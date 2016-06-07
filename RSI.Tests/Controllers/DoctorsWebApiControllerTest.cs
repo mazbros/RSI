@@ -1,5 +1,6 @@
 ﻿using System;
 using System.CodeDom.Compiler;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RSI.Controllers;
@@ -71,15 +72,15 @@ namespace RSI.Tests.Controllers
         {
             // Arrange
             var controller = new DoctorsWebApiController();
-            var filter = new Filter {Specialty = "Cardiology", State = "NJ", Rank = 20};
-            var doctors = controller.Get();
+            var filter = new Filter {Specialty = new List<string>{ "Cardiology", "Gynecology" }, State = "NY", Rank = 11};
+            var doctors = controller.Get("Last Name", "", controller.Get());
 
             // Act
-            var result = controller.GetFiltered(filter, controller.Get("Last Name","", doctors));
+            var result = controller.GetFiltered(filter, doctors);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Count == 4);
+            Assert.IsTrue(result.Count == 35);
         }
 
         [TestMethod]
@@ -122,6 +123,21 @@ namespace RSI.Tests.Controllers
             // Assert
             Assert.IsNotNull(specialties);
             Assert.IsTrue(specialties.Count == 172);
+        }
+
+        [TestMethod]
+        public void TestFilter_returns_filtered_results_with_multiple_filters()
+        {
+            // Arrange
+            var controller = new DoctorsWebApiController();
+            var filter = new List<string> {"Cardiology", "Alergy", "Pediatrician"};
+            var doctors = controller.Get();
+            // Act
+            var result = controller.TestFilter(filter, doctors);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count == 3610);
         }
 
     }

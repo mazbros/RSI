@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using LinqKit;
 using Microsoft.Ajax.Utilities;
 using RSI.Cashed;
 using RSI.Helpers;
@@ -12,6 +13,18 @@ namespace RSI.Controllers
 {
     public class DoctorsWebApiController : ApiController
     {
+
+        public List<Doctors> TestFilter(List<string> filter, List<Doctors> doctors)
+        {
+            var predicate = PredicateBuilder.False<Doctors>();
+            
+            foreach (var fltr in filter)
+            {
+                var temp = fltr;
+                predicate = predicate.Or(d => d.Specialty == temp);
+            }
+            return doctors.AsQueryable().Where(predicate).ToList();
+        }
         // GET api/<controller>
         public List<Doctors> Get()
         {
@@ -21,43 +34,49 @@ namespace RSI.Controllers
         // GET api/<controller>
         public List<Doctors> GetFiltered(Filter filter, List<Doctors> doctors)
         {
-            if (!filter.Specialty.IsNullOrWhiteSpace() && 
+            var predicate = PredicateBuilder.False<Doctors>();
+
+            if (filter.Specialty.Count != 0 && 
                 filter.State.IsNullOrWhiteSpace() &&
                 filter.Rank == null)
             {
-                doctors = doctors.Where(d => d.Specialty == filter.Specialty).ToList();
+                predicate = filter.Specialty.Aggregate(predicate, (current, temp) => current.Or(d => d.Specialty == temp));
+
+                doctors = doctors.AsQueryable().Where(predicate).ToList();
             }
-            if (!filter.Specialty.IsNullOrWhiteSpace() &&
+            if (filter.Specialty.Count != 0 &&
                 !filter.State.IsNullOrWhiteSpace() &&
                 filter.Rank == null)
             {
-                doctors = doctors.Where(d => d.Specialty == filter.Specialty && d.State == filter.State).ToList();
+                predicate = filter.Specialty.Aggregate(predicate, (current, temp) => current.Or(d => d.Specialty == temp));
+                doctors = doctors.AsQueryable().Where(predicate).Where(d => d.State == filter.State).ToList();
             }
-            if (!filter.Specialty.IsNullOrWhiteSpace() &&
+            if (filter.Specialty.Count != 0 &&
                 !filter.State.IsNullOrWhiteSpace() &&
                 filter.Rank != null)
             {
-                doctors = doctors.Where(d => d.Specialty == filter.Specialty && d.State == filter.State && d.Rank == filter.Rank).ToList();
+                predicate = filter.Specialty.Aggregate(predicate, (current, temp) => current.Or(d => d.Specialty == temp));
+                doctors = doctors.AsQueryable().Where(predicate).Where(d => d.State == filter.State && d.Rank == filter.Rank).ToList();
             }
-            if (!filter.Specialty.IsNullOrWhiteSpace() &&
+            if (filter.Specialty.Count() != 0 &&
                 filter.State.IsNullOrWhiteSpace() &&
                 filter.Rank != null)
             {
-                doctors = doctors.Where(d => d.Specialty == filter.Specialty && d.Rank == filter.Rank).ToList();
+                doctors = doctors.AsQueryable().Where(predicate).Where(d => d.Rank == filter.Rank).ToList();
             }
-            if (filter.Specialty.IsNullOrWhiteSpace() &&
+            if (filter.Specialty.Count == 0 &&
                 !filter.State.IsNullOrWhiteSpace() &&
                 filter.Rank != null)
             {
                 doctors = doctors.Where(d => d.State == filter.State && d.Rank == filter.Rank).ToList();
             }
-            if (filter.Specialty.IsNullOrWhiteSpace() &&
+            if (filter.Specialty.Count == 0 &&
                 !filter.State.IsNullOrWhiteSpace() &&
                 filter.Rank == null)
             {
                 doctors = doctors.Where(d => d.State == filter.State).ToList();
             }
-            if (filter.Specialty.IsNullOrWhiteSpace() &&
+            if (filter.Specialty.Count == 0 &&
                 filter.State.IsNullOrWhiteSpace() &&
                 filter.Rank == null)
             {
