@@ -2,9 +2,6 @@
 
 namespace RSI.Helpers
 {
-    /// <summary>
-    /// Filter with several categories that may have multiple entries each
-    /// </summary>
     public class Filter
     {
         public List<int?> Rank { get; set; }
