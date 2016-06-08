@@ -46,28 +46,28 @@ namespace RSI.Tests.Controllers
             var doctors = controller.Get();
 
             // Act
-            var result = controller.Get("DRID", "desc", doctors);
+            var result = controller.Get(new Sorter {Field = "DRID", Order = "desc"}, doctors);
 
             // Assert
             Assert.AreNotSame(result[0].DRID, result[1].DRID);
             Assert.IsTrue(result[0].DRID > result[1].DRID);
 
             // Act
-            result = controller.Get("DRID", "", doctors);
+            result = controller.Get(new Sorter { Field = "DRID", Order = ""}, doctors);
 
             // Assert
             Assert.AreNotSame(result[0].DRID, result[1].DRID);
             Assert.IsTrue(result[0].DRID < result[1].DRID);
 
             // Act
-            result = controller.Get("RecentDate", "desc", doctors);
+            result = controller.Get(new Sorter {Field = "RecentDate", Order = "desc"}, doctors);
 
             // Assert
             Assert.AreNotSame(result[0].RecentDate, result[7].RecentDate);
             Assert.IsTrue(DateTime.Parse(result[0].RecentDate) >= DateTime.Parse(result[7].RecentDate));
 
             // Act
-            result = controller.Get("Blah", "desc", doctors);
+            result = controller.Get(new Sorter {Field = "Blah", Order = "desc"}, doctors);
 
             // Assert
             Assert.AreNotSame(result[0].RecentDate, result[7].RecentDate);
@@ -85,7 +85,7 @@ namespace RSI.Tests.Controllers
                 State = new List<string>(),
                 Rank = new List<int?> {null}
             };
-            var doctors = controller.Get("Last Name", "", controller.Get());
+            var doctors = controller.Get(new Sorter {Field =  "Last Name", Order = ""}, controller.Get());
 
             // Act
             var result = controller.GetFiltered(filter, doctors);

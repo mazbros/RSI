@@ -58,18 +58,17 @@ namespace RSI.Controllers
         /// <summary>
         /// Override to return sorted list, takes complete list or filtered portion
         /// </summary>
-        /// <param name="sortField">Field to sort on</param>
-        /// <param name="sortOrder">Direction of sort (asc, desc)</param>
+        /// <param name="sorter">Field to sort on and Order of sort (asc, desc)</param>
         /// <param name="doctors">Complete or filtered list</param>
         /// <returns>Sorted list</returns>
-        public List<Doctors> Get(string sortField, string sortOrder, List<Doctors> doctors )
+        public List<Doctors> Get(Sorter sorter, List<Doctors> doctors )
         {
             var result = doctors;
 
-            if (typeof(Doctors).GetProperties().Any(p => p.Name.Equals(sortField)))
+            if (typeof(Doctors).GetProperties().Any(p => p.Name.Equals(sorter.Field)))
             {
-                var pi = typeof(Doctors).GetProperty(sortField);
-                result = sortOrder == "desc"
+                var pi = typeof(Doctors).GetProperty(sorter.Field);
+                result = sorter.Order == "desc"
                     ? doctors.OrderByDescending(x => pi.GetValue(x, null)).ToList()
                     : doctors.OrderBy(x => pi.GetValue(x, null)).ToList();
             }
