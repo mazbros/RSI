@@ -60,11 +60,18 @@ namespace RSI.Tests.Controllers
             Assert.IsTrue(result[0].DRID < result[1].DRID);
 
             // Act
-            result = controller.Get("Recent Date", "desc", doctors);
+            result = controller.Get("RecentDate", "desc", doctors);
 
             // Assert
             Assert.AreNotSame(result[0].RecentDate, result[7].RecentDate);
             Assert.IsTrue(DateTime.Parse(result[0].RecentDate) >= DateTime.Parse(result[7].RecentDate));
+
+            // Act
+            result = controller.Get("Blah", "desc", doctors);
+
+            // Assert
+            Assert.AreNotSame(result[0].RecentDate, result[7].RecentDate);
+            Assert.IsTrue(DateTime.Parse(result[0].RecentDate) != DateTime.Parse(result[7].RecentDate));
         }
 
         [TestMethod]
