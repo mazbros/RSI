@@ -14,8 +14,8 @@ namespace RSI.Helpers
         public CsvDownloader(IList<T> list,
             string fileDownloadName,
             char separator = ',')
-			: base("text/csv")
-		{
+            : base("text/csv")
+        {
             _list = list;
             FileDownloadName = fileDownloadName;
             _separator = separator;
@@ -27,7 +27,7 @@ namespace RSI.Helpers
             using (var memoryStream = new MemoryStream())
             {
                 writeList(memoryStream);
-                outputStream.Write(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
+                outputStream.Write(memoryStream.GetBuffer(), 0, (int) memoryStream.Length);
             }
         }
 
@@ -75,6 +75,5 @@ namespace RSI.Helpers
             var res = src.GetType().GetProperty(propName).GetValue(src, null);
             return res?.ToString() ?? string.Empty;
         }
-
     }
 }

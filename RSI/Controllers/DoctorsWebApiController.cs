@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Web.Http;
 using LinqKit;
@@ -15,7 +13,7 @@ namespace RSI.Controllers
     {
         // GET api/<controller>
         /// <summary>
-        /// Gets all records
+        ///     Gets all records
         /// </summary>
         /// <returns>Complete list</returns>
         public List<Doctors> Get()
@@ -25,7 +23,7 @@ namespace RSI.Controllers
 
         // GET api/<controller>
         /// <summary>
-        /// Takes list and filters it using a filter with several filter categories that may have multiple entries each
+        ///     Takes list and filters it using a filter with several filter categories that may have multiple entries each
         /// </summary>
         /// <param name="filter">Filter with several categories that may have multiple entries each</param>
         /// <param name="doctors">Initial list, may be already sorted, sort will remain intact</param>
@@ -50,18 +48,18 @@ namespace RSI.Controllers
                 ? filter.Rank.Aggregate(predicateRank,
                     (current, temp) => current.Or(d => d.Rank == temp))
                 : PredicateBuilder.True<Doctors>();
-            
-            return  doctors.AsQueryable().Where(predicateSpecialty).Where(predicateState).Where(predicateRank).ToList();
+
+            return doctors.AsQueryable().Where(predicateSpecialty).Where(predicateState).Where(predicateRank).ToList();
         }
 
         // GET api/<controller>
         /// <summary>
-        /// Override to return sorted list, takes complete list or filtered portion
+        ///     Override to return sorted list, takes complete list or filtered portion
         /// </summary>
         /// <param name="sorter">Field to sort on and Order of sort (asc, desc)</param>
         /// <param name="doctors">Complete or filtered list</param>
         /// <returns>Sorted list</returns>
-        public List<Doctors> Get(Sorter sorter, List<Doctors> doctors )
+        public List<Doctors> Get(Sorter sorter, List<Doctors> doctors)
         {
             var result = doctors;
 
@@ -72,13 +70,13 @@ namespace RSI.Controllers
                     ? doctors.OrderByDescending(x => pi.GetValue(x, null)).ToList()
                     : doctors.OrderBy(x => pi.GetValue(x, null)).ToList();
             }
-            
+
             return result;
         }
 
         // GET api/<controller>/5
         /// <summary>
-        /// Gets single record
+        ///     Gets single record
         /// </summary>
         /// <param name="id"> ID of the records</param>
         /// <returns>Single record</returns>
@@ -90,7 +88,7 @@ namespace RSI.Controllers
 
         // GET api/<controller>
         /// <summary>
-        /// Distinct list of all available ranks
+        ///     Distinct list of all available ranks
         /// </summary>
         /// <returns>List</returns>
         public List<string> GetRanks()
@@ -100,7 +98,7 @@ namespace RSI.Controllers
 
         // GET api/<controller>
         /// <summary>
-        /// Distinct list of all available specialties
+        ///     Distinct list of all available specialties
         /// </summary>
         /// <returns>List</returns>
         public List<string> GetSpecialties()
@@ -110,7 +108,7 @@ namespace RSI.Controllers
 
         // GET api/<controller>
         /// <summary>
-        /// Distinct list of available states
+        ///     Distinct list of available states
         /// </summary>
         /// <returns>List</returns>
         public List<string> GetStates()
@@ -119,12 +117,12 @@ namespace RSI.Controllers
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public void Post([FromBody] string value)
         {
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody] string value)
         {
         }
 

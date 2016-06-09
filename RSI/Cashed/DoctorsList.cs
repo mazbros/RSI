@@ -8,9 +8,9 @@ namespace RSI.Cashed
     public class DoctorsList
     {
         private static Lazy<DoctorsList> _inst = new Lazy<DoctorsList>();
-        public static DoctorsList Instance => _inst.Value;
 
         private List<Doctors> _doctors;
+        public static DoctorsList Instance => _inst.Value;
 
         public List<Doctors> Get()
         {

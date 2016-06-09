@@ -4,10 +4,10 @@
 }
 
 <h2>Details</h2>
-@{ Ajax.BeginForm("Index", "Doctors", new AjaxOptions { HttpMethod = "POST" }); }
+@{ Ajax.BeginForm("Index", "Doctors", new AjaxOptions {HttpMethod = "POST"}); }
 <div>
     @*<h4>Consolidated Doctors View</h4>*@
-    <hr />
+    <hr/>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Rank)
@@ -194,4 +194,4 @@
         },
         new AjaxOptions {HttpMethod = "POST"})
 </p>
-@{ Html.EndForm();}
+@{ Html.EndForm(); }

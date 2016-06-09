@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using RSI.Models;
 
 namespace RSI.Cashed
 {
     public class RanksList
     {
         private static readonly Lazy<RanksList> Inst = new Lazy<RanksList>();
-        public static RanksList Instance => Inst.Value;
 
         private List<string> _ranks;
+        public static RanksList Instance => Inst.Value;
 
         public List<string> Get()
         {

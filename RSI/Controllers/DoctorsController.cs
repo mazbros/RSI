@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Microsoft.Ajax.Utilities;
@@ -16,8 +16,8 @@ namespace RSI.Controllers
 {
     public class DoctorsController : Controller
     {
-        private readonly Entities _db = new Entities();
         private static List<Doctors> _doctorsResults = new List<Doctors>();
+        private readonly Entities _db = new Entities();
 
         // GET: DoctorsViews
         public ActionResult Index(long? id, string sortOrder, int? page, string specialtyFilter, string rankFilter,
@@ -54,8 +54,9 @@ namespace RSI.Controllers
 
             var doctors = allDoctors;
 
-            int fs,fr,fst;
-            applyFilters( specialtyFilter, rankFilter, stateFilter, allDoctors, specialties, ranks, states, out fs,out fr, out fst, ref doctors);
+            int fs, fr, fst;
+            applyFilters(specialtyFilter, rankFilter, stateFilter, allDoctors, specialties, ranks, states, out fs,
+                out fr, out fst, ref doctors);
 
             ViewBag.Specialties = DropDownHelper.ToSelectListItems(specialties, fs);
             ViewBag.Ranks = DropDownHelper.ToSelectListItems(ranks, fr);
@@ -68,7 +69,7 @@ namespace RSI.Controllers
             ViewBag.CurrentSort = sortOrder;
 
             const int pageSize = 20;
-            var pageNumber = (page ?? 1);
+            var pageNumber = page ?? 1;
 
             ViewBag.PageNumber = pageNumber;
 
@@ -147,8 +148,10 @@ namespace RSI.Controllers
         }
 
         // One filter at a time logic
-        private void applyFilters(string specialtyFilter, string rankFilter, string stateFilter, List<Doctors> allDoctors, IReadOnlyList<string> specialties, 
-            IReadOnlyList<string> ranks, IReadOnlyList<string> states, out int fs, out int fr, out int fst, ref List<Doctors> doctors)
+        private void applyFilters(string specialtyFilter, string rankFilter, string stateFilter,
+            List<Doctors> allDoctors, IReadOnlyList<string> specialties,
+            IReadOnlyList<string> ranks, IReadOnlyList<string> states, out int fs, out int fr, out int fst,
+            ref List<Doctors> doctors)
         {
             fs = -1;
             if (!specialtyFilter.IsNullOrWhiteSpace())
@@ -179,9 +182,9 @@ namespace RSI.Controllers
                 doctors =
                     allDoctors.Where(
                         d =>
-                            (!ranks[i].IsNullOrWhiteSpace()
+                            !ranks[i].IsNullOrWhiteSpace()
                                 ? d.Rank.Equals(int.Parse(ranks[i]))
-                                : d.Rank.ToString().Equals(ranks[i]))).Select(d => d).ToList();
+                                : d.Rank.ToString().Equals(ranks[i])).Select(d => d).ToList();
             }
             if (fst >= 0 && fr < 0 && fs < 0)
             {
@@ -190,7 +193,8 @@ namespace RSI.Controllers
             }
             if (fs >= 0 && fr >= 0 && fst < 0)
             {
-                var i = fs; var j = fr;
+                var i = fs;
+                var j = fr;
                 doctors =
                     allDoctors.Where(
                         d =>
@@ -241,7 +245,8 @@ namespace RSI.Controllers
         }
 
         // GET: Doctors/Details/5
-        public async Task<ActionResult> Details(long? id, string sortOrder, int? page, string specialtyFilter, string rankFilter,
+        public async Task<ActionResult> Details(long? id, string sortOrder, int? page, string specialtyFilter,
+            string rankFilter,
             string stateFilter)
         {
             if (id == null)
@@ -275,7 +280,11 @@ namespace RSI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax,Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website")] Doctors consolidatedDoctorsView)
+        public async Task<ActionResult> Create(
+            [Bind(
+                Include =
+                    "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax,Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website"
+                )] Doctors consolidatedDoctorsView)
         {
             if (ModelState.IsValid)
             {
@@ -288,8 +297,9 @@ namespace RSI.Controllers
         }
 
         // GET: Doctors/Edit/5
-        public async Task<ActionResult> Edit(long? id, string sortOrder, int? page, string specialtyFilter, string rankFilter,
-            string stateFilter )
+        public async Task<ActionResult> Edit(long? id, string sortOrder, int? page, string specialtyFilter,
+            string rankFilter,
+            string stateFilter)
         {
             if (id == null)
             {
@@ -318,7 +328,11 @@ namespace RSI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax,Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website")] Doctors consolidatedDoctorsView,  
+        public async Task<ActionResult> Edit(
+            [Bind(
+                Include =
+                    "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax,Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website"
+                )] Doctors consolidatedDoctorsView,
             long? id, string sortOrder, int? page, string specialtyFilter, string rankFilter, string stateFilter)
         {
             ViewBag.DRID = id;
@@ -334,25 +348,27 @@ namespace RSI.Controllers
                 await _db.SaveChangesAsync();
                 DoctorsList.Reset();
                 return RedirectToAction(
-                    "Index", 
+                    "Index",
                     new RouteValueDictionary(
-                    new {
-                        controller = "Doctors",
-                        action = "Index",
-                        id = ViewBag.DRID,
-                        sortOrder = ViewBag.SortOrder,
-                        page = ViewBag.PageNumber,
-                        specialtyFilter = ViewBag.SpecialtyFilter,
-                        rankFilter = ViewBag.RankFilter,
-                        stateFilter = ViewBag.StateFilter
-                    })
-                );
+                        new
+                        {
+                            controller = "Doctors",
+                            action = "Index",
+                            id = ViewBag.DRID,
+                            sortOrder = ViewBag.SortOrder,
+                            page = ViewBag.PageNumber,
+                            specialtyFilter = ViewBag.SpecialtyFilter,
+                            rankFilter = ViewBag.RankFilter,
+                            stateFilter = ViewBag.StateFilter
+                        })
+                    );
             }
             return View(consolidatedDoctorsView);
         }
 
         // GET: Doctors/Delete/5
-        public async Task<ActionResult> Delete(long? id, string sortOrder, int? page, string specialtyFilter, string rankFilter,
+        public async Task<ActionResult> Delete(long? id, string sortOrder, int? page, string specialtyFilter,
+            string rankFilter,
             string stateFilter)
         {
             if (id == null)
@@ -379,7 +395,8 @@ namespace RSI.Controllers
         }
 
         // CSV file dump of sorted and filtered list
-        public ActionResult CsvList(/*long? id,*/ string sortOrder, int? page, string specialtyFilter, string rankFilter,
+        public ActionResult CsvList( /*long? id,*/
+            string sortOrder, int? page, string specialtyFilter, string rankFilter,
             string stateFilter)
         {
             var timeStamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
@@ -395,7 +412,4 @@ namespace RSI.Controllers
             base.Dispose(disposing);
         }
     }
-
-
-  
 }

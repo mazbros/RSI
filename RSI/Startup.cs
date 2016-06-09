@@ -1,7 +1,9 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using RSI;
 
-[assembly: OwinStartupAttribute(typeof(RSI.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
+
 namespace RSI
 {
     public partial class Startup
