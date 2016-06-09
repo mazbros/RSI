@@ -63,14 +63,14 @@ namespace RSI.Controllers
 
         // GET api/<controller>
         /// <summary>
-        ///     Override to return sorted list, takes complete list or filtered portion
+        ///     Overload to return sorted list, takes complete list or filtered portion
         /// </summary>
         /// <param name="sorter">Sort options</param>
         /// <remarks>
         ///     Sorter has two properties: 
         /// </remarks>
         /// <remarks>
-        ///         Field - filed to sort on
+        ///         Field - field to sort on
         /// </remarks>
         /// <remarks>
         ///         Sort - direction of sort
@@ -96,7 +96,7 @@ namespace RSI.Controllers
         /// <summary>
         ///     Gets single record
         /// </summary>
-        /// <param name="id"> ID of the records</param>
+        /// <param name="id"> ID of the record to find</param>
         /// <returns>Single record of type Doctors</returns>
         public async Task<Doctors> GetById(int id)
         {
