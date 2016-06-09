@@ -26,6 +26,15 @@ namespace RSI.Controllers
         ///     Takes list and filters it using a filter with several filter categories that may have multiple entries each
         /// </summary>
         /// <param name="filter">Filter with several categories that may have multiple entries each</param>
+        /// <remarks>
+        ///     Specialty: can contain single or multiple specialties, if empty ignored
+        /// </remarks>
+        /// <remarks>
+        ///     State: can contain single or multiple states, if empty ignored
+        /// </remarks>
+        /// <remarks>
+        ///     Rank: can contain single or multiple ranks, if empty ignored
+        /// </remarks>
         /// <param name="doctors">Initial list, may be already sorted, sort will remain intact</param>
         /// <returns>Returns filtered list</returns>
         public List<Doctors> GetFiltered(Filter filter, List<Doctors> doctors)
@@ -56,7 +65,16 @@ namespace RSI.Controllers
         /// <summary>
         ///     Override to return sorted list, takes complete list or filtered portion
         /// </summary>
-        /// <param name="sorter">Field to sort on and Order of sort (asc, desc)</param>
+        /// <param name="sorter">Sort options</param>
+        /// <remarks>
+        ///     Sorter has two properties: 
+        /// </remarks>
+        /// <remarks>
+        ///         Field - filed to sort on
+        /// </remarks>
+        /// <remarks>
+        ///         Sort - direction of sort
+        /// </remarks>
         /// <param name="doctors">Complete or filtered list</param>
         /// <returns>Sorted list</returns>
         public List<Doctors> Get(Sorter sorter, List<Doctors> doctors)
@@ -79,7 +97,7 @@ namespace RSI.Controllers
         ///     Gets single record
         /// </summary>
         /// <param name="id"> ID of the records</param>
-        /// <returns>Single record</returns>
+        /// <returns>Single record of type Doctors</returns>
         public async Task<Doctors> GetById(int id)
         {
             var db = new Entities();
@@ -116,19 +134,19 @@ namespace RSI.Controllers
             return StatesList.Instance.Get();
         }
 
-        // POST api/<controller>
-        public void Post([FromBody] string value)
-        {
-        }
+        //// POST api/<controller>
+        //public void Post([FromBody] string value)
+        //{
+        //}
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        //// PUT api/<controller>/5
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //}
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
+        //// DELETE api/<controller>/5
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

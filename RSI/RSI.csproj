@@ -36,6 +36,8 @@
     <WarningLevel>4</WarningLevel>
     <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
     <PublishDatabases>false</PublishDatabases>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
