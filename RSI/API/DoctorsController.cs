@@ -13,7 +13,7 @@ namespace RSI.API
     {
         // GET api/<controller>
         /// <summary>
-        ///     Gets all records
+        ///     [GET] Gets all records
         /// </summary>
         /// <returns>Complete list</returns>
         [HttpGet]
@@ -24,7 +24,7 @@ namespace RSI.API
 
         // POST api/<controller>/<action>/<filter>
         /// <summary>
-        ///     Takes list and filters it using a filter with several filter categories that may have multiple entries each
+        ///     [POST] Takes list and filters it using a filter with several filter categories that may have multiple entries each
         /// </summary>
         /// <param name="filter">Filter with several categories that may have multiple entries each</param>
         /// <remarks>
@@ -66,7 +66,7 @@ namespace RSI.API
 
         // POST api/<controller>
         /// <summary>
-        ///     Sorting list by any field in any direction
+        ///     [POST] Sorting list by any field in any direction
         /// </summary>
         /// <param name="sorter">Sort options</param>
         /// <remarks>
@@ -96,7 +96,7 @@ namespace RSI.API
 
         // GET api/<controller>/5
         /// <summary>
-        ///     Gets single record
+        ///     [GET] Gets single record
         /// </summary>
         /// <param name="id"> ID of the record to find</param>
         /// <returns>Single record of type Doctors</returns>
@@ -109,7 +109,7 @@ namespace RSI.API
 
         // GET api/<controller>
         /// <summary>
-        ///     Distinct list of all available ranks
+        ///     [GET] Distinct list of all available ranks
         /// </summary>
         /// <returns>List</returns>
         [HttpGet]
@@ -120,7 +120,7 @@ namespace RSI.API
 
         // GET api/<controller>
         /// <summary>
-        ///     Distinct list of all available specialties
+        ///     [GET] Distinct list of all available specialties
         /// </summary>
         /// <returns>List</returns>
         [HttpGet]
@@ -131,7 +131,7 @@ namespace RSI.API
 
         // GET api/<controller>
         /// <summary>
-        ///     Distinct list of available states
+        ///     [GET] Distinct list of available states
         /// </summary>
         /// <returns>List</returns>
         [HttpGet]
