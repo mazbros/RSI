@@ -1,6 +1,6 @@
 var NAVTREE =
 [
-  [ "RSI", "index.html", [
+  [ "RSI Web API", "index.html", [
     [ "Packages", null, [
       [ "Packages", "namespaces.html", "namespaces" ]
     ] ],
