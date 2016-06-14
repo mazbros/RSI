@@ -5,10 +5,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RsiDoctorsDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008"
-              Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
-              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
-              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RsiDoctorsDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Doctors">
           <Key>
             <PropertyRef Name="DRID" />
@@ -35,12 +32,13 @@
           <Property Name="Longitude" Type="float" />
           <Property Name="Timezone" Type="varchar" MaxLength="50" />
           <Property Name="Website" Type="varchar" MaxLength="64" />
+          <Property Name="Gender" Type="varchar" MaxLength="1" />
+          <Property Name="Credentials" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="RsiDoctorsDbModelStoreContainer">
           <EntitySet Name="Doctors" EntityType="Self.Doctors" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RsiDoctorsDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false"
@@ -76,6 +74,8 @@
           <Property Name="Longitude" Type="Double" />
           <Property Name="Timezone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Website" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Credentials" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -86,6 +86,8 @@
           <EntitySetMapping Name="Doctors">
             <EntityTypeMapping TypeName="RsiDoctorsDbModel.Doctors">
               <MappingFragment StoreEntitySet="Doctors">
+                <ScalarProperty Name="Credentials" ColumnName="Credentials" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Website" ColumnName="Website" />
                 <ScalarProperty Name="Timezone" ColumnName="Timezone" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />

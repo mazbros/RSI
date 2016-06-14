@@ -36,5 +36,7 @@ namespace RSI.Models
         public Nullable<double> Longitude { get; set; }
         public string Timezone { get; set; }
         public string Website { get; set; }
+        public string Gender { get; set; }
+        public string Credentials { get; set; }
     }
 }

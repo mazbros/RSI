@@ -287,7 +287,7 @@ namespace RSI.Controllers
         public async Task<ActionResult> Create(
             [Bind(
                 Include =
-                    "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax,Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website"
+                    "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax,Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website,Gender,Credentials"
                 )] Doctors consolidatedDoctorsView)
         {
             if (ModelState.IsValid)
@@ -335,7 +335,7 @@ namespace RSI.Controllers
         public async Task<ActionResult> Edit(
             [Bind(
                 Include =
-                    "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax,Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website"
+                    "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax,Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website,Gender,Credentials"
                 )] Doctors consolidatedDoctorsView,
             long? id, string sortOrder, int? page, string specialtyFilter, string rankFilter, string stateFilter)
         {
