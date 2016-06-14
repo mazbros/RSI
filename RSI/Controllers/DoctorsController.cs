@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -111,10 +112,13 @@ namespace RSI.Controllers
                     doctors = doctors.OrderBy(d => d.Publications).ToList();
                     break;
                 case "recentdate_desc":
-                    doctors = doctors.OrderByDescending(d => Convert.ToDateTime(d.RecentDate)).ToList();
+                    doctors =
+                        doctors.OrderByDescending(d => Convert.ToDateTime(d.RecentDate, CultureInfo.InvariantCulture))
+                            .ToList();
                     break;
                 case "Recent Date":
-                    doctors = doctors.OrderBy(d => Convert.ToDateTime(d.RecentDate)).ToList();
+                    doctors =
+                        doctors.OrderBy(d => Convert.ToDateTime(d.RecentDate, CultureInfo.InvariantCulture)).ToList();
                     break;
                 case "specialty_desc":
                     doctors = doctors.OrderByDescending(d => d.Specialty).ToList();
