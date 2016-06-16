@@ -56,7 +56,7 @@ namespace RSI.Controllers
             var doctors = allDoctors;
 
             int fs, fr, fst;
-            applyFilters(specialtyFilter, rankFilter, stateFilter, allDoctors, specialties, ranks, states, out fs,
+            ApplyFilters(specialtyFilter, rankFilter, stateFilter, allDoctors, specialties, ranks, states, out fs,
                 out fr, out fst, ref doctors);
 
             ViewBag.Specialties = DropDownHelper.ToSelectListItems(specialties, fs);
@@ -65,7 +65,7 @@ namespace RSI.Controllers
 
             ViewBag.TotalRecords = doctors.Count();
 
-            doctors = applySort(sortOrder, doctors);
+            doctors = ApplySort(sortOrder, doctors);
 
             ViewBag.CurrentSort = sortOrder;
 
@@ -80,7 +80,7 @@ namespace RSI.Controllers
         }
 
         // Sort order logic
-        private List<Doctors> applySort(string sortOrder, List<Doctors> doctors)
+        private List<Doctors> ApplySort(string sortOrder, List<Doctors> doctors)
         {
             switch (sortOrder)
             {
@@ -152,7 +152,7 @@ namespace RSI.Controllers
         }
 
         // One filter at a time logic
-        private void applyFilters(string specialtyFilter, string rankFilter, string stateFilter,
+        private void ApplyFilters(string specialtyFilter, string rankFilter, string stateFilter,
             List<Doctors> allDoctors, IReadOnlyList<string> specialties,
             IReadOnlyList<string> ranks, IReadOnlyList<string> states, out int fs, out int fr, out int fst,
             ref List<Doctors> doctors)
@@ -232,20 +232,20 @@ namespace RSI.Controllers
                         .Select(d => d)
                         .ToList();
             }
-            if (fs >= 0 && fr >= 0 && fst >= 0)
-            {
-                var i = fs;
-                var j = fr;
-                var y = fst;
-                doctors =
-                    allDoctors.Where(
-                        d =>
-                            d.Specialty.Equals(specialties[i]) &&
-                            (!ranks[j].IsNullOrWhiteSpace()
-                                ? d.Rank.Equals(int.Parse(ranks[j]))
-                                : d.Rank.ToString().Equals(ranks[j])) &&
-                            d.State.Equals(states[y])).Select(d => d).ToList();
-            }
+
+            if (fs < 0 || fr < 0 || fst < 0) return; // fs >= 0 && fr >= 0 && fst >= 0
+
+            var x = fs;
+            var z = fr;
+            var y = fst;
+            doctors =
+                allDoctors.Where(
+                    d =>
+                        d.Specialty.Equals(specialties[x]) &&
+                        (!ranks[z].IsNullOrWhiteSpace()
+                            ? d.Rank.Equals(int.Parse(ranks[z]))
+                            : d.Rank.ToString().Equals(ranks[z])) &&
+                        d.State.Equals(states[y])).Select(d => d).ToList();
         }
 
         // GET: Doctors/Details/5
@@ -399,8 +399,7 @@ namespace RSI.Controllers
         }
 
         // CSV file dump of sorted and filtered list
-        public ActionResult CsvList( /*long? id,*/
-            string sortOrder, int? page, string specialtyFilter, string rankFilter,
+        public ActionResult CsvList(string sortOrder, int? page, string specialtyFilter, string rankFilter,
             string stateFilter)
         {
             var timeStamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
