@@ -281,15 +281,16 @@
             </td>
             <td>
                 <span style="white-space: nowrap;">
-                            @{
-                                var formattedAddress = item.Address.IsNullOrWhiteSpace() ? string.Empty : item.Address;
-                                if (formattedAddress.Length > 27)
-                                {
-                                    formattedAddress = $"{formattedAddress.Substring(0, 24)}...";
-                                }
-                                @Html.DisplayFor(modelItem => formattedAddress)
-                            }
-                        </span>
+                    @{
+                        var formattedAddress = item.Address.IsNullOrWhiteSpace() ? string.Empty : item.Address;
+                        if (formattedAddress.Length > 27)
+                        {
+                            formattedAddress = $"{formattedAddress.Substring(0, 24)}...";
+                        }
+                        @Html.DisplayFor(modelItem => formattedAddress)
+                    }
+                </span>
+
             </td>
             <td>
                 <span style="white-space: nowrap;">@Html.DisplayFor(modelItem => item.City)</span>
