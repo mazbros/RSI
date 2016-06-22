@@ -34,9 +34,24 @@
           <Property Name="Website" Type="varchar" MaxLength="64" />
           <Property Name="Gender" Type="varchar" MaxLength="1" />
           <Property Name="Credentials" Type="varchar" MaxLength="50" />
+          <Property Name="Taxonomy_Code" Type="varchar" MaxLength="255" />
+          <Property Name="License_Number" Type="varchar" MaxLength="255" />
+          <Property Name="License_State" Type="varchar" MaxLength="255" />
+          <Property Name="Taxonomy_Classification" Type="varchar" MaxLength="8000" />
+          <Property Name="Taxonomy_Specialization" Type="varchar" MaxLength="8000" />
+        </EntityType>
+        <EntityType Name="Taxonomy">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Grouping" Type="varchar" MaxLength="255" />
+          <Property Name="Classification" Type="varchar" MaxLength="255" />
+          <Property Name="Specialization" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityContainer Name="RsiDoctorsDbModelStoreContainer">
           <EntitySet Name="Doctors" EntityType="Self.Doctors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Taxonomy" EntityType="Self.Taxonomy" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -47,6 +62,7 @@
               xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Doctors" EntityType="RsiDoctorsDbModel.Doctors" />
+          <EntitySet Name="Taxonomies" EntityType="RsiDoctorsDbModel.Taxonomy" />
         </EntityContainer>
         <EntityType Name="Doctors">
           <Key>
@@ -76,6 +92,20 @@
           <Property Name="Website" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="Credentials" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Taxonomy_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Taxonomy_Classification" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="Taxonomy_Specialization" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="License_Number" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="License_State" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Taxonomy">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Grouping" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Classification" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Specialization" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -86,6 +116,11 @@
           <EntitySetMapping Name="Doctors">
             <EntityTypeMapping TypeName="RsiDoctorsDbModel.Doctors">
               <MappingFragment StoreEntitySet="Doctors">
+                <ScalarProperty Name="Taxonomy_Specialization" ColumnName="Taxonomy_Specialization" />
+                <ScalarProperty Name="Taxonomy_Classification" ColumnName="Taxonomy_Classification" />
+                <ScalarProperty Name="License_State" ColumnName="License_State" />
+                <ScalarProperty Name="License_Number" ColumnName="License_Number" />
+                <ScalarProperty Name="Taxonomy_Code" ColumnName="Taxonomy_Code" />
                 <ScalarProperty Name="Credentials" ColumnName="Credentials" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Website" ColumnName="Website" />
@@ -110,6 +145,16 @@
                 <ScalarProperty Name="Publications" ColumnName="Publications" />
                 <ScalarProperty Name="Rank" ColumnName="Rank" />
                 <ScalarProperty Name="DRID" ColumnName="DRID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Taxonomies">
+            <EntityTypeMapping TypeName="RsiDoctorsDbModel.Taxonomy">
+              <MappingFragment StoreEntitySet="Taxonomy">
+                <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+                <ScalarProperty Name="Classification" ColumnName="Classification" />
+                <ScalarProperty Name="Grouping" ColumnName="Grouping" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

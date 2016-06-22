@@ -38,5 +38,10 @@ namespace RSI.Models
         public string Website { get; set; }
         public string Gender { get; set; }
         public string Credentials { get; set; }
+        public string Taxonomy_Code { get; set; }
+        public string Taxonomy_Classification { get; set; }
+        public string Taxonomy_Specialization { get; set; }
+        public string License_Number { get; set; }
+        public string License_State { get; set; }
     }
 }

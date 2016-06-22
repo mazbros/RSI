@@ -4,10 +4,10 @@
 }
 
 <h2>Details</h2>
-@{ Ajax.BeginForm("Index", "Doctors", new AjaxOptions {HttpMethod = "POST"}); }
+@{ Ajax.BeginForm("Index", "Doctors", new AjaxOptions { HttpMethod = "POST" }); }
 <div>
     @*<h4>Consolidated Doctors View</h4>*@
-    <hr/>
+    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Rank)
@@ -193,6 +193,46 @@
             @Html.DisplayFor(model => model.Credentials)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Taxonomy_Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Taxonomy_Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Taxonomy_Classification)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Taxonomy_Classification)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Taxonomy_Specialization)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Taxonomy_Specialization)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.License_Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.License_Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.License_State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.License_State)
+        </dd>
+
     </dl>
 </div>
 <p>
@@ -208,6 +248,6 @@
             rankFilter = ViewBag.RankFilter,
             stateFilter = ViewBag.StateFilter
         },
-        new AjaxOptions {HttpMethod = "POST"})
+        new AjaxOptions { HttpMethod = "POST" })
 </p>
 @{ Html.EndForm(); }
