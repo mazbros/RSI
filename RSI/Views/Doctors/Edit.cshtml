@@ -161,7 +161,16 @@
     <div class="form-group">
         @Html.HiddenFor(model => model.Latitude)
         @Html.HiddenFor(model => model.Longitude)
+        @Html.HiddenFor(model => model.Taxonomy_Code)
+        @Html.HiddenFor(model => model.Taxonomy_Classification)
+        @Html.HiddenFor(model => model.Taxonomy_Specialization)
+        @Html.HiddenFor(model => model.License_Number)
+        @Html.HiddenFor(model => model.License_State)
+        @Html.HiddenFor(model => model.Medical_School)
+        @Html.HiddenFor(model => model.Residency_Training)
+        @Html.HiddenFor(model => model.Graduation_Year)
     </div>
+    
     <div class="form-group">
         <div class="col-md-offset-10 col-md-2 pull-right">
             <input type="submit" value="Save" class="btn btn-default" />

@@ -43,5 +43,8 @@ namespace RSI.Models
         public string Taxonomy_Specialization { get; set; }
         public string License_Number { get; set; }
         public string License_State { get; set; }
+        public string Medical_School { get; set; }
+        public string Residency_Training { get; set; }
+        public string Graduation_Year { get; set; }
     }
 }

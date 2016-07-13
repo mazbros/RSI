@@ -42,7 +42,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.REVIEWER_ID)
+            @Html.DisplayNameFor(model => model.REVIEWER_ID).ToString().Replace("_", " ")
         </dt>
 
         <dd>
@@ -58,7 +58,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.First_Name)
+            @Html.DisplayNameFor(model => model.First_Name).ToString().Replace("_", " ")
         </dt>
 
         <dd>
@@ -66,7 +66,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Last_Name)
+            @Html.DisplayNameFor(model => model.Last_Name).ToString().Replace("_", " ")
         </dt>
 
         <dd>
@@ -122,7 +122,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Email_Address)
+            @Html.DisplayNameFor(model => model.Email_Address).ToString().Replace("_", " ")
         </dt>
 
         <dd>
@@ -138,7 +138,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Company_Name)
+            @Html.DisplayNameFor(model => model.Company_Name).ToString().Replace("_", " ")
         </dt>
 
         <dd>
@@ -194,7 +194,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Taxonomy_Code)
+            @Html.DisplayNameFor(model => model.Taxonomy_Code).ToString().Replace("_", " ")
         </dt>
 
         <dd>
@@ -202,7 +202,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Taxonomy_Classification)
+            @Html.DisplayNameFor(model => model.Taxonomy_Classification).ToString().Replace("_", " ")
         </dt>
 
         <dd>
@@ -210,7 +210,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Taxonomy_Specialization)
+            @Html.DisplayNameFor(model => model.Taxonomy_Specialization).ToString().Replace("_", " ")
         </dt>
 
         <dd>
@@ -218,7 +218,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.License_Number)
+            @Html.DisplayNameFor(model => model.License_Number).ToString().Replace("_", " ")
         </dt>
 
         <dd>
@@ -226,11 +226,35 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.License_State)
+            @Html.DisplayNameFor(model => model.License_State).ToString().Replace("_", " ")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.License_State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Medical_School).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Medical_School)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Residency_Training).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Residency_Training)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Graduation_Year).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Graduation_Year)
         </dd>
 
     </dl>

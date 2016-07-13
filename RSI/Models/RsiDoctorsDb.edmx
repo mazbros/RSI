@@ -21,10 +21,10 @@
           <Property Name="Last_Name" Type="varchar" MaxLength="50" />
           <Property Name="Address" Type="varchar" MaxLength="84" />
           <Property Name="City" Type="varchar" MaxLength="50" />
-          <Property Name="State" Type="varchar" MaxLength="2" />
+          <Property Name="State" Type="varchar" MaxLength="24" />
           <Property Name="Zipcode" Type="varchar" MaxLength="10" />
-          <Property Name="Phone" Type="varchar" MaxLength="50" />
-          <Property Name="Fax" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="8000" />
+          <Property Name="Fax" Type="varchar" MaxLength="8000" />
           <Property Name="Email_Address" Type="varchar" MaxLength="128" />
           <Property Name="County" Type="varchar" MaxLength="50" />
           <Property Name="Company_Name" Type="varchar" MaxLength="255" />
@@ -39,6 +39,9 @@
           <Property Name="License_State" Type="varchar" MaxLength="255" />
           <Property Name="Taxonomy_Classification" Type="varchar" MaxLength="8000" />
           <Property Name="Taxonomy_Specialization" Type="varchar" MaxLength="8000" />
+          <Property Name="Medical_School" Type="varchar" MaxLength="8000" />
+          <Property Name="Residency_Training" Type="varchar" MaxLength="8000" />
+          <Property Name="Graduation_Year" Type="varchar" MaxLength="4" />
         </EntityType>
         <EntityType Name="Taxonomy">
           <Key>
@@ -79,10 +82,10 @@
           <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="84" FixedLength="false" Unicode="false" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
           <Property Name="Zipcode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
           <Property Name="Email_Address" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="County" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Company_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -97,6 +100,9 @@
           <Property Name="Taxonomy_Specialization" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
           <Property Name="License_Number" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="License_State" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Medical_School" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="Residency_Training" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="Graduation_Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Taxonomy">
           <Key>
@@ -116,6 +122,9 @@
           <EntitySetMapping Name="Doctors">
             <EntityTypeMapping TypeName="RsiDoctorsDbModel.Doctors">
               <MappingFragment StoreEntitySet="Doctors">
+                <ScalarProperty Name="Graduation_Year" ColumnName="Graduation_Year" />
+                <ScalarProperty Name="Residency_Training" ColumnName="Residency_Training" />
+                <ScalarProperty Name="Medical_School" ColumnName="Medical_School" />
                 <ScalarProperty Name="Taxonomy_Specialization" ColumnName="Taxonomy_Specialization" />
                 <ScalarProperty Name="Taxonomy_Classification" ColumnName="Taxonomy_Classification" />
                 <ScalarProperty Name="License_State" ColumnName="License_State" />

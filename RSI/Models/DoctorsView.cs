@@ -10,26 +10,29 @@ namespace RSI.Models
         public string Grouping { get; set; }
         public string Classification { get; set; }
         public string Specialization { get; set; }
+        public string MedicalSchool { get; set; }
+        public string ResidencyTraining { get; set; }
+        public string GraduationYear { get; set; }
 
         public DoctorsView(IList<object> list) 
         {
-            DRID = (long) list[0];
-            Rank = (int) list[1];
-            Publications = (int) list[2];
-            RecentDate = (string) list[3];
-            NPI = (string) list[4];
-            REVIEWER_ID = (long) list[5];
-            Specialty = (string) list[6];
-            First_Name = (string) list[7];
-            Last_Name = (string) list[8];
-            Address = (string) list[9];
-            City = (string) list[10];
-            State = (string) list[11];
-            Zipcode = (string) list[12];
-            Phone = (string) list[13];
-            Fax = (string) list[14];
-            Email_Address = (string) list[15];
-            County = (string) list[16];
+            DRID = (long)list[0];
+            Rank = (int)list[1];
+            Publications = (int)list[2];
+            RecentDate = (string)list[3];
+            NPI = (string)list[4];
+            REVIEWER_ID = (long)list[5];
+            Specialty = (string)list[6];
+            First_Name = (string)list[7];
+            Last_Name = (string)list[8];
+            Address = (string)list[9];
+            City = (string)list[10];
+            State = (string)list[11];
+            Zipcode = (string)list[12];
+            Phone = (string)list[13];
+            Fax = (string)list[14];
+            Email_Address = (string)list[15];
+            County = (string)list[16];
             Company_Name = (string)list[17];
             Latitude = (double)list[18];
             Longitude = (double)list[19];
@@ -42,7 +45,10 @@ namespace RSI.Models
             License_State = (string)list[26];
             Grouping = (string)list[27];
             Classification = (string)list[28];
-            Specialization = (string) list[29];
+            Specialization = (string)list[29];
+            MedicalSchool = (string)list[30];
+            ResidencyTraining = (string)list[31];
+            GraduationYear = (string)list[32];
         }
     }
 }

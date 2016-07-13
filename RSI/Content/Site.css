@@ -14,7 +14,15 @@
    will truncate terms that are too long to fit in the left column 
 */
 
-.dl-horizontal dt { white-space: normal; }
+.dl-horizontal dt {
+    white-space: nowrap;
+    width: 15%;
+    border-bottom: dashed 1px gray;
+}
+.dl-horizontal dd {
+    white-space: nowrap;
+    border-bottom: dashed 1px gray;
+}
 
 /* Set width on the form input elements since they're 100% wide by default */
 
