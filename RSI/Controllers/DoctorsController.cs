@@ -287,7 +287,9 @@ namespace RSI.Controllers
         public async Task<ActionResult> Create(
             [Bind(
                 Include =
-                    "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax,Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website,Gender,Credentials"
+                    "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax," +
+                    "Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website,Gender,Credentials,Taxonomy_Code,Taxonomy_Classification," +
+                    "Taxonomy_Specialization,License_Number,License_State,Medical_School,Residency_Training,Graduation_Year"
                 )] Doctors consolidatedDoctorsView)
         {
             if (ModelState.IsValid)
@@ -335,7 +337,9 @@ namespace RSI.Controllers
         public async Task<ActionResult> Edit(
             [Bind(
                 Include =
-                    "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax,Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website,Gender,Credentials"
+                    "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax," +
+                    "Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website,Gender,Credentials,Taxonomy_Code,Taxonomy_Classification," +
+                    "Taxonomy_Specialization,License_Number,License_State,Medical_School,Residency_Training,Graduation_Year"
                 )] Doctors consolidatedDoctorsView,
             long? id, string sortOrder, int? page, string specialtyFilter, string rankFilter, string stateFilter)
         {
