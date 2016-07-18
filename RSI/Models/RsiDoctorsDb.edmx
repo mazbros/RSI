@@ -23,8 +23,8 @@
           <Property Name="City" Type="varchar" MaxLength="50" />
           <Property Name="State" Type="varchar" MaxLength="24" />
           <Property Name="Zipcode" Type="varchar" MaxLength="10" />
-          <Property Name="Phone" Type="varchar" MaxLength="8000" />
-          <Property Name="Fax" Type="varchar" MaxLength="8000" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Fax" Type="varchar" MaxLength="50" />
           <Property Name="Email_Address" Type="varchar" MaxLength="128" />
           <Property Name="County" Type="varchar" MaxLength="50" />
           <Property Name="Company_Name" Type="varchar" MaxLength="255" />
@@ -84,8 +84,8 @@
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="State" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
           <Property Name="Zipcode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
-          <Property Name="Fax" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email_Address" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="County" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Company_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
