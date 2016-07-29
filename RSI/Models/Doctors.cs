@@ -46,5 +46,8 @@ namespace RSI.Models
         public string Medical_School { get; set; }
         public string Residency_Training { get; set; }
         public string Graduation_Year { get; set; }
+        public Nullable<int> Patients { get; set; }
+        public Nullable<int> Claims { get; set; }
+        public Nullable<int> Prescriptions { get; set; }
     }
 }

@@ -42,6 +42,9 @@
           <Property Name="Medical_School" Type="varchar" MaxLength="8000" />
           <Property Name="Residency_Training" Type="varchar" MaxLength="8000" />
           <Property Name="Graduation_Year" Type="varchar" MaxLength="4" />
+          <Property Name="Patients" Type="int" />
+          <Property Name="Claims" Type="int" />
+          <Property Name="Prescriptions" Type="int" />
         </EntityType>
         <EntityType Name="Taxonomy">
           <Key>
@@ -103,6 +106,9 @@
           <Property Name="Medical_School" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
           <Property Name="Residency_Training" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
           <Property Name="Graduation_Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Patients" Type="Int32" />
+          <Property Name="Claims" Type="Int32" />
+          <Property Name="Prescriptions" Type="Int32" />
         </EntityType>
         <EntityType Name="Taxonomy">
           <Key>
@@ -122,6 +128,9 @@
           <EntitySetMapping Name="Doctors">
             <EntityTypeMapping TypeName="RsiDoctorsDbModel.Doctors">
               <MappingFragment StoreEntitySet="Doctors">
+                <ScalarProperty Name="Prescriptions" ColumnName="Prescriptions" />
+                <ScalarProperty Name="Claims" ColumnName="Claims" />
+                <ScalarProperty Name="Patients" ColumnName="Patients" />
                 <ScalarProperty Name="Graduation_Year" ColumnName="Graduation_Year" />
                 <ScalarProperty Name="Residency_Training" ColumnName="Residency_Training" />
                 <ScalarProperty Name="Medical_School" ColumnName="Medical_School" />

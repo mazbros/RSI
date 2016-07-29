@@ -253,8 +253,32 @@
             @Html.DisplayNameFor(model => model.Graduation_Year).ToString().Replace("_", " ")
         </dt>
 
+    <dd>
+        @Html.DisplayFor(model => model.Graduation_Year)
+    </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patients).ToString().Replace("_", " ")
+        </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Patients)
+    </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Claims).ToString().Replace("_", " ")
+        </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Claims)
+    </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prescriptions).ToString().Replace("_", " ")
+        </dt>
+
         <dd>
-            @Html.DisplayFor(model => model.Graduation_Year)
+            @Html.DisplayFor(model => model.Prescriptions)
         </dd>
 
     </dl>
