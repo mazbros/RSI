@@ -73,3 +73,6 @@ textarea { max-width: 280px; }
 }
 
 .reset-highlight { background-color: #f9f9f9; }
+
+.navbar-inverse { background-color: #41adf2; color: #ffffff; }
+
