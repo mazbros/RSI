@@ -25,8 +25,12 @@ namespace RSI.API
         // POST api/<controller>/<action>/<filter>
         /// <summary>
         ///     [POST] Takes list and filters it using a filter with several filter categories that may have multiple entries each
+        ///             except Country - only single value allowed
         /// </summary>
         /// <param name="filter">Filter with several categories that may have multiple entries each</param>
+        /// <remarks>
+        ///     Country: mandatory (not optional) parameter eg. USA, CAN
+        /// </remarks>
         /// <remarks>
         ///     Specialty: can contain single or multiple specialties, if empty ignored
         /// </remarks>
@@ -42,30 +46,30 @@ namespace RSI.API
         {
             var doctors = DoctorsList.Instance.Get();
 
-            var predicateSpecialty = PredicateBuilder.False<Doctors>();
-            var predicateState = PredicateBuilder.False<Doctors>();
-            var predicateRank = PredicateBuilder.False<Doctors>();
-            var predicateCountry = PredicateBuilder.False<Doctors>();
+            var predicateSpecialty = PredicateBuilder.New<Doctors>(false);
+            var predicateState = PredicateBuilder.New<Doctors>(false);
+            var predicateRank = PredicateBuilder.New<Doctors>(false);
+            var predicateCountry = PredicateBuilder.New<Doctors>(false);
 
             predicateSpecialty = filter.Specialty != null ? filter.Specialty.Count != 0
                 ? filter.Specialty.Aggregate(predicateSpecialty,
                     (current, temp) => current.Or(d => d.Specialty == temp))
-                : PredicateBuilder.True<Doctors>() : PredicateBuilder.True<Doctors>();
+                : PredicateBuilder.New<Doctors>(true) : PredicateBuilder.New<Doctors>(true);
 
             predicateState = filter.State != null ? filter.State.Count != 0
                 ? filter.State.Aggregate(predicateState,
                     (current, temp) => current.Or(d => d.State == temp))
-                : PredicateBuilder.True<Doctors>() : PredicateBuilder.True<Doctors>();
+                : PredicateBuilder.New<Doctors>(true) : PredicateBuilder.New<Doctors>(true);
 
             predicateRank = filter.Rank != null ? filter.Rank.Count != 0
                 ? filter.Rank.Aggregate(predicateRank,
                     (current, temp) => current.Or(d => d.Rank == temp))
-                : PredicateBuilder.True<Doctors>() : PredicateBuilder.True<Doctors>();
+                : PredicateBuilder.New<Doctors>(true) : PredicateBuilder.New<Doctors>(true);
 
             predicateRank = filter.Country != null ? filter.Country.Count != 0
                 ? filter.Country.Aggregate(predicateCountry,
                     (current, temp) => current.Or(d => d.Country == temp))
-                : PredicateBuilder.True<Doctors>() : PredicateBuilder.True<Doctors>();
+                : PredicateBuilder.New<Doctors>(true) : PredicateBuilder.New<Doctors>(true);
 
             return doctors.AsQueryable().Where(predicateSpecialty).Where(predicateState).Where(predicateRank).Where(predicateCountry).ToList();
         }

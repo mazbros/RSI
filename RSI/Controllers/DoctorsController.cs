@@ -55,11 +55,9 @@ namespace RSI.Controllers
             var states = StatesList.Instance.Get();
             var countries = CountriesList.Instance.GetNames();
 
-            var doctors = allDoctors;
-
             int fs, fr, fst, fc;
-            ApplyFilters(specialtyFilter, rankFilter, stateFilter, country, allDoctors, specialties, ranks, states, countries, out fs,
-                out fr, out fst, out fc, ref doctors);
+            var doctors = ApplyFilters(specialtyFilter, rankFilter, stateFilter, country, allDoctors, specialties, ranks, states, countries, out fs,
+                out fr, out fst, out fc);
 
             ViewBag.Specialties = DropDownHelper.ToSelectListItems(specialties, fs);
             ViewBag.Ranks = DropDownHelper.ToSelectListItems(ranks, fr);
@@ -155,11 +153,12 @@ namespace RSI.Controllers
         }
 
         // One filter at a time logic
-        private void ApplyFilters(string specialtyFilter, string rankFilter, string stateFilter, string country,
+        private List<Doctors> ApplyFilters(string specialtyFilter, string rankFilter, string stateFilter, string country,
             List<Doctors> allDoctors, IReadOnlyList<string> specialties, IReadOnlyList<string> ranks,
             IReadOnlyList<string> states, IReadOnlyList<string> countries, out int fs, out int fr, out int fst,
-            out int fc, ref List<Doctors> doctors)
+            out int fc)
         {
+            List<Doctors> doctors;
             int c;
             string countryCode;
             fc = -1;
@@ -167,7 +166,7 @@ namespace RSI.Controllers
             {
                 int.TryParse(country, out fc);
                 c = fc;
-                countryCode = AllCountries.Instance.GetCodeByName(countries[c]).ToString();
+                countryCode = AllCountries.Instance.GetCodeByName(countries[c]);
                 doctors =
                     allDoctors.Where(d => d.Country.Equals(countryCode))
                         .Select(d => d)
@@ -176,7 +175,7 @@ namespace RSI.Controllers
             else
             {
                 c = 0;
-                countryCode = AllCountries.Instance.GetCodeByName(countries[c]).ToString();
+                countryCode = AllCountries.Instance.GetCodeByName(countries[c]);
                 doctors =
                     allDoctors.Where(d => d.Country.Equals(countryCode))
                         .Select(d => d)
@@ -207,7 +206,6 @@ namespace RSI.Controllers
                 doctors = allDoctors.Where(d => d.Specialty.Equals(specialties[i])).Select(d => d).ToList();
                 if (fc >= 0)
                 {
-                    c = fc;
                     doctors =
                         doctors.Where(d => d.Country.Equals(countryCode))
                             .Select(d => d)
@@ -225,7 +223,6 @@ namespace RSI.Controllers
                                 : d.Rank.ToString().Equals(ranks[i])).Select(d => d).ToList();
                 if (fc >= 0)
                 {
-                    c = fc;
                     doctors =
                         doctors.Where(d => d.Country.Equals(countryCode))
                             .Select(d => d)
@@ -238,7 +235,6 @@ namespace RSI.Controllers
                 doctors = allDoctors.Where(d => d.State.Equals(states[i])).Select(d => d).ToList();
                 if (fc >= 0)
                 {
-                    c = fc;
                     doctors =
                         doctors.Where(d => d.Country.Equals(countryCode))
                             .Select(d => d)
@@ -260,7 +256,6 @@ namespace RSI.Controllers
                         .ToList();
                 if (fc >= 0)
                 {
-                    c = fc;
                     doctors =
                         doctors.Where(d => d.Country.Equals(countryCode))
                             .Select(d => d)
@@ -277,7 +272,6 @@ namespace RSI.Controllers
                         .ToList();
                 if (fc >= 0)
                 {
-                    c = fc;
                     doctors =
                         doctors.Where(d => d.Country.Equals(countryCode))
                             .Select(d => d)
@@ -299,7 +293,6 @@ namespace RSI.Controllers
                         .ToList();
                 if (fc >= 0)
                 {
-                    c = fc;
                     doctors =
                         doctors.Where(d => d.Country.Equals(countryCode))
                             .Select(d => d)
@@ -307,7 +300,7 @@ namespace RSI.Controllers
                 }
             }
 
-            if (fs < 0 || fr < 0 || fst < 0 || fc < 0) return; // fs >= 0 && fr >= 0 && fst >= 0
+            if (fs < 0 || fr < 0 || fst < 0 || fc < 0) return doctors; // fs >= 0 && fr >= 0 && fst >= 0
 
             var x = fs;
             var z = fr;
@@ -322,12 +315,12 @@ namespace RSI.Controllers
                         d.State.Equals(states[y])).Select(d => d).ToList();
             if (fc >= 0)
             {
-                c = fc;
                 doctors =
                     doctors.Where(d => d.Country.Equals(countryCode))
                         .Select(d => d)
                         .ToList();
             }
+            return doctors;
         }
 
         // GET: Doctors/Details/5

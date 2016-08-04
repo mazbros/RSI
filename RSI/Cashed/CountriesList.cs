@@ -8,11 +8,12 @@ namespace RSI.Cashed
     {
         private static readonly Lazy<CountriesList> Inst = new Lazy<CountriesList>();
 
-        private List<CountryKVP> _countries;
+        private List<Country> _countries;
         private List<string> _countryNames;
         public static CountriesList Instance => Inst.Value;
 
-        public List<CountryKVP> Get()
+        //TODO: make sure below is necessary otherwise - delete
+        public List<Country> Get()
         {
             if (_countries != null) return _countries;
 
@@ -20,11 +21,11 @@ namespace RSI.Cashed
             var countries = AllCountries.Instance.Get();
             _countries = doctors
                 .OrderBy(d => d.Country)
-                .Join(countries, d => d.Country, c => c.A3_UN,
-                    (d, c) => new CountryKVP {Country = c.Country, A3_UN = c.A3_UN}).Distinct().ToList();
+                .Join(countries, d => d.Country, c => c.Code,
+                    (d, c) => new Country {Name = c.Name, Code = c.Code}).Distinct().ToList();
             
-            _countries.Remove(new CountryKVP { Country = "United States", A3_UN = "USA" });
-            _countries.Insert(0, new CountryKVP { Country = "United States", A3_UN = "USA" });
+            _countries.Remove(new Country { Name = "United States", Code = "USA" });
+            _countries.Insert(0, new Country { Name = "United States", Code = "USA" });
 
             return _countries;
         }
@@ -37,8 +38,8 @@ namespace RSI.Cashed
             var countries = AllCountries.Instance.Get();
             _countryNames = doctors
                 .OrderBy(d => d.Country)
-                .Join(countries, d => d.Country, c => c.A3_UN,
-                    (d, c) =>  c.Country).Distinct().ToList();
+                .Join(countries, d => d.Country, c => c.Code,
+                    (d, c) =>  c.Name).Distinct().ToList();
 
             _countryNames.Remove("United States");
             _countryNames.Insert(0, "United States");

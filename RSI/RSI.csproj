@@ -228,7 +228,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Cashed\AllCountries.cs" />
     <Compile Include="Cashed\CountriesList.cs" />
-    <Compile Include="Cashed\CountryKVP.cs" />
+    <Compile Include="Cashed\Country.cs" />
     <Compile Include="Cashed\DoctorsList.cs" />
     <Compile Include="Cashed\RanksList.cs" />
     <Compile Include="Cashed\SpecialtiesList.cs" />

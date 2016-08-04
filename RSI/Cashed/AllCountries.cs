@@ -9,28 +9,29 @@ namespace RSI.Cashed
     {
         private static readonly Lazy<AllCountries> Inst = new Lazy<AllCountries>();
 
-        private List<CountryKVP> _countries;
+        private List<Country> _countries;
         public static AllCountries Instance => Inst.Value;
 
-        public List<CountryKVP> Get()
+        public IEnumerable<Country> Get()
         {
             if (_countries != null) return _countries;
 
             var db = new Entities();
             _countries = db.Country_Codes
-                .Select(c => new CountryKVP {A3_UN = c.A3_UN, Country = c.COUNTRY }).ToList();
+                .Select(c => new Country {Code = c.A3_UN, Name = c.COUNTRY }).ToList();
             return _countries;
         }
 
         public string GetCodeByName(string name)
         {
-            var result = _countries.First(c => c.Country.Equals(name)).A3_UN;
+            var result = _countries.First(c => c.Name.Equals(name)).Code;
             return result;
         }
 
+        //TODO: make sure below is necessary otherwise - delete
         public string GetNameByCode(string code)
         {
-            var result = _countries.First(c => c.A3_UN.Equals(code)).Country;
+            var result = _countries.First(c => c.Code.Equals(code)).Name;
             return result;
         }
     }
