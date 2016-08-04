@@ -45,6 +45,7 @@ namespace RSI.API
             var predicateSpecialty = PredicateBuilder.False<Doctors>();
             var predicateState = PredicateBuilder.False<Doctors>();
             var predicateRank = PredicateBuilder.False<Doctors>();
+            var predicateCountry = PredicateBuilder.False<Doctors>();
 
             predicateSpecialty = filter.Specialty != null ? filter.Specialty.Count != 0
                 ? filter.Specialty.Aggregate(predicateSpecialty,
@@ -61,7 +62,12 @@ namespace RSI.API
                     (current, temp) => current.Or(d => d.Rank == temp))
                 : PredicateBuilder.True<Doctors>() : PredicateBuilder.True<Doctors>();
 
-            return doctors.AsQueryable().Where(predicateSpecialty).Where(predicateState).Where(predicateRank).ToList();
+            predicateRank = filter.Country != null ? filter.Country.Count != 0
+                ? filter.Country.Aggregate(predicateCountry,
+                    (current, temp) => current.Or(d => d.Country == temp))
+                : PredicateBuilder.True<Doctors>() : PredicateBuilder.True<Doctors>();
+
+            return doctors.AsQueryable().Where(predicateSpecialty).Where(predicateState).Where(predicateRank).Where(predicateCountry).ToList();
         }
 
         // POST api/<controller>

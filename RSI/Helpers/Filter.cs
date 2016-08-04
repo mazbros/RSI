@@ -7,5 +7,6 @@ namespace RSI.Helpers
         public List<int?> Rank { get; set; }
         public List<string> Specialty { get; set; }
         public List<string> State { get; set; }
+        public List<string> Country { get; set; }
     }
 }
