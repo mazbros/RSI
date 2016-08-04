@@ -45,8 +45,8 @@
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
@@ -116,15 +116,18 @@
   <ItemGroup>
     <Content Include="App.config" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="Scripts\jquery-2.2.3.intellisense.js" />
-    <Content Include="Scripts\jquery-2.2.3.js" />
-    <Content Include="Scripts\jquery-2.2.3.min.js" />
+    <Content Include="Scripts\jquery-3.1.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.1.0.js" />
+    <Content Include="Scripts\jquery-3.1.0.min.js" />
+    <Content Include="Scripts\jquery-3.1.0.slim.js" />
+    <Content Include="Scripts\jquery-3.1.0.slim.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Scripts\jquery-2.2.3.min.map" />
+    <None Include="Scripts\jquery-3.1.0.min.map" />
+    <None Include="Scripts\jquery-3.1.0.slim.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RSI\RSI.csproj">

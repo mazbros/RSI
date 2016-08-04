@@ -52,6 +52,7 @@ namespace RSI.Controllers
             var specialties = SpecialtiesList.Instance.Get();
             var ranks = RanksList.Instance.Get();
             var states = StatesList.Instance.Get();
+            var countries = CountriesList.Instance.Get();
 
             var doctors = allDoctors;
 
@@ -62,6 +63,7 @@ namespace RSI.Controllers
             ViewBag.Specialties = DropDownHelper.ToSelectListItems(specialties, fs);
             ViewBag.Ranks = DropDownHelper.ToSelectListItems(ranks, fr);
             ViewBag.States = DropDownHelper.ToSelectListItems(states, fst);
+            ViewBag.Countries = DropDownHelper.ToSelectListItems(countries);
 
             ViewBag.TotalRecords = doctors.Count();
 
