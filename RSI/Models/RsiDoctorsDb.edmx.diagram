@@ -8,7 +8,7 @@
       <Diagram DiagramId="350b4440927540f0b98ab3fc70d84030" Name="Diagram1" ZoomLevel="93">
         <EntityTypeShape EntityType="RsiDoctorsDbModel.Doctors" Width="2.25" PointX="0.625" PointY="0.5" />
         <EntityTypeShape EntityType="RsiDoctorsDbModel.Taxonomy" Width="1.5" PointX="3.25" PointY="0.5" />
-        <EntityTypeShape EntityType="RsiDoctorsDbModel.Doctors_NONUS" Width="1.5" PointX="5.125" PointY="0.5" />
+        <EntityTypeShape EntityType="RsiDoctorsDbModel.Country_Codes" Width="1.5" PointX="3.25" PointY="2.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

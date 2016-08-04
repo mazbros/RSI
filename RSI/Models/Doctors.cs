@@ -49,5 +49,6 @@ namespace RSI.Models
         public Nullable<int> Patients { get; set; }
         public Nullable<int> Claims { get; set; }
         public Nullable<int> Prescriptions { get; set; }
+        public string Country { get; set; }
     }
 }

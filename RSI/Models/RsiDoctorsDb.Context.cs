@@ -27,6 +27,6 @@ namespace RSI.Models
     
         public virtual DbSet<Doctors> Doctors { get; set; }
         public virtual DbSet<Taxonomy> Taxonomies { get; set; }
-        public virtual DbSet<Doctors_NONUS> Doctors_NONUS { get; set; }
+        public virtual DbSet<Country_Codes> Country_Codes { get; set; }
     }
 }

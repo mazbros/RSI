@@ -6,6 +6,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="RsiDoctorsDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Country_Codes">
+          <Key>
+            <PropertyRef Name="A3 (UN)" />
+          </Key>
+          <Property Name="COUNTRY" Type="nvarchar" MaxLength="255" />
+          <Property Name="A2 (ISO)" Type="nvarchar" MaxLength="2" />
+          <Property Name="A3 (UN)" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="NUM (UN)" Type="smallint" />
+          <Property Name="DIALING CODE" Type="smallint" />
+        </EntityType>
         <EntityType Name="Doctors">
           <Key>
             <PropertyRef Name="DRID" />
@@ -45,31 +55,7 @@
           <Property Name="Patients" Type="int" />
           <Property Name="Claims" Type="int" />
           <Property Name="Prescriptions" Type="int" />
-        </EntityType>
-        <EntityType Name="Doctors_NONUS">
-          <Key>
-            <PropertyRef Name="DRID" />
-          </Key>
-          <Property Name="DRID" Type="bigint" Nullable="false" />
-          <Property Name="Rank" Type="int" />
-          <Property Name="Publications" Type="int" />
-          <Property Name="RecentDate" Type="varchar" MaxLength="10" />
-          <Property Name="NPI" Type="varchar" MaxLength="128" />
-          <Property Name="REVIEWER_ID" Type="bigint" />
-          <Property Name="Specialty" Type="varchar" MaxLength="128" />
-          <Property Name="First_Name" Type="varchar" MaxLength="50" />
-          <Property Name="Last_Name" Type="varchar" MaxLength="50" />
-          <Property Name="Address" Type="varchar" MaxLength="84" />
-          <Property Name="City" Type="varchar" MaxLength="50" />
-          <Property Name="State" Type="varchar" MaxLength="24" />
-          <Property Name="Zipcode" Type="varchar" MaxLength="10" />
-          <Property Name="Phone" Type="varchar" MaxLength="50" />
-          <Property Name="Fax" Type="varchar" MaxLength="50" />
-          <Property Name="Email_Address" Type="varchar" MaxLength="128" />
-          <Property Name="Country" Type="varchar" MaxLength="50" />
-          <Property Name="Company_Name" Type="varchar" MaxLength="255" />
-          <Property Name="Gender" Type="varchar" MaxLength="1" />
-          <Property Name="Credentials" Type="varchar" MaxLength="50" />
+          <Property Name="Country" Type="varchar" MaxLength="3" />
         </EntityType>
         <EntityType Name="Taxonomy">
           <Key>
@@ -81,8 +67,8 @@
           <Property Name="Specialization" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityContainer Name="RsiDoctorsDbModelStoreContainer">
+          <EntitySet Name="Country_Codes" EntityType="Self.Country_Codes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Doctors" EntityType="Self.Doctors" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Doctors_NONUS" EntityType="Self.Doctors_NONUS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Taxonomy" EntityType="Self.Taxonomy" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -95,7 +81,7 @@
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Doctors" EntityType="RsiDoctorsDbModel.Doctors" />
           <EntitySet Name="Taxonomies" EntityType="RsiDoctorsDbModel.Taxonomy" />
-          <EntitySet Name="Doctors_NONUS" EntityType="RsiDoctorsDbModel.Doctors_NONUS" />
+          <EntitySet Name="Country_Codes" EntityType="RsiDoctorsDbModel.Country_Codes" />
         </EntityContainer>
         <EntityType Name="Doctors">
           <Key>
@@ -136,6 +122,7 @@
           <Property Name="Patients" Type="Int32" />
           <Property Name="Claims" Type="Int32" />
           <Property Name="Prescriptions" Type="Int32" />
+          <Property Name="Country" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Taxonomy">
           <Key>
@@ -146,30 +133,15 @@
           <Property Name="Classification" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Specialization" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Doctors_NONUS">
+        <EntityType Name="Country_Codes">
           <Key>
-            <PropertyRef Name="DRID" />
+            <PropertyRef Name="A3_UN" />
           </Key>
-          <Property Name="DRID" Type="Int64" Nullable="false" />
-          <Property Name="Rank" Type="Int32" />
-          <Property Name="Publications" Type="Int32" />
-          <Property Name="RecentDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="NPI" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="REVIEWER_ID" Type="Int64" />
-          <Property Name="Specialty" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="84" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="State" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
-          <Property Name="Zipcode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email_Address" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Company_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="Credentials" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="COUNTRY" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A2_ISO" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="A3_UN" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_UN" Type="Int16" />
+          <Property Name="DIALING_CODE" Type="Int16" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -180,6 +152,7 @@
           <EntitySetMapping Name="Doctors">
             <EntityTypeMapping TypeName="RsiDoctorsDbModel.Doctors">
               <MappingFragment StoreEntitySet="Doctors">
+                <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="Prescriptions" ColumnName="Prescriptions" />
                 <ScalarProperty Name="Claims" ColumnName="Claims" />
                 <ScalarProperty Name="Patients" ColumnName="Patients" />
@@ -228,29 +201,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Doctors_NONUS">
-            <EntityTypeMapping TypeName="RsiDoctorsDbModel.Doctors_NONUS">
-              <MappingFragment StoreEntitySet="Doctors_NONUS">
-                <ScalarProperty Name="Credentials" ColumnName="Credentials" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Email_Address" ColumnName="Email_Address" />
-                <ScalarProperty Name="Fax" ColumnName="Fax" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
-                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
-                <ScalarProperty Name="Specialty" ColumnName="Specialty" />
-                <ScalarProperty Name="REVIEWER_ID" ColumnName="REVIEWER_ID" />
-                <ScalarProperty Name="NPI" ColumnName="NPI" />
-                <ScalarProperty Name="RecentDate" ColumnName="RecentDate" />
-                <ScalarProperty Name="Publications" ColumnName="Publications" />
-                <ScalarProperty Name="Rank" ColumnName="Rank" />
-                <ScalarProperty Name="DRID" ColumnName="DRID" />
+          <EntitySetMapping Name="Country_Codes">
+            <EntityTypeMapping TypeName="RsiDoctorsDbModel.Country_Codes">
+              <MappingFragment StoreEntitySet="Country_Codes">
+                <ScalarProperty Name="DIALING_CODE" ColumnName="DIALING CODE" />
+                <ScalarProperty Name="NUM_UN" ColumnName="NUM (UN)" />
+                <ScalarProperty Name="A3_UN" ColumnName="A3 (UN)" />
+                <ScalarProperty Name="A2_ISO" ColumnName="A2 (ISO)" />
+                <ScalarProperty Name="COUNTRY" ColumnName="COUNTRY" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

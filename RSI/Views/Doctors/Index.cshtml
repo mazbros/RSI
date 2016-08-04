@@ -20,6 +20,25 @@
 
     @{ Ajax.BeginForm("Index", "Doctors", new AjaxOptions {HttpMethod = "POST"}); }
     <table class="table table-condensed table-bordered full-width">
+    <tr>
+        <td colspan="18">
+            Country:&nbsp;@Html.DropDownList(
+                "country",
+                (IEnumerable<SelectListItem>)ViewBag.Countries,
+                "USA",
+                new
+                {
+                    style = "width:60px;",
+                    onchange = "this.form.submit();",
+                    specialtyFilter = ViewBag.SpecialtyFilter,
+                    sortOrder = ViewBag.CurrentSort,
+                    rankFilter = ViewBag.RankFilter,
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country//,
+                    //multiple = "multiple"
+                })
+        </td>
+    </tr>
     <tr class="header">
         <th>
             @Ajax.ActionLink(

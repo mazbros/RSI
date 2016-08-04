@@ -226,13 +226,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Cashed\AllCountries.cs" />
     <Compile Include="Cashed\CountriesList.cs" />
+    <Compile Include="Cashed\CountryKVP.cs" />
     <Compile Include="Cashed\DoctorsList.cs" />
-    <Compile Include="Cashed\DoctorsList_NONUS.cs" />
     <Compile Include="Cashed\RanksList.cs" />
-    <Compile Include="Cashed\RanksList_NONUS.cs" />
     <Compile Include="Cashed\SpecialtiesList.cs" />
-    <Compile Include="Cashed\SpecialtiesList_NONUS.cs" />
     <Compile Include="Cashed\StatesList.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DoctorsController.cs" />
@@ -246,10 +245,10 @@
     <Compile Include="Helpers\Filter.cs" />
     <Compile Include="Helpers\Sorter.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Doctors.cs">
+    <Compile Include="Models\Country_Codes.cs">
       <DependentUpon>RsiDoctorsDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Doctors_NONUS.cs">
+    <Compile Include="Models\Doctors.cs">
       <DependentUpon>RsiDoctorsDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
