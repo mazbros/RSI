@@ -22,7 +22,7 @@ namespace RSI.Controllers
 
         // GET: DoctorsViews
         public ActionResult Index(long? id, string sortOrder, int? page, string specialtyFilter, string rankFilter,
-            string stateFilter, string country)
+            string stateFilter, string country = "0")
         {
             if (!Request.IsAuthenticated)
             {
@@ -156,9 +156,9 @@ namespace RSI.Controllers
 
         // One filter at a time logic
         private void ApplyFilters(string specialtyFilter, string rankFilter, string stateFilter, string country,
-            List<Doctors> allDoctors, IReadOnlyList<string> specialties,
-            IReadOnlyList<string> ranks, IReadOnlyList<string> states, IReadOnlyList<string> countries, out int fs, out int fr, out int fst, out int fc,
-            ref List<Doctors> doctors)
+            List<Doctors> allDoctors, IReadOnlyList<string> specialties, IReadOnlyList<string> ranks,
+            IReadOnlyList<string> states, IReadOnlyList<string> countries, out int fs, out int fr, out int fst,
+            out int fc, ref List<Doctors> doctors)
         {
             int c;
             fc = -1;
@@ -176,13 +176,13 @@ namespace RSI.Controllers
             {
                 c = 0;
                 var countryCode = AllCountries.Instance.GetCodeByName(countries[c]).ToString();
-                
+
                 doctors =
                     allDoctors.Where(d => d.Country.Equals(countryCode))
                         .Select(d => d)
                         .ToList();
             }
-            
+
             fs = -1;
             if (!specialtyFilter.IsNullOrWhiteSpace())
             {
@@ -332,8 +332,7 @@ namespace RSI.Controllers
 
         // GET: Doctors/Details/5
         public async Task<ActionResult> Details(long? id, string sortOrder, int? page, string specialtyFilter,
-            string rankFilter,
-            string stateFilter)
+            string rankFilter, string stateFilter, string country)
         {
             if (id == null)
             {
@@ -346,6 +345,7 @@ namespace RSI.Controllers
             ViewBag.SpecialtyFilter = specialtyFilter;
             ViewBag.RankFilter = rankFilter;
             ViewBag.StateFilter = stateFilter;
+            ViewBag.Country = country;
 
             Doctors consolidatedDoctorsView = await _db.Doctors.FindAsync(id);
             if (consolidatedDoctorsView == null)
@@ -371,7 +371,7 @@ namespace RSI.Controllers
                 Include =
                     "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax," +
                     "Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website,Gender,Credentials,Taxonomy_Code,Taxonomy_Classification," +
-                    "Taxonomy_Specialization,License_Number,License_State,Medical_School,Residency_Training,Graduation_Year"
+                    "Taxonomy_Specialization,License_Number,License_State,Medical_School,Residency_Training,Graduation_Year,Patients,Claims,Prescriptions,Country"
                 )] Doctors consolidatedDoctorsView)
         {
             if (ModelState.IsValid)
@@ -386,8 +386,7 @@ namespace RSI.Controllers
 
         // GET: Doctors/Edit/5
         public async Task<ActionResult> Edit(long? id, string sortOrder, int? page, string specialtyFilter,
-            string rankFilter,
-            string stateFilter)
+            string rankFilter, string stateFilter, string country)
         {
             if (id == null)
             {
@@ -407,6 +406,7 @@ namespace RSI.Controllers
             ViewBag.SpecialtyFilter = specialtyFilter;
             ViewBag.RankFilter = rankFilter;
             ViewBag.StateFilter = stateFilter;
+            ViewBag.Country = country;
 
             return View(consolidatedDoctorsView);
         }
@@ -421,9 +421,9 @@ namespace RSI.Controllers
                 Include =
                     "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax," +
                     "Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website,Gender,Credentials,Taxonomy_Code,Taxonomy_Classification," +
-                    "Taxonomy_Specialization,License_Number,License_State,Medical_School,Residency_Training,Graduation_Year"
+                    "Taxonomy_Specialization,License_Number,License_State,Medical_School,Residency_Training,Graduation_Year,Patients,Claims,Prescriptions,Country"
                 )] Doctors consolidatedDoctorsView,
-            long? id, string sortOrder, int? page, string specialtyFilter, string rankFilter, string stateFilter)
+            long? id, string sortOrder, int? page, string specialtyFilter, string rankFilter, string stateFilter, string country)
         {
             ViewBag.DRID = id;
             ViewBag.SortOrder = sortOrder;
@@ -431,6 +431,7 @@ namespace RSI.Controllers
             ViewBag.SpecialtyFilter = specialtyFilter;
             ViewBag.RankFilter = rankFilter;
             ViewBag.StateFilter = stateFilter;
+            ViewBag.Country = country;
 
             if (ModelState.IsValid)
             {
@@ -449,7 +450,8 @@ namespace RSI.Controllers
                             page = ViewBag.PageNumber,
                             specialtyFilter = ViewBag.SpecialtyFilter,
                             rankFilter = ViewBag.RankFilter,
-                            stateFilter = ViewBag.StateFilter
+                            stateFilter = ViewBag.StateFilter,
+                            country = ViewBag.Country
                         })
                     );
             }
@@ -458,8 +460,7 @@ namespace RSI.Controllers
 
         // GET: Doctors/Delete/5
         public async Task<ActionResult> Delete(long? id, string sortOrder, int? page, string specialtyFilter,
-            string rankFilter,
-            string stateFilter)
+            string rankFilter, string stateFilter, string country)
         {
             if (id == null)
             {
@@ -486,7 +487,7 @@ namespace RSI.Controllers
 
         // CSV file dump of sorted and filtered list
         public ActionResult CsvList(string sortOrder, int? page, string specialtyFilter, string rankFilter,
-            string stateFilter)
+            string stateFilter, string country)
         {
             var timeStamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
             return new CsvDownloader<Doctors>(_doctorsResults, $"RSI-Export_{timeStamp}.csv");

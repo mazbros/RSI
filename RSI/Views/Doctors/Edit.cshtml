@@ -14,7 +14,7 @@
     <hr/>
     @Html.ValidationSummary(true, "", new {@class = "text-danger"})
     @Html.HiddenFor(model => model.DRID)
-
+    
     <div class="form-group">
         @Html.LabelFor(model => model.Rank, new { @class = "control-label col-md-1" })
         <div class="col-md-3">
@@ -172,6 +172,7 @@
         @Html.HiddenFor(model => model.Patients)
         @Html.HiddenFor(model => model.Claims)
         @Html.HiddenFor(model => model.Prescriptions)
+        @Html.HiddenFor(model => model.Country)
     </div>
     
     <div class="form-group">
@@ -194,7 +195,8 @@
                 page = ViewBag.PageNumber,
                 specialtyFilter = ViewBag.SpecialtyFilter,
                 rankFilter = ViewBag.RankFilter,
-                stateFilter = ViewBag.StateFilter
+                stateFilter = ViewBag.StateFilter,
+                country = ViewBag.Country
             }),
         new AjaxOptions {HttpMethod = "POST"})
 </p>

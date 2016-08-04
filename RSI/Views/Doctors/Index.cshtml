@@ -25,10 +25,9 @@
             Country:&nbsp;@Html.DropDownList(
                 "country",
                 (IEnumerable<SelectListItem>)ViewBag.Countries,
-                "USA",
                 new
                 {
-                    style = "width:60px;",
+                    style = "width:160px;",
                     onchange = "this.form.submit();",
                     specialtyFilter = ViewBag.SpecialtyFilter,
                     sortOrder = ViewBag.CurrentSort,
@@ -49,7 +48,8 @@
                     sortOrder = ViewBag.DrIdSortParm,
                     specialtyFilter = ViewBag.SpecialtyFilter,
                     rankFilter = ViewBag.RankFilter,
-                    stateFilter = ViewBag.StateFilter
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
                 },
                 new AjaxOptions {HttpMethod = "POST"},
                 new {style = "white-space:nowrap;"})
@@ -63,7 +63,8 @@
                     sortOrder = ViewBag.RankSortParm,
                     specialtyFilter = ViewBag.SpecialtyFilter,
                     rankFilter = ViewBag.RankFilter,
-                    stateFilter = ViewBag.StateFilter
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
                 },
                 new AjaxOptions {HttpMethod = "POST"},
                 new {style = "white-space:nowrap;"})
@@ -77,7 +78,8 @@
                     sortOrder = ViewBag.PublicationsSortParm,
                     specialtyFilter = ViewBag.SpecialtyFilter,
                     rankFilter = ViewBag.RankFilter,
-                    stateFilter = ViewBag.StateFilter
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
                 },
                 new AjaxOptions {HttpMethod = "POST"},
                 new {style = "white-space:nowrap;"})
@@ -91,7 +93,8 @@
                     sortOrder = ViewBag.RecentDateSortParm,
                     specialtyFilter = ViewBag.SpecialtyFilter,
                     rankFilter = ViewBag.RankFilter,
-                    stateFilter = ViewBag.StateFilter
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
                 },
                 new AjaxOptions {HttpMethod = "POST"},
                 new {style = "white-space:nowrap;"})
@@ -111,7 +114,8 @@
                     sortOrder = ViewBag.SpecialtySortParm,
                     specialtyFilter = ViewBag.SpecialtyFilter,
                     rankFilter = ViewBag.RankFilter,
-                    stateFilter = ViewBag.StateFilter
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
                 },
                 new AjaxOptions {HttpMethod = "POST"},
                 new {style = "white-space:nowrap;"})
@@ -125,7 +129,8 @@
                     sortOrder = ViewBag.FirstNameSortParm,
                     specialtyFilter = ViewBag.SpecialtyFilter,
                     rankFilter = ViewBag.RankFilter,
-                    stateFilter = ViewBag.StateFilter
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
                 },
                 new AjaxOptions {HttpMethod = "POST"},
                 new {style = "white-space:nowrap;"})
@@ -139,7 +144,8 @@
                     sortOrder = ViewBag.LastNameSortParm,
                     specialtyFilter = ViewBag.SpecialtyFilter,
                     rankFilter = ViewBag.RankFilter,
-                    stateFilter = ViewBag.StateFilter
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
                 },
                 new AjaxOptions {HttpMethod = "POST"},
                 new {style = "white-space:nowrap;"})
@@ -153,7 +159,8 @@
                     sortOrder = ViewBag.AddressSortParm,
                     specialtyFilter = ViewBag.SpecialtyFilter,
                     rankFilter = ViewBag.RankFilter,
-                    stateFilter = ViewBag.StateFilter
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
                 },
                 new AjaxOptions {HttpMethod = "POST"},
                 new {style = "white-space:nowrap;"})
@@ -167,7 +174,8 @@
                     sortOrder = ViewBag.CitySortParm,
                     specialtyFilter = ViewBag.SpecialtyFilter,
                     rankFilter = ViewBag.RankFilter,
-                    stateFilter = ViewBag.StateFilter
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
                 },
                 new AjaxOptions {HttpMethod = "POST"},
                 new {style = "white-space:nowrap;"})
@@ -181,7 +189,8 @@
                     sortOrder = ViewBag.StateSortParm,
                     specialtyFilter = ViewBag.SpecialtyFilter,
                     rankFilter = ViewBag.RankFilter,
-                    stateFilter = ViewBag.StateFilter
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
                 },
                 new AjaxOptions {HttpMethod = "POST"},
                 new {style = "white-space:nowrap;"})
@@ -216,7 +225,8 @@
                     specialtyFilter = ViewBag.SpecialtyFilter,
                     sortOrder = ViewBag.CurrentSort,
                     rankFilter = ViewBag.RankFilter,
-                    stateFilter = ViewBag.StateFilter //,
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country //,
                     //multiple = "multiple"
                 })
         </th>
@@ -237,7 +247,8 @@
                     specialtyFilter = ViewBag.SpecialtyFilter,
                     sortOrder = ViewBag.CurrentSort,
                     rankFilter = ViewBag.RankFilter,
-                    stateFilter = ViewBag.StateFilter
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
                 })
         </th>
         <th><!-- First Name --></th>
@@ -257,7 +268,8 @@
                     specialtyFilter = ViewBag.SpecialtyFilter,
                     sortOrder = ViewBag.CurrentSort,
                     rankFilter = ViewBag.RankFilter,
-                    stateFilter = ViewBag.StateFilter
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
                 })
         </th>
         <th><!-- Zipcode --></th>
@@ -362,7 +374,8 @@
                         page = ViewBag.PageNumber,
                         specialtyFilter = ViewBag.SpecialtyFilter,
                         rankFilter = ViewBag.RankFilter,
-                        stateFilter = ViewBag.StateFilter
+                        stateFilter = ViewBag.StateFilter,
+                        country = ViewBag.Country
                     },
                     new AjaxOptions {HttpMethod = "POST"},
                     new {@class = "btn btn-default btn-xs"})
@@ -378,7 +391,8 @@
                         page = ViewBag.PageNumber,
                         specialtyFilter = ViewBag.SpecialtyFilter,
                         rankFilter = ViewBag.RankFilter,
-                        stateFilter = ViewBag.StateFilter
+                        stateFilter = ViewBag.StateFilter,
+                        country = ViewBag.Country
                     },
                     new AjaxOptions {HttpMethod = "POST"},
                     new {@class = "btn btn-default btn-xs"})
@@ -400,7 +414,8 @@
                     sortOrder = ViewBag.CurrentSort,
                     specialtyFilter = ViewBag.SpecialtyFilter,
                     rankFilter = ViewBag.RankFilter,
-                    stateFilter = ViewBag.StateFilter
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
                 }
                 ))
     </div>
@@ -415,6 +430,7 @@
                 specialtyFilter = ViewBag.SpecialtyFilter,
                 rankFilter = ViewBag.RankFilter,
                 stateFilter = ViewBag.StateFilter,
+                country = ViewBag.Country,
                 page = ViewBag.PageNumber
             },
             new AjaxOptions {HttpMethod = "POST"},

@@ -24,13 +24,13 @@ namespace RSI.Cashed
 
         public string GetCodeByName(string name)
         {
-            var result = _countries.Where(c => c.Country.Equals(name)).Select(c => c.A3_UN).ToString();
+            var result = _countries.First(c => c.Country.Equals(name)).A3_UN;
             return result;
         }
 
         public string GetNameByCode(string code)
         {
-            var result = _countries.Where(c => c.A3_UN.Equals(code)).Select(c => c.Country).ToString();
+            var result = _countries.First(c => c.A3_UN.Equals(code)).Country;
             return result;
         }
     }

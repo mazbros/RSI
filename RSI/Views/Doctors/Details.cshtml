@@ -10,6 +10,12 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Rank)
         </dt>
 
@@ -253,25 +259,25 @@
             @Html.DisplayNameFor(model => model.Graduation_Year).ToString().Replace("_", " ")
         </dt>
 
-    <dd>
-        @Html.DisplayFor(model => model.Graduation_Year)
-    </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Graduation_Year)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Patients).ToString().Replace("_", " ")
         </dt>
 
-    <dd>
-        @Html.DisplayFor(model => model.Patients)
-    </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Patients)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Claims).ToString().Replace("_", " ")
         </dt>
 
-    <dd>
-        @Html.DisplayFor(model => model.Claims)
-    </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Claims)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Prescriptions).ToString().Replace("_", " ")
@@ -294,7 +300,8 @@
             page = ViewBag.PageNumber,
             specialtyFilter = ViewBag.SpecialtyFilter,
             rankFilter = ViewBag.RankFilter,
-            stateFilter = ViewBag.StateFilter
+            stateFilter = ViewBag.StateFilter,
+            country = ViewBag.Country
         },
         new AjaxOptions { HttpMethod = "POST" })
 </p>
