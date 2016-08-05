@@ -47,6 +47,27 @@ namespace RSI.API
         {
             var doctors = DoctorsList.Instance.Get();
 
+            if (filter == null)
+            {
+                filter = new Filter();
+            }
+            if (filter.Country == null || filter.Country.Count == 0)
+            { 
+                filter.Country = new List<string> {"USA"};
+            }
+            if (filter.Specialty == null || filter.Specialty.Count == 0)
+            {
+                filter.Specialty = new List<string>();
+            }
+            if (filter.State == null || filter.State.Count == 0)
+            {
+                filter.State = new List<string>();
+            }
+            if (filter.Rank == null || filter.Rank.Count == 0)
+            {
+                filter.Rank = new List<int?>();
+            }
+
             var predicateSpecialty = PredicateBuilder.New<Doctors>(false);
             var predicateState = PredicateBuilder.New<Doctors>(false);
             var predicateRank = PredicateBuilder.New<Doctors>(false);
