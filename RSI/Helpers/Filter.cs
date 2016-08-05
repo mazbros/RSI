@@ -8,9 +8,14 @@ namespace RSI.Helpers
     /// </summary>
     public class Filter
     {
-        public List<int?> Rank { get; set; }
+        public List<string> Country { get; set; }
         public List<string> Specialty { get; set; }
         public List<string> State { get; set; }
-        public List<string> Country { get; set; }
+        public List<int?> Rank { get; set; }
+
+        public Filter()
+        {
+            Country = new List<string> {"USA"};
+        }
     }
 }

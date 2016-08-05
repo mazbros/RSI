@@ -79,10 +79,10 @@ namespace RSI.Tests.Controllers
             var controller = new DoctorsController();
             var filter = new Filter
             {
-                Country = new List<string> { "CAN" },
+                //Country = new List<string>(),
                 Specialty = new List<string>(),
                 State = new List<string>(),
-                Rank = new List<int?> {null}
+                Rank = new List<int?>()
             };
 
             // Act

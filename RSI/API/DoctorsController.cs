@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using LinqKit;
+using Microsoft.Ajax.Utilities;
 using RSI.Cashed;
 using RSI.Helpers;
 using RSI.Models;
@@ -66,7 +67,7 @@ namespace RSI.API
                     (current, temp) => current.Or(d => d.Rank == temp))
                 : PredicateBuilder.New<Doctors>(true) : PredicateBuilder.New<Doctors>(true);
 
-            predicateRank = filter.Country != null ? filter.Country.Count != 0
+            predicateCountry = filter.Country != null ? filter.Country.Count != 0
                 ? filter.Country.Aggregate(predicateCountry,
                     (current, temp) => current.Or(d => d.Country == temp))
                 : PredicateBuilder.New<Doctors>(true) : PredicateBuilder.New<Doctors>(true);
