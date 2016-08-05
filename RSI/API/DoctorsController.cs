@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using LinqKit;
-using Microsoft.Ajax.Utilities;
 using RSI.Cashed;
 using RSI.Helpers;
 using RSI.Models;
