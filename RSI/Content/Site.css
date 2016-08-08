@@ -28,7 +28,7 @@
 
 input,
 select,
-textarea { max-width: 280px; }
+textarea { max-width: 480px; }
 
 .result-view {
     bottom: -28%;
