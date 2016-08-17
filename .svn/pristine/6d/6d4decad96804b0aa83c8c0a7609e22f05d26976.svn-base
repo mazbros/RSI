@@ -1,0 +1,33 @@
+0000000000000000000000000000000000000000 989fde1143c49a9ea43e0600b5469c96a421570a mazbros <mazbros@gmail.com> 1464991310 -0400	commit (initial): Add .gitignore and .gitattributes.
+989fde1143c49a9ea43e0600b5469c96a421570a 1253f67a7d82ee92b6f4af1b653bd42b7e756eee mazbros <mazbros@gmail.com> 1464991314 -0400	commit: Add project files.
+1253f67a7d82ee92b6f4af1b653bd42b7e756eee 22b5da87a39220a084b0ce13d070910cdd6f2daa mazbros <mazbros@gmail.com> 1465327314 -0400	commit: Added WebAPI controller
+22b5da87a39220a084b0ce13d070910cdd6f2daa 70cce77b1088293e78f3ba1b06efa52014e7edee mazbros <mazbros@gmail.com> 1465338896 -0400	commit: Multiple keywords in filter in single category
+70cce77b1088293e78f3ba1b06efa52014e7edee dbe58fd03838c5f127a979f7894e11b3513e3d2f mazbros <mazbros@gmail.com> 1465399034 -0400	commit: Improvements to GetFiltered
+dbe58fd03838c5f127a979f7894e11b3513e3d2f 4ffce4089417802708eb02e038d949d557e1219f mazbros <mazbros@gmail.com> 1465404538 -0400	commit: Filter class cleanup
+4ffce4089417802708eb02e038d949d557e1219f 32eb99ec8819ef0436b215e4896628cd9e58978b mazbros <mazbros@gmail.com> 1465412157 -0400	commit: Improvements to sorted list Get override
+32eb99ec8819ef0436b215e4896628cd9e58978b 76b52f9e2c559ced59b8e32a67aaa38efa7bbb08 mazbros <mazbros@gmail.com> 1465413197 -0400	commit: Added Sorter class
+76b52f9e2c559ced59b8e32a67aaa38efa7bbb08 d8a417af2fc34d96c39c11901493920178b8c862 mazbros <mazbros@gmail.com> 1465492002 -0400	commit: Cleanup and optimization
+d8a417af2fc34d96c39c11901493920178b8c862 c23d926f1c5c9872be47d8187106e7d34075df03 mazbros <mazbros@gmail.com> 1465501228 -0400	commit: Added HTML docs
+c23d926f1c5c9872be47d8187106e7d34075df03 8ed95ab33e3d3e182f9e476139da3c262517e770 mazbros <mazbros@gmail.com> 1465502643 -0400	commit: Minor fixes of comments for documentation
+8ed95ab33e3d3e182f9e476139da3c262517e770 5599bdc9cd339aa1d45c013fd88def87fd256e32 mazbros <mazbros@gmail.com> 1465845261 -0400	commit: Improved API and up[dated docs
+5599bdc9cd339aa1d45c013fd88def87fd256e32 703b82b10209d580cf22a5d2e891987e67f5be05 mazbros <mazbros@gmail.com> 1465850602 -0400	commit: Updated comments for docs
+703b82b10209d580cf22a5d2e891987e67f5be05 6d9bcf8bbb2eb79ddc1527250a966885dd68658c mazbros <mazbros@gmail.com> 1465922747 -0400	commit: Added CultureInfo
+6d9bcf8bbb2eb79ddc1527250a966885dd68658c 6d2bd4ecf427e12d4fec77b39ffbe97fd7574b16 mazbros <mazbros@gmail.com> 1465936586 -0400	commit: Added Gender and Credentials to the data model
+6d2bd4ecf427e12d4fec77b39ffbe97fd7574b16 1db877f834a246832d4156bc5860b0914c543042 mazbros <mazbros@gmail.com> 1466089760 -0400	commit: ApplyFilter minor adjustment of logic
+1db877f834a246832d4156bc5860b0914c543042 14136de049137ffde5f9bbfa6d9da38cacf92b3b mazbros <mazbros@gmail.com> 1466089936 -0400	commit: HTML formatting
+14136de049137ffde5f9bbfa6d9da38cacf92b3b 7c56f51b27799757c0e4fd75c906a030e04d2e19 mazbros <mazbros@gmail.com> 1466635694 -0400	commit: New data fileds added
+7c56f51b27799757c0e4fd75c906a030e04d2e19 7b9a87d3433a777d52295fdea761ab68995b501b mazbros <mazbros@gmail.com> 1468429634 -0400	commit: Added fields
+7b9a87d3433a777d52295fdea761ab68995b501b e70f423ffb8757f95ae597ff8fb63430351ce993 mazbros <mazbros@gmail.com> 1468433493 -0400	commit: Fixed: missing values for aded fields on save
+e70f423ffb8757f95ae597ff8fb63430351ce993 a84f07b414e2917ddf0c7d5e170a5c81eac1129e mazbros <mazbros@gmail.com> 1468850062 -0400	commit: Table schema update
+a84f07b414e2917ddf0c7d5e170a5c81eac1129e 668dc261655a14bafc8a8581acf7c663217f90f0 mazbros <mazbros@gmail.com> 1469827018 -0400	commit: Added Patients, Claims and Prescriptions as new fields
+668dc261655a14bafc8a8581acf7c663217f90f0 8c6254935013c5c2035577557a3914b89e5ef60a mazbros <mazbros@gmail.com> 1470259215 -0400	commit: Added classes and models for NONUS
+8c6254935013c5c2035577557a3914b89e5ef60a bebe915a7d8e6e126d12986058e16eef159a0a49 mazbros <mazbros@gmail.com> 1470316960 -0400	commit: Bootsrap & JQuery update
+bebe915a7d8e6e126d12986058e16eef159a0a49 be0123f485ee8e5cec023ed1e54eb43a0be1c455 mazbros <mazbros@gmail.com> 1470337851 -0400	commit: Adding Country as a criteria
+be0123f485ee8e5cec023ed1e54eb43a0be1c455 e28485516aaa0a75835dd69951b4055bf7d61c3a mazbros <mazbros@gmail.com> 1470342168 -0400	commit: Added Country selection
+e28485516aaa0a75835dd69951b4055bf7d61c3a afbd949d18a53efe5ee3cfc833d58e2a434f9a95 mazbros <mazbros@gmail.com> 1470342621 -0400	commit: Minor change in ApplyFilter
+afbd949d18a53efe5ee3cfc833d58e2a434f9a95 d8fe9ba60f2bf10a3d97a540e02fc1b3b0459245 mazbros <mazbros@gmail.com> 1470343052 -0400	commit: Added Country predicate to API GetFiltered method
+d8fe9ba60f2bf10a3d97a540e02fc1b3b0459245 9f6dc89bfb52d06cdfc68115e33509bb5aec2ef3 mazbros <mazbros@gmail.com> 1470347936 -0400	commit: Updated Docs
+9f6dc89bfb52d06cdfc68115e33509bb5aec2ef3 22eb6f5a96649f01856d7c7c348f390a8009b8ad mazbros <mazbros@gmail.com> 1470410754 -0400	commit: Released Country switching for Web and API
+22eb6f5a96649f01856d7c7c348f390a8009b8ad dd0005ff6bd02a3c12cee3fc727d10938a98c115 mazbros <mazbros@gmail.com> 1470432226 -0400	commit: Error handling for Filter in API
+dd0005ff6bd02a3c12cee3fc727d10938a98c115 ad1a1c23c98519648e512580943687835decc015 mazbros <mazbros@gmail.com> 1470432273 -0400	commit: Error handling in Filter for API
+ad1a1c23c98519648e512580943687835decc015 6ef64d4e3bc4f91f10b4eb2febb99bd9a0a96298 mazbros <mazbros@gmail.com> 1470666319 -0400	commit: Countries dropdown style change

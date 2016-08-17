@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PhysicianRankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'PhysicianRank.dbo.DR_ID' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DR_ID">
+    <Key>
+      <PropertyRef Name="DRID" />
+      <PropertyRef Name="DEPRECIATED_FLAG" />
+    </Key>
+    <Property Name="DRID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DRDEDUPID" Type="bigint" />
+    <Property Name="DEPRECIATED_FLAG" Type="bit" Nullable="false" />
+    <Property Name="SOURCE_TABLE" Type="varchar" MaxLength="50" />
+    <Property Name="SOURCE_ID" Type="varchar" MaxLength="128" />
+    <Property Name="FNAME" Type="varchar" MaxLength="50" />
+    <Property Name="LNAME" Type="varchar" MaxLength="50" />
+    <Property Name="COUNTRY" Type="varchar" MaxLength="3" />
+    <Property Name="CITY" Type="varchar" MaxLength="64" />
+    <Property Name="STATE" Type="varchar" MaxLength="30" />
+    <Property Name="ZIP" Type="varchar" MaxLength="17" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'PhysicianRank.dbo.DR_ID_3' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DR_ID_3">
+    <Key>
+      <PropertyRef Name="DRID" />
+      <PropertyRef Name="DEPRECIATED_FLAG" />
+    </Key>
+    <Property Name="DRID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DRDEDUPID" Type="bigint" />
+    <Property Name="DRDEDUPID2" Type="int" />
+    <Property Name="DRDEDUPID3" Type="int" />
+    <Property Name="DEPRECIATED_FLAG" Type="bit" Nullable="false" />
+    <Property Name="SOURCE_TABLE" Type="varchar" MaxLength="50" />
+    <Property Name="SOURCE_ID" Type="varchar" MaxLength="128" />
+    <Property Name="FNAME" Type="varchar" MaxLength="50" />
+    <Property Name="LNAME" Type="varchar" MaxLength="50" />
+    <Property Name="COUNTRY" Type="varchar" MaxLength="3" />
+    <Property Name="CITY" Type="varchar" MaxLength="64" />
+    <Property Name="STATE" Type="varchar" MaxLength="30" />
+    <Property Name="ZIP" Type="varchar" MaxLength="17" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'PhysicianRank.dbo.DR_ID_Ranking' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DR_ID_Ranking">
+    <Key>
+      <PropertyRef Name="DRID" />
+    </Key>
+    <Property Name="DRID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DRDEDUPID" Type="bigint" />
+    <Property Name="Rank" Type="int" />
+    <Property Name="Publications" Type="int" />
+    <Property Name="RecentDate" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'PhysicianRank.dbo.HIGHTAIL_PHYSICIAN_EMAIL_LIST' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="HIGHTAIL_PHYSICIAN_EMAIL_LIST">
+          <Property Name="Email_Address" Type="varchar" MaxLength="128" />
+          <Property Name="Contact_Name" Type="varchar" MaxLength="50" />
+          <Property Name="First_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Specialty" Type="varchar" MaxLength="128" />
+          <Property Name="Title" Type="varchar" MaxLength="10" />
+          <Property Name="Company_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Fax" Type="varchar" MaxLength="50" />
+          <Property Name="Website" Type="varchar" MaxLength="64" />
+          <Property Name="Address" Type="varchar" MaxLength="84" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="County" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="2" />
+          <Property Name="Zipcode" Type="varchar" MaxLength="10" />
+          <Property Name="Timezone" Type="varchar" MaxLength="50" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Longitude" Type="float" />
+          <Property Name="ZIPType" Type="varchar" MaxLength="1" />
+          <Property Name="CityType" Type="varchar" MaxLength="1" />
+          <Property Name="CountyFIPS" Type="int" />
+          <Property Name="StateName" Type="varchar" MaxLength="24" />
+          <Property Name="StateFIPS" Type="int" />
+          <Property Name="UTC" Type="int" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'PhysicianRank.dbo.npidata_20050523-20160410' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="npidata_20050523-20160410">
+          <Property Name="NPI" Type="varchar" MaxLength="10" />
+          <Property Name="Entity Type Code" Type="varchar" MaxLength="1" />
+          <Property Name="Replacement NPI" Type="varchar" MaxLength="10" />
+          <Property Name="Employer Identification Number (EIN)" Type="varchar" MaxLength="9" />
+          <Property Name="Provider Organization Name (Legal Business Name)" Type="varchar" MaxLength="96" />
+          <Property Name="Provider Last Name (Legal Name)" Type="varchar" MaxLength="64" />
+          <Property Name="Provider First Name" Type="varchar" MaxLength="48" />
+          <Property Name="Provider Middle Name" Type="varchar" MaxLength="48" />
+          <Property Name="Provider Name Prefix Text" Type="varchar" MaxLength="5" />
+          <Property Name="Provider Name Suffix Text" Type="varchar" MaxLength="4" />
+          <Property Name="Provider Credential Text" Type="varchar" MaxLength="48" />
+          <Property Name="Provider Other Organization Name" Type="varchar" MaxLength="96" />
+          <Property Name="Provider Other Organization Name Type Code" Type="varchar" MaxLength="1" />
+          <Property Name="Provider Other Last Name" Type="varchar" MaxLength="64" />
+          <Property Name="Provider Other First Name" Type="varchar" MaxLength="48" />
+          <Property Name="Provider Other Middle Name" Type="varchar" MaxLength="48" />
+          <Property Name="Provider Other Name Prefix Text" Type="varchar" MaxLength="5" />
+          <Property Name="Provider Other Name Suffix Text" Type="varchar" MaxLength="4" />
+          <Property Name="Provider Other Credential Text" Type="varchar" MaxLength="48" />
+          <Property Name="Provider Other Last Name Type Code" Type="varchar" MaxLength="1" />
+          <Property Name="Provider First Line Business Mailing Address" Type="varchar" MaxLength="96" />
+          <Property Name="Provider Second Line Business Mailing Address" Type="varchar" MaxLength="96" />
+          <Property Name="Provider Business Mailing Address City Name" Type="varchar" MaxLength="64" />
+          <Property Name="Provider Business Mailing Address State Name" Type="varchar" MaxLength="48" />
+          <Property Name="Provider Business Mailing Address Postal Code" Type="varchar" MaxLength="48" />
+          <Property Name="Provider Business Mailing Address Country Code (If outside U S )" Type="varchar" MaxLength="2" />
+          <Property Name="Provider Business Mailing Address Telephone Number" Type="varchar" MaxLength="48" />
+          <Property Name="Provider Business Mailing Address Fax Number" Type="varchar" MaxLength="48" />
+          <Property Name="Provider First Line Business Practice Location Address" Type="varchar" MaxLength="96" />
+          <Property Name="Provider Second Line Business Practice Location Address" Type="varchar" MaxLength="96" />
+          <Property Name="Provider Business Practice Location Address City Name" Type="varchar" MaxLength="64" />
+          <Property Name="Provider Business Practice Location Address State Name" Type="varchar" MaxLength="48" />
+          <Property Name="Provider Business Practice Location Address Postal Code" Type="varchar" MaxLength="48" />
+          <Property Name="Provider Business Practice Location Address Country Code (If outside U S )" Type="varchar" MaxLength="2" />
+          <Property Name="Provider Business Practice Location Address Telephone Number" Type="varchar" MaxLength="48" />
+          <Property Name="Provider Business Practice Location Address Fax Number" Type="varchar" MaxLength="48" />
+          <Property Name="Provider Enumeration Date" Type="varchar" MaxLength="10" />
+          <Property Name="Last Update Date" Type="varchar" MaxLength="10" />
+          <Property Name="NPI Deactivation Reason Code" Type="varchar" MaxLength="16" />
+          <Property Name="NPI Deactivation Date" Type="varchar" MaxLength="10" />
+          <Property Name="NPI Reactivation Date" Type="varchar" MaxLength="10" />
+          <Property Name="Provider Gender Code" Type="varchar" MaxLength="1" />
+          <Property Name="Authorized Official Last Name" Type="varchar" MaxLength="64" />
+          <Property Name="Authorized Official First Name" Type="varchar" MaxLength="48" />
+          <Property Name="Authorized Official Middle Name" Type="varchar" MaxLength="48" />
+          <Property Name="Authorized Official Title or Position" Type="varchar" MaxLength="64" />
+          <Property Name="Authorized Official Telephone Number" Type="varchar" MaxLength="48" />
+          <Property Name="Healthcare Provider Taxonomy Code_1" Type="varchar" MaxLength="36" />
+          <Property Name="Provider License Number_1" Type="varchar" MaxLength="48" />
+          <Property Name="Provider License Number State Code_1" Type="varchar" MaxLength="2" />
+          <Property Name="Healthcare Provider Primary Taxonomy Switch_1" Type="varchar" MaxLength="1" />
+          <Property Name="Healthcare Provider Taxonomy Code_2" Type="varchar" MaxLength="36" />
+          <Property Name="Provider License Number_2" Type="varchar" MaxLength="48" />
+          <Property Name="Provider License Number State Code_2" Type="varchar" MaxLength="2" />
+          <Property Name="Healthcare Provider Primary Taxonomy Switch_2" Type="varchar" MaxLength="1" />
+          <Property Name="Healthcare Provider Taxonomy Code_3" Type="varchar" MaxLength="36" />
+          <Property Name="Provider License Number_3" Type="varchar" MaxLength="48" />
+          <Property Name="Provider License Number State Code_3" Type="varchar" MaxLength="2" />
+          <Property Name="Healthcare Provider Primary Taxonomy Switch_3" Type="varchar" MaxLength="1" />
+          <Property Name="Healthcare Provider Taxonomy Code_4" Type="varchar" MaxLength="36" />
+          <Property Name="Provider License Number_4" Type="varchar" MaxLength="48" />
+          <Property Name="Provider License Number State Code_4" Type="varchar" MaxLength="2" />
+          <Property Name="Healthcare Provider Primary Taxonomy Switch_4" Type="varchar" MaxLength="1" />
+          <Property Name="Healthcare Provider Taxonomy Code_5" Type="varchar" MaxLength="36" />
+          <Property Name="Provider License Number_5" Type="varchar" MaxLength="48" />
+          <Property Name="Provider License Number State Code_5" Type="varchar" MaxLength="2" />
+          <Property Name="Healthcare Provider Primary Taxonomy Switch_5" Type="varchar" MaxLength="1" />
+          <Property Name="Healthcare Provider Taxonomy Code_6" Type="varchar" MaxLength="36" />
+          <Property Name="Provider License Number_6" Type="varchar" MaxLength="48" />
+          <Property Name="Provider License Number State Code_6" Type="varchar" MaxLength="2" />
+          <Property Name="Healthcare Provider Primary Taxonomy Switch_6" Type="varchar" MaxLength="1" />
+          <Property Name="Healthcare Provider Taxonomy Code_7" Type="varchar" MaxLength="36" />
+          <Property Name="Provider License Number_7" Type="varchar" MaxLength="48" />
+          <Property Name="Provider License Number State Code_7" Type="varchar" MaxLength="2" />
+          <Property Name="Healthcare Provider Primary Taxonomy Switch_7" Type="varchar" MaxLength="1" />
+          <Property Name="Healthcare Provider Taxonomy Code_8" Type="varchar" MaxLength="36" />
+          <Property Name="Provider License Number_8" Type="varchar" MaxLength="48" />
+          <Property Name="Provider License Number State Code_8" Type="varchar" MaxLength="2" />
+          <Property Name="Healthcare Provider Primary Taxonomy Switch_8" Type="varchar" MaxLength="1" />
+          <Property Name="Healthcare Provider Taxonomy Code_9" Type="varchar" MaxLength="36" />
+          <Property Name="Provider License Number_9" Type="varchar" MaxLength="48" />
+          <Property Name="Provider License Number State Code_9" Type="varchar" MaxLength="2" />
+          <Property Name="Healthcare Provider Primary Taxonomy Switch_9" Type="varchar" MaxLength="1" />
+          <Property Name="Healthcare Provider Taxonomy Code_10" Type="varchar" MaxLength="36" />
+          <Property Name="Provider License Number_10" Type="varchar" MaxLength="48" />
+          <Property Name="Provider License Number State Code_10" Type="varchar" MaxLength="2" />
+          <Property Name="Healthcare Provider Primary Taxonomy Switch_10" Type="varchar" MaxLength="1" />
+          <Property Name="Healthcare Provider Taxonomy Code_11" Type="varchar" MaxLength="36" />
+          <Property Name="Provider License Number_11" Type="varchar" MaxLength="48" />
+          <Property Name="Provider License Number State Code_11" Type="varchar" MaxLength="2" />
+          <Property Name="Healthcare Provider Primary Taxonomy Switch_11" Type="varchar" MaxLength="1" />
+          <Property Name="Healthcare Provider Taxonomy Code_12" Type="varchar" MaxLength="36" />
+          <Property Name="Provider License Number_12" Type="varchar" MaxLength="48" />
+          <Property Name="Provider License Number State Code_12" Type="varchar" MaxLength="2" />
+          <Property Name="Healthcare Provider Primary Taxonomy Switch_12" Type="varchar" MaxLength="1" />
+          <Property Name="Healthcare Provider Taxonomy Code_13" Type="varchar" MaxLength="36" />
+          <Property Name="Provider License Number_13" Type="varchar" MaxLength="48" />
+          <Property Name="Provider License Number State Code_13" Type="varchar" MaxLength="2" />
+          <Property Name="Healthcare Provider Primary Taxonomy Switch_13" Type="varchar" MaxLength="1" />
+          <Property Name="Healthcare Provider Taxonomy Code_14" Type="varchar" MaxLength="36" />
+          <Property Name="Provider License Number_14" Type="varchar" MaxLength="48" />
+          <Property Name="Provider License Number State Code_14" Type="varchar" MaxLength="2" />
+          <Property Name="Healthcare Provider Primary Taxonomy Switch_14" Type="varchar" MaxLength="1" />
+          <Property Name="Healthcare Provider Taxonomy Code_15" Type="varchar" MaxLength="36" />
+          <Property Name="Provider License Number_15" Type="varchar" MaxLength="48" />
+          <Property Name="Provider License Number State Code_15" Type="varchar" MaxLength="2" />
+          <Property Name="Healthcare Provider Primary Taxonomy Switch_15" Type="varchar" MaxLength="1" />
+          <Property Name="Other Provider Identifier_1" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_1" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_1" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_1" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_2" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_2" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_2" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_2" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_3" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_3" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_3" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_3" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_4" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_4" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_4" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_4" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_5" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_5" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_5" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_5" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_6" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_6" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_6" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_6" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_7" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_7" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_7" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_7" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_8" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_8" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_8" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_8" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_9" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_9" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_9" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_9" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_10" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_10" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_10" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_10" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_11" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_11" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_11" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_11" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_12" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_12" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_12" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_12" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_13" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_13" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_13" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_13" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_14" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_14" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_14" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_14" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_15" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_15" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_15" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_15" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_16" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_16" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_16" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_16" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_17" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_17" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_17" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_17" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_18" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_18" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_18" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_18" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_19" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_19" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_19" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_19" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_20" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_20" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_20" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_20" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_21" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_21" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_21" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_21" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_22" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_22" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_22" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_22" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_23" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_23" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_23" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_23" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_24" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_24" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_24" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_24" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_25" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_25" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_25" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_25" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_26" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_26" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_26" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_26" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_27" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_27" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_27" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_27" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_28" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_28" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_28" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_28" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_29" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_29" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_29" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_29" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_30" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_30" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_30" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_30" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_31" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_31" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_31" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_31" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_32" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_32" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_32" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_32" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_33" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_33" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_33" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_33" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_34" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_34" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_34" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_34" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_35" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_35" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_35" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_35" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_36" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_36" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_36" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_36" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_37" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_37" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_37" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_37" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_38" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_38" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_38" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_38" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_39" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_39" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_39" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_39" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_40" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_40" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_40" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_40" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_41" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_41" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_41" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_41" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_42" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_42" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_42" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_42" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_43" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_43" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_43" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_43" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_44" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_44" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_44" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_44" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_45" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_45" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_45" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_45" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_46" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_46" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_46" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_46" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_47" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_47" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_47" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_47" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_48" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_48" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_48" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_48" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_49" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_49" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_49" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_49" Type="varchar" MaxLength="128" />
+          <Property Name="Other Provider Identifier_50" Type="varchar" MaxLength="64" />
+          <Property Name="Other Provider Identifier Type Code_50" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier State_50" Type="varchar" MaxLength="2" />
+          <Property Name="Other Provider Identifier Issuer_50" Type="varchar" MaxLength="128" />
+          <Property Name="Is Sole Proprietor" Type="varchar" MaxLength="1" />
+          <Property Name="Is Organization Subpart" Type="varchar" MaxLength="1" />
+          <Property Name="Parent Organization LBN" Type="varchar" MaxLength="96" />
+          <Property Name="Parent Organization TIN" Type="varchar" MaxLength="9" />
+          <Property Name="Authorized Official Name Prefix Text" Type="varchar" MaxLength="5" />
+          <Property Name="Authorized Official Name Suffix Text" Type="varchar" MaxLength="4" />
+          <Property Name="Authorized Official Credential Text" Type="varchar" MaxLength="48" />
+          <Property Name="Healthcare Provider Taxonomy Group_1" Type="varchar" MaxLength="64" />
+          <Property Name="Healthcare Provider Taxonomy Group_2" Type="varchar" MaxLength="64" />
+          <Property Name="Healthcare Provider Taxonomy Group_3" Type="varchar" MaxLength="64" />
+          <Property Name="Healthcare Provider Taxonomy Group_4" Type="varchar" MaxLength="64" />
+          <Property Name="Healthcare Provider Taxonomy Group_5" Type="varchar" MaxLength="64" />
+          <Property Name="Healthcare Provider Taxonomy Group_6" Type="varchar" MaxLength="64" />
+          <Property Name="Healthcare Provider Taxonomy Group_7" Type="varchar" MaxLength="64" />
+          <Property Name="Healthcare Provider Taxonomy Group_8" Type="varchar" MaxLength="64" />
+          <Property Name="Healthcare Provider Taxonomy Group_9" Type="varchar" MaxLength="64" />
+          <Property Name="Healthcare Provider Taxonomy Group_10" Type="varchar" MaxLength="64" />
+          <Property Name="Healthcare Provider Taxonomy Group_11" Type="varchar" MaxLength="64" />
+          <Property Name="Healthcare Provider Taxonomy Group_12" Type="varchar" MaxLength="64" />
+          <Property Name="Healthcare Provider Taxonomy Group_13" Type="varchar" MaxLength="64" />
+          <Property Name="Healthcare Provider Taxonomy Group_14" Type="varchar" MaxLength="64" />
+          <Property Name="Healthcare Provider Taxonomy Group_15" Type="varchar" MaxLength="64" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'PhysicianRank.dbo.PublicationsList' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PublicationsList">
+          <Property Name="REVIEWER_ID" Type="numeric" Precision="9" Scale="0" />
+          <Property Name="LAST_NAME" Type="varchar" MaxLength="50" />
+          <Property Name="FIRST_NAME" Type="varchar" MaxLength="50" />
+          <Property Name="MIDDLE_INITIAL" Type="varchar" MaxLength="50" />
+          <Property Name="RANK" Type="varchar" MaxLength="3" />
+          <Property Name="DEGREE" Type="varchar" MaxLength="50" />
+          <Property Name="ORGANIZATION" Type="varchar" MaxLength="100" />
+          <Property Name="ADDRESS" Type="varchar" MaxLength="100" />
+          <Property Name="CITY" Type="varchar" MaxLength="50" />
+          <Property Name="STATE" Type="varchar" MaxLength="2" />
+          <Property Name="ZIP_CODE" Type="varchar" MaxLength="10" />
+          <Property Name="COUNTRY" Type="varchar" MaxLength="50" />
+          <Property Name="RECEIPT_DATE" Type="varchar" MaxLength="50" />
+          <Property Name="TYPE" Type="varchar" MaxLength="3" />
+        </EntityType>-->
+  <EntityContainer Name="PhysicianRankModelStoreContainer">
+    <EntitySet Name="DR_ID" EntityType="Self.DR_ID" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DR_ID].[DRID] AS [DRID], 
+    [DR_ID].[DRDEDUPID] AS [DRDEDUPID], 
+    [DR_ID].[DEPRECIATED_FLAG] AS [DEPRECIATED_FLAG], 
+    [DR_ID].[SOURCE_TABLE] AS [SOURCE_TABLE], 
+    [DR_ID].[SOURCE_ID] AS [SOURCE_ID], 
+    [DR_ID].[FNAME] AS [FNAME], 
+    [DR_ID].[LNAME] AS [LNAME], 
+    [DR_ID].[COUNTRY] AS [COUNTRY], 
+    [DR_ID].[CITY] AS [CITY], 
+    [DR_ID].[STATE] AS [STATE], 
+    [DR_ID].[ZIP] AS [ZIP]
+    FROM [dbo].[DR_ID] AS [DR_ID]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="DR_ID_3" EntityType="Self.DR_ID_3" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DR_ID_3].[DRID] AS [DRID], 
+    [DR_ID_3].[DRDEDUPID] AS [DRDEDUPID], 
+    [DR_ID_3].[DRDEDUPID2] AS [DRDEDUPID2], 
+    [DR_ID_3].[DRDEDUPID3] AS [DRDEDUPID3], 
+    [DR_ID_3].[DEPRECIATED_FLAG] AS [DEPRECIATED_FLAG], 
+    [DR_ID_3].[SOURCE_TABLE] AS [SOURCE_TABLE], 
+    [DR_ID_3].[SOURCE_ID] AS [SOURCE_ID], 
+    [DR_ID_3].[FNAME] AS [FNAME], 
+    [DR_ID_3].[LNAME] AS [LNAME], 
+    [DR_ID_3].[COUNTRY] AS [COUNTRY], 
+    [DR_ID_3].[CITY] AS [CITY], 
+    [DR_ID_3].[STATE] AS [STATE], 
+    [DR_ID_3].[ZIP] AS [ZIP]
+    FROM [dbo].[DR_ID_3] AS [DR_ID_3]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="DR_ID_Ranking" EntityType="Self.DR_ID_Ranking" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DR_ID_Ranking].[DRID] AS [DRID], 
+    [DR_ID_Ranking].[DRDEDUPID] AS [DRDEDUPID], 
+    [DR_ID_Ranking].[Rank] AS [Rank], 
+    [DR_ID_Ranking].[Publications] AS [Publications], 
+    [DR_ID_Ranking].[RecentDate] AS [RecentDate]
+    FROM [dbo].[DR_ID_Ranking] AS [DR_ID_Ranking]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

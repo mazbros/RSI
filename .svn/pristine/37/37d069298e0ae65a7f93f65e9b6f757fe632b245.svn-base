@@ -1,0 +1,308 @@
+﻿@model RSI.Models.Doctors
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+@{ Ajax.BeginForm("Index", "Doctors", new AjaxOptions { HttpMethod = "POST" }); }
+<div>
+    @*<h4>Consolidated Doctors View</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Rank)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rank)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Publications)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Publications)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RecentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NPI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NPI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.REVIEWER_ID).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.REVIEWER_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Specialty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Specialty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.First_Name).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.First_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Last_Name).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Last_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zipcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zipcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email_Address).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email_Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.County)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.County)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Company_Name).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Longitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Timezone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Timezone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Website)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Website)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Credentials)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Credentials)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Taxonomy_Code).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Taxonomy_Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Taxonomy_Classification).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Taxonomy_Classification)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Taxonomy_Specialization).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Taxonomy_Specialization)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.License_Number).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.License_Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.License_State).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.License_State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Medical_School).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Medical_School)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Residency_Training).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Residency_Training)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Graduation_Year).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Graduation_Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patients).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patients)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Claims).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Claims)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prescriptions).ToString().Replace("_", " ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prescriptions)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Ajax.ActionLink(
+        "Back to List",
+        "Index",
+        new
+        {
+            id = string.Empty, /*Model.DRID,*/
+            sortOrder = ViewBag.CurrentSort,
+            page = ViewBag.PageNumber,
+            specialtyFilter = ViewBag.SpecialtyFilter,
+            rankFilter = ViewBag.RankFilter,
+            stateFilter = ViewBag.StateFilter,
+            countryId = ViewBag.Country
+        },
+        new AjaxOptions { HttpMethod = "POST" })
+</p>
+@{ Html.EndForm(); }

@@ -1,0 +1,476 @@
+﻿@using Microsoft.Ajax.Utilities
+@using PagedList.Mvc
+@model PagedList.IPagedList<RSI.Models.Doctors>
+@{
+    ViewBag.Title = "Results";
+}
+@{
+    if (ViewBag.Error != null)
+    {
+        <h1>
+            <span class="glyphicon glyphicon-exclamation-sign text-danger"></span></h1>
+        <h2>
+            <span class="text-danger">@ViewBag.Error</span></h2>
+    }
+}
+@if (Request.IsAuthenticated)
+{
+    <div class="row" style="height: 820px;">&nbsp;</div>
+    <div class="result-view">
+
+    @{ Ajax.BeginForm("Index", "Doctors", new AjaxOptions {HttpMethod = "POST"}); }
+    <table class="table table-condensed table-bordered full-width">
+    <tr>
+        <td colspan="18">
+            Country:&nbsp;@Html.DropDownList(
+                "country",
+                (IEnumerable<SelectListItem>)ViewBag.Countries,
+                new
+                {
+                    style = "width: 380px; font-weight: bold",
+                    onchange = "this.form.submit();",
+                    specialtyFilter = ViewBag.SpecialtyFilter,
+                    sortOrder = ViewBag.CurrentSort,
+                    rankFilter = ViewBag.RankFilter,
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country//,
+                    //multiple = "multiple"
+                })
+        </td>
+    </tr>
+    <tr class="header">
+        <th>
+            @Ajax.ActionLink(
+                "DR ID",
+                "Index",
+                new
+                {
+                    sortOrder = ViewBag.DrIdSortParm,
+                    specialtyFilter = ViewBag.SpecialtyFilter,
+                    rankFilter = ViewBag.RankFilter,
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
+                },
+                new AjaxOptions {HttpMethod = "POST"},
+                new {style = "white-space:nowrap;"})
+        </th>
+        <th>
+            @Ajax.ActionLink(
+                "Rank",
+                "Index",
+                new
+                {
+                    sortOrder = ViewBag.RankSortParm,
+                    specialtyFilter = ViewBag.SpecialtyFilter,
+                    rankFilter = ViewBag.RankFilter,
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
+                },
+                new AjaxOptions {HttpMethod = "POST"},
+                new {style = "white-space:nowrap;"})
+        </th>
+        <th>
+            @Ajax.ActionLink(
+                "Publications",
+                "Index",
+                new
+                {
+                    sortOrder = ViewBag.PublicationsSortParm,
+                    specialtyFilter = ViewBag.SpecialtyFilter,
+                    rankFilter = ViewBag.RankFilter,
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
+                },
+                new AjaxOptions {HttpMethod = "POST"},
+                new {style = "white-space:nowrap;"})
+        </th>
+        <th>
+            @Ajax.ActionLink(
+                "Recent Date",
+                "Index",
+                new
+                {
+                    sortOrder = ViewBag.RecentDateSortParm,
+                    specialtyFilter = ViewBag.SpecialtyFilter,
+                    rankFilter = ViewBag.RankFilter,
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
+                },
+                new AjaxOptions {HttpMethod = "POST"},
+                new {style = "white-space:nowrap;"})
+        </th>
+        <th>
+            NPI
+        </th>
+        <th>
+            <span style="white-space: nowrap;">Reviewer ID</span>
+        </th>
+        <th>
+            @Ajax.ActionLink(
+                "Specialty",
+                "Index",
+                new
+                {
+                    sortOrder = ViewBag.SpecialtySortParm,
+                    specialtyFilter = ViewBag.SpecialtyFilter,
+                    rankFilter = ViewBag.RankFilter,
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
+                },
+                new AjaxOptions {HttpMethod = "POST"},
+                new {style = "white-space:nowrap;"})
+        </th>
+        <th>
+            @Ajax.ActionLink(
+                "First Name",
+                "Index",
+                new
+                {
+                    sortOrder = ViewBag.FirstNameSortParm,
+                    specialtyFilter = ViewBag.SpecialtyFilter,
+                    rankFilter = ViewBag.RankFilter,
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
+                },
+                new AjaxOptions {HttpMethod = "POST"},
+                new {style = "white-space:nowrap;"})
+        </th>
+        <th>
+            @Ajax.ActionLink(
+                "Last Name",
+                "Index",
+                new
+                {
+                    sortOrder = ViewBag.LastNameSortParm,
+                    specialtyFilter = ViewBag.SpecialtyFilter,
+                    rankFilter = ViewBag.RankFilter,
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
+                },
+                new AjaxOptions {HttpMethod = "POST"},
+                new {style = "white-space:nowrap;"})
+        </th>
+        <th>
+            @Ajax.ActionLink(
+                "Address",
+                "Index",
+                new
+                {
+                    sortOrder = ViewBag.AddressSortParm,
+                    specialtyFilter = ViewBag.SpecialtyFilter,
+                    rankFilter = ViewBag.RankFilter,
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
+                },
+                new AjaxOptions {HttpMethod = "POST"},
+                new {style = "white-space:nowrap;"})
+        </th>
+        <th>
+            @Ajax.ActionLink(
+                "City",
+                "Index",
+                new
+                {
+                    sortOrder = ViewBag.CitySortParm,
+                    specialtyFilter = ViewBag.SpecialtyFilter,
+                    rankFilter = ViewBag.RankFilter,
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
+                },
+                new AjaxOptions {HttpMethod = "POST"},
+                new {style = "white-space:nowrap;"})
+        </th>
+        <th>
+            @Ajax.ActionLink(
+                "State",
+                "Index",
+                new
+                {
+                    sortOrder = ViewBag.StateSortParm,
+                    specialtyFilter = ViewBag.SpecialtyFilter,
+                    rankFilter = ViewBag.RankFilter,
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
+                },
+                new AjaxOptions {HttpMethod = "POST"},
+                new {style = "white-space:nowrap;"})
+        </th>
+        <th>
+            Zipcode
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            Fax
+        </th>
+        <th>
+            Email
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr class="low-height">
+        <th><!-- DRID --></th>
+        <th>
+            <!-- Rank -->
+            @Html.DropDownList(
+                "rankFilter",
+                (IEnumerable<SelectListItem>) ViewBag.Ranks,
+                "All",
+                new
+                {
+                    style = "width:50px;",
+                    onchange = "this.form.submit();",
+                    specialtyFilter = ViewBag.SpecialtyFilter,
+                    sortOrder = ViewBag.CurrentSort,
+                    rankFilter = ViewBag.RankFilter,
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country //,
+                    //multiple = "multiple"
+                })
+        </th>
+        <th><!-- Publications --></th>
+        <th><!-- Recent Date--></th>
+        <th><!-- NPI --></th>
+        <th><!-- Reviewer ID--></th>
+        <th>
+            <!-- Specialty -->
+            @Html.DropDownList(
+                "specialtyFilter",
+                (IEnumerable<SelectListItem>) ViewBag.Specialties,
+                "All",
+                new
+                {
+                    style = "width:160px;",
+                    onchange = "this.form.submit();",
+                    specialtyFilter = ViewBag.SpecialtyFilter,
+                    sortOrder = ViewBag.CurrentSort,
+                    rankFilter = ViewBag.RankFilter,
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
+                })
+        </th>
+        <th><!-- First Name --></th>
+        <th><!-- Last Name --></th>
+        <th><!-- Address --></th>
+        <th><!-- City --></th>
+        <th>
+            <!-- State -->
+            @Html.DropDownList(
+                "stateFilter",
+                (IEnumerable<SelectListItem>) ViewBag.States,
+                "All",
+                new
+                {
+                    style = "width:50px;",
+                    onchange = "this.form.submit();",
+                    specialtyFilter = ViewBag.SpecialtyFilter,
+                    sortOrder = ViewBag.CurrentSort,
+                    rankFilter = ViewBag.RankFilter,
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
+                })
+        </th>
+        <th><!-- Zipcode --></th>
+        <th><!-- Phone --></th>
+        <th><!-- Fax --></th>
+        <th><!-- Email --></th>
+        <th></th>
+        <th></th>
+    </tr>
+    @{ var odd = true; }
+    @foreach (var item in Model)
+    {
+        <tr class="@(item.DRID == ViewBag.DRID ? "highlight" : odd ? "odd" : "even")">
+            <td>
+                @Html.DisplayFor(modelItem => item.DRID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rank)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publications)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NPI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.REVIEWER_ID)
+            </td>
+            <td>
+                <span style="white-space: nowrap;">@Html.DisplayFor(modelItem => item.Specialty)</span>
+            </td>
+            <td>
+                <span style="white-space: nowrap;">@Html.DisplayFor(modelItem => item.First_Name)</span>
+            </td>
+            <td>
+                <span style="white-space: nowrap;">@Html.DisplayFor(modelItem => item.Last_Name)</span>
+            </td>
+            <td>
+                <span style="white-space: nowrap;">
+                    @{
+                        var formattedAddress = item.Address.IsNullOrWhiteSpace() ? string.Empty : item.Address;
+                        if (formattedAddress.Length > 27)
+                        {
+                            formattedAddress = $"{formattedAddress.Substring(0, 24)}...";
+                        }
+                        @Html.DisplayFor(modelItem => formattedAddress)
+                    }
+                </span>
+
+            </td>
+            <td>
+                <span style="white-space: nowrap;">@Html.DisplayFor(modelItem => item.City)</span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                <span style="white-space: nowrap;">@Html.DisplayFor(modelItem => item.Zipcode)</span>
+            </td>
+            <td class="centered">
+                @{
+                    if (!item.Phone.IsNullOrWhiteSpace())
+                    {
+                        if (item.Phone.Length > 0)
+                        {
+                            <span class="glyphicon glyphicon-ok green centered"></span>
+                        }
+                    }
+                }
+            </td>
+            <td class="centered">
+                @{
+                    if (!item.Fax.IsNullOrWhiteSpace())
+                    {
+                        if (item.Fax.Length > 0)
+                        {
+                            <span class="glyphicon glyphicon-ok green centered"></span>
+                        }
+                    }
+                }
+            </td>
+            <td class="centered">
+                @{
+                    var formattedEmail = item.Email_Address.IsNullOrWhiteSpace() ? string.Empty : item.Email_Address;
+                    if (formattedEmail.Length > 0)
+                    {
+                        <span class="glyphicon glyphicon-ok green centered"></span>
+                    }
+                }
+            </td>
+            <td>
+                @Ajax.ActionLink(
+                    "Details",
+                    "Details",
+                    new
+                    {
+                        id = item.DRID,
+                        sortOrder = ViewBag.CurrentSort,
+                        page = ViewBag.PageNumber,
+                        specialtyFilter = ViewBag.SpecialtyFilter,
+                        rankFilter = ViewBag.RankFilter,
+                        stateFilter = ViewBag.StateFilter,
+                        country = ViewBag.Country
+                    },
+                    new AjaxOptions {HttpMethod = "POST"},
+                    new {@class = "btn btn-default btn-xs"})
+            </td>
+            <td>
+                @Ajax.ActionLink(
+                    "Edit",
+                    "Edit",
+                    new
+                    {
+                        id = item.DRID,
+                        sortOrder = ViewBag.CurrentSort,
+                        page = ViewBag.PageNumber,
+                        specialtyFilter = ViewBag.SpecialtyFilter,
+                        rankFilter = ViewBag.RankFilter,
+                        stateFilter = ViewBag.StateFilter,
+                        country = ViewBag.Country
+                    },
+                    new AjaxOptions {HttpMethod = "POST"},
+                    new {@class = "btn btn-default btn-xs"})
+            </td>
+        </tr>
+        odd = !odd;
+    }
+    </table>
+
+
+    <div class="col-md-6">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount (@ViewBag.TotalRecords records)
+        @Html.PagedListPager(Model,
+            page => Url.Action(
+                "Index",
+                new
+                {
+                    page,
+                    sortOrder = ViewBag.CurrentSort,
+                    specialtyFilter = ViewBag.SpecialtyFilter,
+                    rankFilter = ViewBag.RankFilter,
+                    stateFilter = ViewBag.StateFilter,
+                    country = ViewBag.Country
+                }
+                ))
+    </div>
+
+    <div class="col-md-6 pull-left">
+        @Ajax.ActionLink(
+            "Download",
+            "CsvList",
+            new
+            {
+                sortOrder = ViewBag.CurrentSort,
+                specialtyFilter = ViewBag.SpecialtyFilter,
+                rankFilter = ViewBag.RankFilter,
+                stateFilter = ViewBag.StateFilter,
+                country = ViewBag.Country,
+                page = ViewBag.PageNumber
+            },
+            new AjaxOptions {HttpMethod = "POST"},
+            new {@class = "btn btn-default btn-sm"})
+    </div>
+
+    @{ Html.EndForm(); }
+
+    </div>
+
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+
+@section scripts{
+    <script language="javascript" type="text/javascript">
+        $(function() {
+            var $target = $('tr.highlight');
+
+            setInterval(function() {
+                    $target.removeClass('highlight');
+                    if ($target.prev().attr('class') === 'odd') {
+                        $target.addClass('even');
+                    } else {
+                        $target.addClass('odd');
+                    }
+                },
+                7500);
+
+        });
+    </script>
+}}

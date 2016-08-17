@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RsiDoctorsDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Country_Codes">
+          <Key>
+            <PropertyRef Name="A3 (UN)" />
+          </Key>
+          <Property Name="COUNTRY" Type="nvarchar" MaxLength="255" />
+          <Property Name="A2 (ISO)" Type="nvarchar" MaxLength="2" />
+          <Property Name="A3 (UN)" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="NUM (UN)" Type="smallint" />
+          <Property Name="DIALING CODE" Type="smallint" />
+        </EntityType>
+        <EntityType Name="Doctors">
+          <Key>
+            <PropertyRef Name="DRID" />
+          </Key>
+          <Property Name="DRID" Type="bigint" Nullable="false" />
+          <Property Name="Rank" Type="int" />
+          <Property Name="Publications" Type="int" />
+          <Property Name="RecentDate" Type="varchar" MaxLength="10" />
+          <Property Name="NPI" Type="varchar" MaxLength="128" />
+          <Property Name="REVIEWER_ID" Type="bigint" />
+          <Property Name="Specialty" Type="varchar" MaxLength="128" />
+          <Property Name="First_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="84" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="24" />
+          <Property Name="Zipcode" Type="varchar" MaxLength="10" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Fax" Type="varchar" MaxLength="50" />
+          <Property Name="Email_Address" Type="varchar" MaxLength="128" />
+          <Property Name="County" Type="varchar" MaxLength="50" />
+          <Property Name="Company_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Longitude" Type="float" />
+          <Property Name="Timezone" Type="varchar" MaxLength="50" />
+          <Property Name="Website" Type="varchar" MaxLength="64" />
+          <Property Name="Gender" Type="varchar" MaxLength="1" />
+          <Property Name="Credentials" Type="varchar" MaxLength="50" />
+          <Property Name="Taxonomy_Code" Type="varchar" MaxLength="255" />
+          <Property Name="License_Number" Type="varchar" MaxLength="255" />
+          <Property Name="License_State" Type="varchar" MaxLength="255" />
+          <Property Name="Taxonomy_Classification" Type="varchar" MaxLength="8000" />
+          <Property Name="Taxonomy_Specialization" Type="varchar" MaxLength="8000" />
+          <Property Name="Medical_School" Type="varchar" MaxLength="8000" />
+          <Property Name="Residency_Training" Type="varchar" MaxLength="8000" />
+          <Property Name="Graduation_Year" Type="varchar" MaxLength="4" />
+          <Property Name="Patients" Type="int" />
+          <Property Name="Claims" Type="int" />
+          <Property Name="Prescriptions" Type="int" />
+          <Property Name="Country" Type="varchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="Taxonomy">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Grouping" Type="varchar" MaxLength="255" />
+          <Property Name="Classification" Type="varchar" MaxLength="255" />
+          <Property Name="Specialization" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityContainer Name="RsiDoctorsDbModelStoreContainer">
+          <EntitySet Name="Country_Codes" EntityType="Self.Country_Codes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Taxonomy" EntityType="Self.Taxonomy" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RsiDoctorsDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false"
+              xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Doctors" EntityType="RsiDoctorsDbModel.Doctors" />
+          <EntitySet Name="Taxonomies" EntityType="RsiDoctorsDbModel.Taxonomy" />
+          <EntitySet Name="Country_Codes" EntityType="RsiDoctorsDbModel.Country_Codes" />
+        </EntityContainer>
+        <EntityType Name="Doctors">
+          <Key>
+            <PropertyRef Name="DRID" />
+          </Key>
+          <Property Name="DRID" Type="Int64" Nullable="false" />
+          <Property Name="Rank" Type="Int32" />
+          <Property Name="Publications" Type="Int32" />
+          <Property Name="RecentDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NPI" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="REVIEWER_ID" Type="Int64" />
+          <Property Name="Specialty" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="84" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email_Address" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="County" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Company_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="Timezone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Website" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Credentials" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Taxonomy_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Taxonomy_Classification" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="Taxonomy_Specialization" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="License_Number" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="License_State" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Medical_School" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="Residency_Training" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="Graduation_Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Patients" Type="Int32" />
+          <Property Name="Claims" Type="Int32" />
+          <Property Name="Prescriptions" Type="Int32" />
+          <Property Name="Country" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Taxonomy">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Grouping" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Classification" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Specialization" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Country_Codes">
+          <Key>
+            <PropertyRef Name="A3_UN" />
+          </Key>
+          <Property Name="COUNTRY" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A2_ISO" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="A3_UN" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_UN" Type="Int16" />
+          <Property Name="DIALING_CODE" Type="Int16" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RsiDoctorsDbModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="RsiDoctorsDbModel.Doctors">
+              <MappingFragment StoreEntitySet="Doctors">
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Prescriptions" ColumnName="Prescriptions" />
+                <ScalarProperty Name="Claims" ColumnName="Claims" />
+                <ScalarProperty Name="Patients" ColumnName="Patients" />
+                <ScalarProperty Name="Graduation_Year" ColumnName="Graduation_Year" />
+                <ScalarProperty Name="Residency_Training" ColumnName="Residency_Training" />
+                <ScalarProperty Name="Medical_School" ColumnName="Medical_School" />
+                <ScalarProperty Name="Taxonomy_Specialization" ColumnName="Taxonomy_Specialization" />
+                <ScalarProperty Name="Taxonomy_Classification" ColumnName="Taxonomy_Classification" />
+                <ScalarProperty Name="License_State" ColumnName="License_State" />
+                <ScalarProperty Name="License_Number" ColumnName="License_Number" />
+                <ScalarProperty Name="Taxonomy_Code" ColumnName="Taxonomy_Code" />
+                <ScalarProperty Name="Credentials" ColumnName="Credentials" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Timezone" ColumnName="Timezone" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="Email_Address" ColumnName="Email_Address" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Specialty" ColumnName="Specialty" />
+                <ScalarProperty Name="REVIEWER_ID" ColumnName="REVIEWER_ID" />
+                <ScalarProperty Name="NPI" ColumnName="NPI" />
+                <ScalarProperty Name="RecentDate" ColumnName="RecentDate" />
+                <ScalarProperty Name="Publications" ColumnName="Publications" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="DRID" ColumnName="DRID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Taxonomies">
+            <EntityTypeMapping TypeName="RsiDoctorsDbModel.Taxonomy">
+              <MappingFragment StoreEntitySet="Taxonomy">
+                <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+                <ScalarProperty Name="Classification" ColumnName="Classification" />
+                <ScalarProperty Name="Grouping" ColumnName="Grouping" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country_Codes">
+            <EntityTypeMapping TypeName="RsiDoctorsDbModel.Country_Codes">
+              <MappingFragment StoreEntitySet="Country_Codes">
+                <ScalarProperty Name="DIALING_CODE" ColumnName="DIALING CODE" />
+                <ScalarProperty Name="NUM_UN" ColumnName="NUM (UN)" />
+                <ScalarProperty Name="A3_UN" ColumnName="A3 (UN)" />
+                <ScalarProperty Name="A2_ISO" ColumnName="A2 (ISO)" />
+                <ScalarProperty Name="COUNTRY" ColumnName="COUNTRY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

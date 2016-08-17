@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PhysicianRankModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DR_ID">
+    <Key>
+      <PropertyRef Name="DRID" />
+      <PropertyRef Name="DEPRECIATED_FLAG" />
+    </Key>
+    <Property Name="DRID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DRDEDUPID" Type="Int64" />
+    <Property Name="DEPRECIATED_FLAG" Type="Boolean" Nullable="false" />
+    <Property Name="SOURCE_TABLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SOURCE_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="FNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="COUNTRY" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="CITY" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="STATE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ZIP" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="DR_ID_3">
+    <Key>
+      <PropertyRef Name="DRID" />
+      <PropertyRef Name="DEPRECIATED_FLAG" />
+    </Key>
+    <Property Name="DRID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DRDEDUPID" Type="Int64" />
+    <Property Name="DRDEDUPID2" Type="Int32" />
+    <Property Name="DRDEDUPID3" Type="Int32" />
+    <Property Name="DEPRECIATED_FLAG" Type="Boolean" Nullable="false" />
+    <Property Name="SOURCE_TABLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SOURCE_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="FNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="COUNTRY" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="CITY" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="STATE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ZIP" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="DR_ID_Ranking">
+    <Key>
+      <PropertyRef Name="DRID" />
+    </Key>
+    <Property Name="DRID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DRDEDUPID" Type="Int64" />
+    <Property Name="Rank" Type="Int32" />
+    <Property Name="Publications" Type="Int32" />
+    <Property Name="RecentDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="PhysicianRankEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DR_ID" EntityType="Self.DR_ID" />
+    <EntitySet Name="DR_ID_3" EntityType="Self.DR_ID_3" />
+    <EntitySet Name="DR_ID_Ranking" EntityType="Self.DR_ID_Ranking" />
+  </EntityContainer>
+</Schema>
