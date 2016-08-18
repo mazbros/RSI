@@ -33,43 +33,41 @@ namespace RSI.Cashed
             _doctorsCanada = new List<DoctorsCanada>();
             foreach (var d in doctors)
             {
-                var item = new DoctorsCanada();
+                var item = new DoctorsCanada
                 {
-                
-                item.DRID = d.DRID;
-                item.Rank = d.Rank;
-                item.Publications = d.Publications;
-                item.RecentDate = d.RecentDate;
-                item.REVIEWER_ID = d.REVIEWER_ID;
-                item.Specialty = d.Specialty;
-                item.First_Name = d.First_Name;
-                item.Last_Name = d.Last_Name;
-                item.Address = d.Address;
-                item.City = d.City;
-                item.Province = d.State;
-                item.Postalcode = d.Zipcode;
-                item.Phone = d.Phone;
-                item.Fax = d.Fax;
-                item.Email_Address = d.Email_Address;
-                item.Company_Name = d.Company_Name;
-                item.Latitude = d.Latitude;
-                item.Longitude = d.Longitude;
-                item.Timezone = d.Timezone;
-                item.Website = d.Website;
-                item.Gender = d.Gender;
-                item.Credentials = d.Credentials;
-                item.Taxonomy_Code = d.Taxonomy_Code;
-                item.Taxonomy_Classification = d.Taxonomy_Classification;
-                item.Taxonomy_Specialization = d.Taxonomy_Specialization;
-                item.Medical_School = d.Medical_School;
-                item.Residency_Training = d.Residency_Training;
-                item.Graduation_Year = d.Graduation_Year;
-                item.Patients = d.Patients;
-                item.Claims = d.Claims;
-                item.Prescriptions = d.Prescriptions;
-            }
-
-            _doctorsCanada.Add(item);
+                    DRID = d.DRID,
+                    Rank = d.Rank,
+                    Publications = d.Publications,
+                    RecentDate = d.RecentDate,
+                    REVIEWER_ID = d.REVIEWER_ID,
+                    Specialty = d.Specialty,
+                    First_Name = d.First_Name,
+                    Last_Name = d.Last_Name,
+                    Address = d.Address,
+                    City = d.City,
+                    Province = d.State,
+                    Postalcode = d.Zipcode,
+                    Phone = d.Phone,
+                    Fax = d.Fax,
+                    Email_Address = d.Email_Address,
+                    Company_Name = d.Company_Name,
+                    Latitude = d.Latitude,
+                    Longitude = d.Longitude,
+                    Timezone = d.Timezone,
+                    Website = d.Website,
+                    Gender = d.Gender,
+                    Credentials = d.Credentials,
+                    Taxonomy_Code = d.Taxonomy_Code,
+                    Taxonomy_Classification = d.Taxonomy_Classification,
+                    Taxonomy_Specialization = d.Taxonomy_Specialization,
+                    Medical_School = d.Medical_School,
+                    Residency_Training = d.Residency_Training,
+                    Graduation_Year = d.Graduation_Year,
+                    Patients = d.Patients,
+                    Claims = d.Claims,
+                    Prescriptions = d.Prescriptions
+                };
+                _doctorsCanada.Add(item);
             }
             return _doctorsCanada;
         }
@@ -79,42 +77,40 @@ namespace RSI.Cashed
             _doctorsOther = new List<DoctorsOther>();
             foreach (var d in doctors)
             {
-                var item = new DoctorsOther();
+                var item = new DoctorsOther
                 {
-
-                    item.DRID = d.DRID;
-                    item.Rank = d.Rank;
-                    item.Publications = d.Publications;
-                    item.RecentDate = d.RecentDate;
-                    item.REVIEWER_ID = d.REVIEWER_ID;
-                    item.Specialty = d.Specialty;
-                    item.First_Name = d.First_Name;
-                    item.Last_Name = d.Last_Name;
-                    item.Address = d.Address;
-                    item.City = d.City;
-                    item.Postalcode = d.Zipcode;
-                    item.Phone = d.Phone;
-                    item.Fax = d.Fax;
-                    item.Email_Address = d.Email_Address;
-                    item.Company_Name = d.Company_Name;
-                    item.Latitude = d.Latitude;
-                    item.Longitude = d.Longitude;
-                    item.Timezone = d.Timezone;
-                    item.Website = d.Website;
-                    item.Gender = d.Gender;
-                    item.Credentials = d.Credentials;
-                    item.Taxonomy_Code = d.Taxonomy_Code;
-                    item.Taxonomy_Classification = d.Taxonomy_Classification;
-                    item.Taxonomy_Specialization = d.Taxonomy_Specialization;
-                    item.Medical_School = d.Medical_School;
-                    item.Residency_Training = d.Residency_Training;
-                    item.Graduation_Year = d.Graduation_Year;
-                    item.Patients = d.Patients;
-                    item.Claims = d.Claims;
-                    item.Prescriptions = d.Prescriptions;
-                    item.Country = d.Country;
-                }
-
+                    DRID = d.DRID,
+                    Rank = d.Rank,
+                    Publications = d.Publications,
+                    RecentDate = d.RecentDate,
+                    REVIEWER_ID = d.REVIEWER_ID,
+                    Specialty = d.Specialty,
+                    First_Name = d.First_Name,
+                    Last_Name = d.Last_Name,
+                    Address = d.Address,
+                    City = d.City,
+                    Postalcode = d.Zipcode,
+                    Phone = d.Phone,
+                    Fax = d.Fax,
+                    Email_Address = d.Email_Address,
+                    Company_Name = d.Company_Name,
+                    Latitude = d.Latitude,
+                    Longitude = d.Longitude,
+                    Timezone = d.Timezone,
+                    Website = d.Website,
+                    Gender = d.Gender,
+                    Credentials = d.Credentials,
+                    Taxonomy_Code = d.Taxonomy_Code,
+                    Taxonomy_Classification = d.Taxonomy_Classification,
+                    Taxonomy_Specialization = d.Taxonomy_Specialization,
+                    Medical_School = d.Medical_School,
+                    Residency_Training = d.Residency_Training,
+                    Graduation_Year = d.Graduation_Year,
+                    Patients = d.Patients,
+                    Claims = d.Claims,
+                    Prescriptions = d.Prescriptions,
+                    Country = d.Country,
+                };
                 _doctorsOther.Add(item);
             }
             return _doctorsOther;
