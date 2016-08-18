@@ -13,9 +13,9 @@
         <dt>
             @Html.DisplayNameFor(model => model.Country)
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Country)
-        </dd>
+    <dd>
+        @Html.DisplayFor(model => model.Country) (@AllCountries.Instance.GetNameByCode(Model.Country))
+    </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Rank)
