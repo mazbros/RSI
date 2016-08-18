@@ -113,19 +113,17 @@
             <dt>
                 @Html.DisplayNameFor(model => model.Zipcode)
             </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Zipcode)
-            </dd>
         }
-        @if (!ViewBag.Country.Equals("0"))
+        else
         {
             <dt>
                 @Html.Label("Postal Code")
             </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Zipcode)
-            </dd>
         }
+        <dd>
+            @Html.DisplayFor(model => model.Zipcode)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Phone)
         </dt>
