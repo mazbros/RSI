@@ -251,7 +251,7 @@
     <Compile Include="Models\Doctors.cs">
       <DependentUpon>RsiDoctorsDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DoctorsCAN.cs" />
+    <Compile Include="Models\DoctorsCanada.cs" />
     <Compile Include="Models\DoctorsOther.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />

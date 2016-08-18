@@ -10,7 +10,7 @@ namespace RSI.Cashed
         private static Lazy<DoctorsList> _inst = new Lazy<DoctorsList>();
 
         private List<Doctors> _doctors;
-        private List<DoctorsCAN> _doctorsCAN;
+        private List<DoctorsCanada> _doctorsCanada;
         private List<DoctorsOther> _doctorsOther;
         public static DoctorsList Instance => _inst.Value;
 
@@ -28,12 +28,12 @@ namespace RSI.Cashed
             _inst = new Lazy<DoctorsList>();
         }
 
-        public List<DoctorsCAN> PrepareForCanada(List<Doctors> doctors)
+        public List<DoctorsCanada> PrepareForCanada(List<Doctors> doctors)
         {
-            _doctorsCAN = new List<DoctorsCAN>();
+            _doctorsCanada = new List<DoctorsCanada>();
             foreach (var d in doctors)
             {
-                var item = new DoctorsCAN();
+                var item = new DoctorsCanada();
                 {
                 
                 item.DRID = d.DRID;
@@ -69,9 +69,9 @@ namespace RSI.Cashed
                 item.Prescriptions = d.Prescriptions;
             }
 
-            _doctorsCAN.Add(item);
+            _doctorsCanada.Add(item);
             }
-            return _doctorsCAN;
+            return _doctorsCanada;
         }
 
         public List<DoctorsOther> PrepareForOther(List<Doctors> doctors)

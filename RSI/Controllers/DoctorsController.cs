@@ -18,7 +18,7 @@ namespace RSI.Controllers
     public class DoctorsController : Controller
     {
         private static List<Doctors> _doctorsResults = new List<Doctors>();
-        private static List<DoctorsCAN> _doctorsResultsCanada = new List<DoctorsCAN>();
+        private static List<DoctorsCanada> _doctorsResultsCanada = new List<DoctorsCanada>();
         private static List<DoctorsOther> _doctorsResultsOther = new List<DoctorsOther>();
         private readonly Entities _db = new Entities();
 
@@ -505,16 +505,14 @@ namespace RSI.Controllers
             {
                 if (countryCode == "CAN")
                 {
-                    return new CsvDownloader<DoctorsCAN>(_doctorsResultsCanada, $"RSI-Export_{countryCode}_{timeStamp}.csv");
+                    return new CsvDownloader<DoctorsCanada>(_doctorsResultsCanada,
+                        $"RSI-Export_{countryCode}_{timeStamp}.csv");
                 }
-                //TODO: make return for other countries
-                else
-                {
-                    return new CsvDownloader<DoctorsOther>(_doctorsResultsOther, $"RSI-Export_{countryCode}_{timeStamp}.csv");
-                }
+                return new CsvDownloader<DoctorsOther>(_doctorsResultsOther,
+                    $"RSI-Export_{countryCode}_{timeStamp}.csv");
             }
-            
-                return new CsvDownloader<Doctors>(_doctorsResults, $"RSI-Export_{countryCode}_{timeStamp}.csv");
+            return new CsvDownloader<Doctors>(_doctorsResults, 
+                $"RSI-Export_{countryCode}_{timeStamp}.csv");
         }
 
         protected override void Dispose(bool disposing)
