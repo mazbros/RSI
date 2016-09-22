@@ -135,7 +135,7 @@ namespace RSI.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(specialties);
-            Assert.IsTrue(specialties.Count == 172);
+            Assert.IsTrue(specialties.Count == 262);
         }
     }
 }

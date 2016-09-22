@@ -28,7 +28,7 @@ namespace RSI.Cashed
             _inst = new Lazy<DoctorsList>();
         }
 
-        public List<DoctorsCanada> PrepareForCanada(List<Doctors> doctors)
+        public List<DoctorsCanada> PrepareForCanada(IEnumerable<Doctors> doctors)
         {
             _doctorsCanada = new List<DoctorsCanada>();
             foreach (var d in doctors)
@@ -72,7 +72,7 @@ namespace RSI.Cashed
             return _doctorsCanada;
         }
 
-        public List<DoctorsOther> PrepareForOther(List<Doctors> doctors)
+        public List<DoctorsOther> PrepareForOther(IEnumerable<Doctors> doctors)
         {
             _doctorsOther = new List<DoctorsOther>();
             foreach (var d in doctors)

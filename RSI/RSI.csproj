@@ -231,6 +231,7 @@
     <Compile Include="Cashed\Country.cs" />
     <Compile Include="Cashed\DoctorsList.cs" />
     <Compile Include="Cashed\RanksList.cs" />
+    <Compile Include="Cashed\RecentDate.cs" />
     <Compile Include="Cashed\SpecialtiesList.cs" />
     <Compile Include="Cashed\StatesList.cs" />
     <Compile Include="Controllers\AccountController.cs" />

@@ -157,7 +157,7 @@ namespace RSI.API
         [HttpGet]
         public List<string> GetSpecialties()
         {
-            return SpecialtiesList.Instance.Get();
+            return SpecialtiesList.Instance.ForApi;
         }
 
         // GET api/<controller>

@@ -39,6 +39,7 @@
                      sortorder = ViewBag.CurrentSort,
                      rankFilter = ViewBag.RankFilter,
                      stateFilter = ViewBag.StateFilter,
+                     yearFilter = ViewBag.YearFilter,
                      countryId = ViewBag.Country
                  })
             </td>
@@ -54,6 +55,7 @@
                              specialtyFilter = ViewBag.SpecialtyFilter,
                              rankFilter = ViewBag.RankFilter,
                              stateFilter = ViewBag.StateFilter,
+                             yearFilter = ViewBag.YearFilter,
                              countryId = ViewBag.Country
                          },
                          new AjaxOptions {HttpMethod = "POST"},
@@ -69,6 +71,7 @@
                              specialtyFilter = ViewBag.SpecialtyFilter,
                              rankFilter = ViewBag.RankFilter,
                              stateFilter = ViewBag.StateFilter,
+                             yearFilter = ViewBag.YearFilter,
                              countryId = ViewBag.Country
                          },
                          new AjaxOptions {HttpMethod = "POST"},
@@ -84,6 +87,7 @@
                              specialtyFilter = ViewBag.SpecialtyFilter,
                              rankFilter = ViewBag.RankFilter,
                              stateFilter = ViewBag.StateFilter,
+                             yearFilter = ViewBag.YearFilter,
                              countryId = ViewBag.Country
                          },
                          new AjaxOptions {HttpMethod = "POST"},
@@ -99,6 +103,7 @@
                              specialtyFilter = ViewBag.SpecialtyFilter,
                              rankFilter = ViewBag.RankFilter,
                              stateFilter = ViewBag.StateFilter,
+                             yearFilter = ViewBag.YearFilter,
                              countryId = ViewBag.Country
                          },
                          new AjaxOptions {HttpMethod = "POST"},
@@ -120,6 +125,7 @@
                              specialtyFilter = ViewBag.SpecialtyFilter,
                              rankFilter = ViewBag.RankFilter,
                              stateFilter = ViewBag.StateFilter,
+                             yearFilter = ViewBag.YearFilter,
                              countryId = ViewBag.Country
                          },
                          new AjaxOptions {HttpMethod = "POST"},
@@ -135,6 +141,7 @@
                              specialtyFilter = ViewBag.SpecialtyFilter,
                              rankFilter = ViewBag.RankFilter,
                              stateFilter = ViewBag.StateFilter,
+                             yearFilter = ViewBag.YearFilter,
                              countryId = ViewBag.Country
                          },
                          new AjaxOptions {HttpMethod = "POST"},
@@ -150,6 +157,7 @@
                              specialtyFilter = ViewBag.SpecialtyFilter,
                              rankFilter = ViewBag.RankFilter,
                              stateFilter = ViewBag.StateFilter,
+                             yearFilter = ViewBag.YearFilter,
                              countryId = ViewBag.Country
                          },
                          new AjaxOptions {HttpMethod = "POST"},
@@ -165,6 +173,7 @@
                              specialtyFilter = ViewBag.SpecialtyFilter,
                              rankFilter = ViewBag.RankFilter,
                              stateFilter = ViewBag.StateFilter,
+                             yearFilter = ViewBag.YearFilter,
                              countryId = ViewBag.Country
                          },
                          new AjaxOptions {HttpMethod = "POST"},
@@ -180,6 +189,7 @@
                              specialtyFilter = ViewBag.SpecialtyFilter,
                              rankFilter = ViewBag.RankFilter,
                              stateFilter = ViewBag.StateFilter,
+                             yearFilter = ViewBag.YearFilter,
                              countryId = ViewBag.Country
                          },
                          new AjaxOptions {HttpMethod = "POST"},
@@ -206,6 +216,7 @@
                                  specialtyFilter = ViewBag.SpecialtyFilter,
                                  rankFilter = ViewBag.RankFilter,
                                  stateFilter = ViewBag.StateFilter,
+                                 yearFilter = ViewBag.YearFilter,
                                  countryId = ViewBag.Country
                              },
                              new AjaxOptions {HttpMethod = "POST"},
@@ -243,12 +254,29 @@
                              sortorder = ViewBag.CurrentSort,
                              rankFilter = ViewBag.RankFilter,
                              stateFilter = ViewBag.StateFilter,
+                             yearFilter = ViewBag.YearFilter,
                              countryId = ViewBag.Country //,
                              //multiple = "multiple"
                          })
                  </th>
                  <th><!-- Publications --></th>
-                 <th><!-- Recent Date--></th>
+                 <th><!-- Recent Date-->
+                 @Html.DropDownList(
+                    "yearFilter",
+                     (IEnumerable<SelectListItem>) ViewBag.Years,
+                     "All",
+                     new
+                     {
+                         style = "width:70px;",
+                         onchange = "$(this.form.submit());",
+                         specialtyFilter = ViewBag.SpecialtyFilter,
+                         sortorder = ViewBag.CurrentSort,
+                         rankFilter = ViewBag.RankFilter,
+                         stateFilter = ViewBag.StateFilter,
+                         yearFilter = ViewBag.YearFilter,
+                         countryId = ViewBag.Country
+                     })
+                 </th>
                  <th><!-- NPI --></th>
                  <th><!-- Reviewer ID--></th>
                  <th>
@@ -265,6 +293,7 @@
                              sortorder = ViewBag.CurrentSort,
                              rankFilter = ViewBag.RankFilter,
                              stateFilter = ViewBag.StateFilter,
+                             yearFilter = ViewBag.YearFilter,
                              countryId = ViewBag.Country
                          })
                  </th>
@@ -288,6 +317,7 @@
                                  sortorder = ViewBag.CurrentSort,
                                  rankFilter = ViewBag.RankFilter,
                                  stateFilter = ViewBag.StateFilter,
+                                 yearFilter = ViewBag.YearFilter,
                                  countryId = ViewBag.Country
                              })
                      </th>
@@ -400,6 +430,7 @@
                          specialtyFilter = ViewBag.SpecialtyFilter,
                          rankFilter = ViewBag.RankFilter,
                          stateFilter = ViewBag.StateFilter,
+                         yearFilter = ViewBag.YearFilter,
                          countryId = ViewBag.Country
                      },
                      new AjaxOptions {HttpMethod = "POST"},
@@ -417,6 +448,7 @@
                          specialtyFilter = ViewBag.SpecialtyFilter,
                          rankFilter = ViewBag.RankFilter,
                          stateFilter = ViewBag.StateFilter,
+                         yearFilter = ViewBag.YearFilter,
                          countryId = ViewBag.Country
                      },
                      new AjaxOptions {HttpMethod = "POST"},
@@ -429,7 +461,7 @@
 
 
              <div class="col-md-6">
-             Page@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount (@ViewBag.TotalRecords records)
+             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount (@ViewBag.TotalRecords records)
              @Html.PagedListPager(Model,
                  page => Url.Action(
                      "Index",
@@ -440,6 +472,7 @@
                          specialtyFilter = ViewBag.SpecialtyFilter,
                          rankFilter = ViewBag.RankFilter,
                          stateFilter = ViewBag.StateFilter,
+                         yearFilter = ViewBag.YearFilter,
                          countryId = ViewBag.Country
                      }
                      ))
@@ -455,6 +488,7 @@
                      specialtyFilter = ViewBag.SpecialtyFilter,
                      rankFilter = ViewBag.RankFilter,
                      stateFilter = ViewBag.StateFilter,
+                     yearFilter = ViewBag.YearFilter,
                      countryId = ViewBag.Country,
                      page = ViewBag.PageNumber
                  },
