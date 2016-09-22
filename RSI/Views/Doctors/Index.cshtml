@@ -23,10 +23,10 @@
         <table class="table table-condensed table-bordered full-width">
         <tr>
          @{ var colspan = "18"; }
-         @if (!ViewBag.Country.Equals("0") && !ViewBag.Country.Equals(CountriesList.Instance.GetIndexByCode("CAN")))
+         @*@if (!ViewBag.Country.Equals("0") && !ViewBag.Country.Equals(CountriesList.Instance.GetIndexByCode("CAN")))
          {
              colspan = "17";
-         }
+         }*@
             <td colspan="@colspan">
             Country:&nbsp;@Html.DropDownList(
                  "countryId",
@@ -226,6 +226,25 @@
                  <th>
                      @(ViewBag.Country.Equals("0") ? Html.Label("Zipcode") : Html.Label("Postal Code", new {style = "white-space: nowrap;"}))
                  </th>
+                 @if (ViewBag.Country.Equals("1"))
+                 {
+                     <th>
+                         @Ajax.ActionLink(
+                         "Country",
+                         "Index",
+                         new
+                         {
+                             sortorder = ViewBag.CountrySortParm,
+                             specialtyFilter = ViewBag.SpecialtyFilter,
+                             rankFilter = ViewBag.RankFilter,
+                             stateFilter = ViewBag.StateFilter,
+                             yearFilter = ViewBag.YearFilter,
+                             countryId = ViewBag.Country
+                         },
+                         new AjaxOptions { HttpMethod = "POST" },
+                         new { style = "white-space:nowrap;" })
+                     </th>
+                 }
                  <th>
                      Phone
                  </th>
@@ -323,6 +342,10 @@
                      </th>
                  }
                  <th><!-- Zipcode --></th>
+                 @if (ViewBag.Country.Equals("1"))
+                 {
+                     <th><!-- Country --></th>
+                 }
                  <th><!-- Phone --></th>
                  <th><!-- Fax --></th>
                  <th><!-- Email --></th>
@@ -385,8 +408,14 @@
                     </td>
                 }
                  <td>
-                 <span style = "white-space: nowrap;" > @Html.DisplayFor(modelItem => item.Zipcode) </span>
+                     <span style = "white-space: nowrap;" > @Html.DisplayFor(modelItem => item.Zipcode) </span>
                  </td>
+                 @if (ViewBag.Country.Equals("1"))
+                 {
+                     <td>
+                         <span style="white-space: nowrap;"> @Html.DisplayFor(modelItem => item.Country) </span>
+                     </td>
+                 }
                  <td class="centered">
                  @{
                      if (!string.IsNullOrWhiteSpace(item.Phone))

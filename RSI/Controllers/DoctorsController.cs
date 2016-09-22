@@ -50,6 +50,7 @@ namespace RSI.Controllers
             ViewBag.AddressSortParm = sortorder == "Address" ? "address_desc" : "Address";
             ViewBag.CitySortParm = sortorder == "City" ? "city_desc" : "City";
             ViewBag.StateSortParm = sortorder == "State" ? "state_desc" : "State";
+            ViewBag.CountrySortParm = sortorder == "Country" ? "country_desc" : "Country";
 
             var allDoctors = DoctorsList.Instance.Get();
             
@@ -166,6 +167,12 @@ namespace RSI.Controllers
                 case "State":
                     doctors = doctors.OrderBy(d => d.State).ToList();
                     break;
+                case "country_desc":
+                    doctors = doctors.OrderByDescending(d => d.Country).ToList();
+                    break;
+                case "Country":
+                    doctors = doctors.OrderBy(d => d.Country).ToList();
+                    break;
                 default:
                     doctors = doctors.OrderBy(d => d.DRID).ToList();
                     break;
@@ -188,20 +195,7 @@ namespace RSI.Controllers
                 int.TryParse(countryId, out fc);
                 c = fc;
                 countryCode = AllCountries.Instance.GetCodeByName(countries[c]);
-                if (countryCode != "USA")
-                {
-                    doctors =
-                        allDoctors.Where(d => d.Country.Equals(countryCode))
-                            .Select(d => d)
-                            .ToList();
-                }
-                else
-                {
-                    doctors =
-                     allDoctors.Where(d => d.Country.Equals(countryCode) && DateTime.Parse(d.RecentDate).Year >= 2000) // limiting USA doctors with publications since year 2000
-                         .Select(d => d)
-                         .ToList();
-                }
+                doctors = FilteredByCountryDoctorsList(allDoctors, countryCode);
             }
             else
             {
@@ -252,30 +246,13 @@ namespace RSI.Controllers
                             d.Specialty.Equals(specialties[i]) ||
                             (!d.Taxonomy_Specialization.IsNullOrWhiteSpace() &&
                              d.Taxonomy_Specialization.Contains(specialties[i]))).Select(d => d).ToList();
-                //TODO: filter to 2000
                 if (fc >= 0)
                 {
-                    if (countryCode != "USA")
-                    {
-                        doctors =
-                           doctors.Where(d => d.Country.Equals(countryCode))
-                               .Select(d => d)
-                               .ToList();
-                    }
-                    else
-                    {
-                        doctors =
-                            doctors.Where(d => d.Country.Equals(countryCode) && DateTime.Parse(d.RecentDate).Year >= 2000)
-                                .Select(d => d)
-                                .ToList();
-                    }
+                    doctors = FilteredByCountryDoctorsList(doctors, countryCode);
                 }
                 if (fy >= 0)
                 {
-                    doctors =
-                        doctors.Where(d => DateTime.Parse(d.RecentDate).Year.ToString().Equals(year))
-                            .Select(d => d)
-                            .ToList();
+                    doctors = FilteredByYearDoctorsList(doctors, year);
                 }
             }
             if (fr >= 0 && fs < 0 && fst < 0)
@@ -289,27 +266,11 @@ namespace RSI.Controllers
                                 : d.Rank.ToString().Equals(ranks[i])).Select(d => d).ToList();
                 if (fc >= 0)
                 {
-                    if (countryCode != "USA")
-                    {
-                        doctors =
-                           doctors.Where(d => d.Country.Equals(countryCode))
-                               .Select(d => d)
-                               .ToList();
-                    }
-                    else
-                    {
-                        doctors =
-                            doctors.Where(d => d.Country.Equals(countryCode) && DateTime.Parse(d.RecentDate).Year >= 2000)
-                                .Select(d => d)
-                                .ToList();
-                    }
+                    doctors = FilteredByCountryDoctorsList(doctors, countryCode);
                 }
                 if (fy >= 0)
                 {
-                    doctors =
-                        doctors.Where(d => DateTime.Parse(d.RecentDate).Year.ToString().Equals(year))
-                            .Select(d => d)
-                            .ToList();
+                    doctors = FilteredByYearDoctorsList(doctors, year);
                 }
             }
             if (fst >= 0 && fr < 0 && fs < 0)
@@ -318,27 +279,11 @@ namespace RSI.Controllers
                 doctors = allDoctors.Where(d => d.State.Equals(states[i])).Select(d => d).ToList();
                 if (fc >= 0)
                 {
-                    if (countryCode != "USA")
-                    {
-                        doctors =
-                           doctors.Where(d => d.Country.Equals(countryCode))
-                               .Select(d => d)
-                               .ToList();
-                    }
-                    else
-                    {
-                        doctors =
-                            doctors.Where(d => d.Country.Equals(countryCode) && DateTime.Parse(d.RecentDate).Year >= 2000)
-                                .Select(d => d)
-                                .ToList();
-                    }
+                    doctors = FilteredByCountryDoctorsList(doctors, countryCode);
                 }
                 if (fy >= 0)
                 {
-                    doctors =
-                        doctors.Where(d => DateTime.Parse(d.RecentDate).Year.ToString().Equals(year))
-                            .Select(d => d)
-                            .ToList();
+                    doctors = FilteredByYearDoctorsList(doctors, year);
                 }
             }
             if (fs >= 0 && fr >= 0 && fst < 0)
@@ -356,27 +301,11 @@ namespace RSI.Controllers
                         .ToList();
                 if (fc >= 0)
                 {
-                    if (countryCode != "USA")
-                    {
-                        doctors =
-                           doctors.Where(d => d.Country.Equals(countryCode))
-                               .Select(d => d)
-                               .ToList();
-                    }
-                    else
-                    {
-                        doctors =
-                            doctors.Where(d => d.Country.Equals(countryCode) && DateTime.Parse(d.RecentDate).Year >= 2000)
-                                .Select(d => d)
-                                .ToList();
-                    }
+                    doctors = FilteredByCountryDoctorsList(doctors, countryCode);
                 }
                 if (fy >= 0)
                 {
-                    doctors =
-                        doctors.Where(d => DateTime.Parse(d.RecentDate).Year.ToString().Equals(year))
-                            .Select(d => d)
-                            .ToList();
+                    doctors = FilteredByYearDoctorsList(doctors, year);
                 }
             }
             if (fr < 0 && fs >= 0 && fst >= 0)
@@ -389,27 +318,11 @@ namespace RSI.Controllers
                         .ToList();
                 if (fc >= 0)
                 {
-                    if (countryCode != "USA")
-                    {
-                        doctors =
-                           doctors.Where(d => d.Country.Equals(countryCode))
-                               .Select(d => d)
-                               .ToList();
-                    }
-                    else
-                    {
-                        doctors =
-                            doctors.Where(d => d.Country.Equals(countryCode) && DateTime.Parse(d.RecentDate).Year >= 2000)
-                                .Select(d => d)
-                                .ToList();
-                    }
+                    doctors = FilteredByCountryDoctorsList(doctors, countryCode);
                 }
                 if (fy >= 0)
                 {
-                    doctors =
-                        doctors.Where(d => DateTime.Parse(d.RecentDate).Year.ToString().Equals(year))
-                            .Select(d => d)
-                            .ToList();
+                    doctors = FilteredByYearDoctorsList(doctors, year);
                 }
             }
             if (fst >= 0 && fr >= 0 && fs < 0)
@@ -427,20 +340,7 @@ namespace RSI.Controllers
                         .ToList();
                 if (fc >= 0)
                 {
-                    if (countryCode != "USA")
-                    {
-                        doctors =
-                           doctors.Where(d => d.Country.Equals(countryCode))
-                               .Select(d => d)
-                               .ToList();
-                    }
-                    else
-                    {
-                        doctors =
-                            doctors.Where(d => d.Country.Equals(countryCode) && DateTime.Parse(d.RecentDate).Year >= 2000)
-                                .Select(d => d)
-                                .ToList();
-                    }
+                    doctors = FilteredByCountryDoctorsList(doctors, countryCode);
                 }
                 if (fy >= 0)
                 {
@@ -466,20 +366,7 @@ namespace RSI.Controllers
                         d.State.Equals(states[y])).Select(d => d).ToList();
             if (fc >= 0)
             {
-                if (countryCode != "USA")
-                {
-                    doctors =
-                       doctors.Where(d => d.Country.Equals(countryCode))
-                           .Select(d => d)
-                           .ToList();
-                }
-                else
-                {
-                    doctors =
-                        doctors.Where(d => d.Country.Equals(countryCode) && DateTime.Parse(d.RecentDate).Year >= 2000)
-                            .Select(d => d)
-                            .ToList();
-                }
+                doctors = FilteredByCountryDoctorsList(doctors, countryCode);
             }
             if (fy >= 0)
             {
@@ -490,6 +377,46 @@ namespace RSI.Controllers
             }
 
             return doctors;
+        }
+
+        private static List<Doctors> FilteredByYearDoctorsList(List<Doctors> doctors, string year)
+        {
+            doctors =
+                doctors.Where(d => DateTime.Parse(d.RecentDate).Year.ToString().Equals(year))
+                    .Select(d => d)
+                    .ToList();
+            return doctors;
+        }
+
+        private List<Doctors> FilteredByCountryDoctorsList(IEnumerable<Doctors> doctors, string countryCode)
+        {
+            List<Doctors> doctorsList;
+            if (countryCode != "USA")
+            {
+                if (countryCode == "ALL")
+                {
+                    doctorsList =
+                        doctors.Where(d => !d.Country.Equals("USA"))
+                            .Select(d => d)
+                            .ToList();
+                }
+                else
+                {
+                    doctorsList =
+                        doctors.Where(d => d.Country.Equals(countryCode))
+                            .Select(d => d)
+                            .ToList();
+                }
+            }
+            else
+            {
+                // limiting USA doctors with publications since year 2000
+                doctorsList =
+                    doctors.Where(d => d.Country.Equals(countryCode) && DateTime.Parse(d.RecentDate).Year >= 2000)
+                        .Select(d => d)
+                        .ToList();
+            }
+            return doctorsList;
         }
 
         // GET: Doctors/Details/5

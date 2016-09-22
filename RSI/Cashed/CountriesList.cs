@@ -28,6 +28,7 @@ namespace RSI.Cashed
             //_countries = _countries.OrderBy(c => c.Name).ToList();
             _countries.Sort((x, y) => string.Compare(x.Name, y.Name, StringComparison.InvariantCulture));
             _countries.Insert(0, new Country { Name = "United States", Code = "USA" });
+            _countries.Insert(1,new Country {Name = "All Non-USA", Code = "ALL"});
 
             return _countries;
         }
@@ -46,6 +47,7 @@ namespace RSI.Cashed
             _countryNames.Remove("United States");
             _countryNames.Sort();
             _countryNames.Insert(0, "United States");
+            _countryNames.Insert(1, "All Non-USA");
 
             return _countryNames;
         }

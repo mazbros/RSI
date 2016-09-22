@@ -298,7 +298,6 @@
       <DependentUpon>RsiDoctorsDb.edmx</DependentUpon>
       <LastGenOutput>RsiDoctorsDb.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
