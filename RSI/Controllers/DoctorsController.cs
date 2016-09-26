@@ -135,12 +135,12 @@ namespace RSI.Controllers
                     break;
                 case "recentdate_desc":
                     doctors =
-                        doctors.OrderByDescending(d => Convert.ToDateTime(d.RecentDate, CultureInfo.InvariantCulture))
+                        doctors.OrderByDescending(d => Convert.ToDateTime(d.RecentDate, CultureInfo.GetCultureInfo("en-US")))
                             .ToList();
                     break;
                 case "Recent Date":
                     doctors =
-                        doctors.OrderBy(d => Convert.ToDateTime(d.RecentDate, CultureInfo.InvariantCulture)).ToList();
+                        doctors.OrderBy(d => Convert.ToDateTime(d.RecentDate, CultureInfo.GetCultureInfo("en-US"))).ToList();
                     break;
                 case "specialty_desc":
                     doctors = doctors.OrderByDescending(d => d.Specialty).ToList();
@@ -483,8 +483,7 @@ namespace RSI.Controllers
         }
 
         // GET: Doctors/Delete/5
-        public async Task<ActionResult> Delete(long? id, string sortorder, int? page, string specialtyFilter,
-            string rankFilter, string stateFilter, string countryId)
+        public async Task<ActionResult> Delete(long? id)
         {
             if (id == null)
             {
@@ -510,8 +509,7 @@ namespace RSI.Controllers
         }
 
         // CSV file dump of sorted and filtered list
-        public ActionResult CsvList(string sortorder, int? page, string specialtyFilter, string rankFilter,
-            string stateFilter, string yearFilter, string countryId)
+        public ActionResult CsvList(string countryId)
         {
             var timeStamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
             var countryCode = AllCountries.Instance.GetCodeByName(CountriesList.Instance.GetCodeByIndex(countryId));
