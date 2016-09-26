@@ -95,8 +95,7 @@ namespace RSI.Controllers
             }
             else
             {
-                // limiting USA to the doctors with publications since year 2000
-                _doctorsResults = doctors.Where(d => DateTime.Parse(d.RecentDate).Year >= 2000).Select(d => d).ToList();
+                _doctorsResults = doctors.Select(d => d).ToList();
             }
 
             return View(doctors.ToPagedList(pageNumber, pageSize));
