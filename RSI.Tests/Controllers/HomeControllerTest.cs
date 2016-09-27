@@ -30,6 +30,7 @@ namespace RSI.Tests.Controllers
             ViewResult result = controller.About() as ViewResult;
 
             // Assert
+            Assert.IsNotNull(result);
             Assert.AreEqual("Your application description page.", result.ViewBag.Message);
         }
 
