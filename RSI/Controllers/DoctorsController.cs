@@ -233,8 +233,9 @@ namespace RSI.Controllers
                 doctors =
                     doctors.Where(
                         d => d.Specialty.Equals(specialties[i]) ||
-                            (!d.Taxonomy_Specialization.IsNullOrWhiteSpace() &&
-                             d.Taxonomy_Specialization.Contains(specialties[i]))).Select(d => d).ToList();
+                             (!d.Taxonomy_Specialization.IsNullOrWhiteSpace() &&
+                              d.Taxonomy_Specialization.Contains(specialties[i])))
+                             .Select(d => d).ToList();
             }
             if (fr >= 0 && fs < 0 && fst < 0)
             {
@@ -258,7 +259,9 @@ namespace RSI.Controllers
                 var j = fr;
                 doctors =
                     doctors.Where(
-                            d => d.Specialty.Equals(specialties[i]) &&
+                            d => (d.Specialty.Equals(specialties[i]) ||
+                            (!d.Taxonomy_Specialization.IsNullOrWhiteSpace() &&
+                            d.Taxonomy_Specialization.Contains(specialties[i]))) &&
                                  (!ranks[j].IsNullOrWhiteSpace()
                                      ? d.Rank.Equals(int.Parse(ranks[j]))
                                      : d.Rank.ToString().Equals(ranks[j])))
@@ -272,7 +275,8 @@ namespace RSI.Controllers
                 doctors =
                     doctors.Where(
                             d => (d.Specialty.Equals(specialties[i]) ||
-                                  d.Taxonomy_Specialization.Contains(specialties[i])) &&
+                            (!d.Taxonomy_Specialization.IsNullOrWhiteSpace() &&
+                             d.Taxonomy_Specialization.Contains(specialties[i]))) &&
                                  d.State.Equals(states[j]))
                         .Select(d => d)
                         .ToList();
@@ -299,10 +303,9 @@ namespace RSI.Controllers
             var y = fst;
             doctors =
                 doctors.Where(
-                    d =>
-                        (d.Specialty.Equals(specialties[x]) ||
-                         d.Taxonomy_Specialization.Contains(specialties[x])) &&
-                        (!ranks[z].IsNullOrWhiteSpace()
+                    d => (d.Specialty.Equals(specialties[x]) ||
+                            (!d.Taxonomy_Specialization.IsNullOrWhiteSpace() &&
+                             d.Taxonomy_Specialization.Contains(specialties[x]))
                             ? d.Rank.Equals(int.Parse(ranks[z]))
                             : d.Rank.ToString().Equals(ranks[z])) &&
                         d.State.Equals(states[y])).Select(d => d).ToList();

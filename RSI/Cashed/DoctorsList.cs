@@ -19,7 +19,7 @@ namespace RSI.Cashed
             if (_doctors != null) return _doctors;
             var db = new Entities();
             var doctors = db.Doctors.Select(d => d).ToList();
-            _doctors = doctors;
+            _doctors = doctors.Where(d => DateTime.Parse(d.RecentDate).Year >= 2000).ToList();
             return _doctors;
         }
 
