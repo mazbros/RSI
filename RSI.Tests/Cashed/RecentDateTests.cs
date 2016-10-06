@@ -3,10 +3,10 @@ using RSI.Cashed;
 
 namespace RSI.Tests.Cashed
 {
-    [TestClass()]
+    [TestClass]
     public class DoctorControllerTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void Get_Years()
         {
             // Act
@@ -18,5 +18,3 @@ namespace RSI.Tests.Cashed
         }
     }
 }
-
-

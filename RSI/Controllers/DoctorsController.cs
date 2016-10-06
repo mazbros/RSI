@@ -53,7 +53,7 @@ namespace RSI.Controllers
             ViewBag.CountrySortParm = sortorder == "Country" ? "country_desc" : "Country";
 
             var allDoctors = DoctorsList.Instance.Get();
-            
+
             var specialties = SpecialtiesList.Instance.Get();
             var ranks = RanksList.Instance.Get();
             var states = StatesList.Instance.Get();
@@ -61,7 +61,8 @@ namespace RSI.Controllers
             var years = RecentDate.Instance.Get();
 
             int fs, fr, fst, fc, fy;
-            var doctors = ApplyFilters(specialtyFilter, rankFilter, stateFilter, yearFilter, countryId, allDoctors, specialties, ranks, states, countries, years, out fs,
+            var doctors = ApplyFilters(specialtyFilter, rankFilter, stateFilter, yearFilter, countryId, allDoctors,
+                specialties, ranks, states, countries, years, out fs,
                 out fr, out fst, out fc, out fy);
 
             ViewBag.Specialties = DropDownHelper.ToSelectListItems(specialties, fs);
@@ -83,20 +84,12 @@ namespace RSI.Controllers
             ViewBag.PageNumber = pageNumber;
 
             if (countryId != "0")
-            {
                 if (countryId == CountriesList.Instance.GetIndexByCode("CAN"))
-                {
                     _doctorsResultsCanada = DoctorsList.Instance.PrepareForCanada(doctors);
-                }
                 else
-                {
                     _doctorsResultsOther = DoctorsList.Instance.PrepareForOther(doctors);
-                }
-            }
             else
-            {
                 _doctorsResults = doctors.Select(d => d).ToList();
-            }
 
             return View(doctors.ToPagedList(pageNumber, pageSize));
         }
@@ -135,12 +128,14 @@ namespace RSI.Controllers
                     break;
                 case "recentdate_desc":
                     doctors =
-                        doctors.OrderByDescending(d => Convert.ToDateTime(d.RecentDate, CultureInfo.GetCultureInfo("en-US")))
+                        doctors.OrderByDescending(
+                                d => Convert.ToDateTime(d.RecentDate, CultureInfo.GetCultureInfo("en-US")))
                             .ToList();
                     break;
                 case "Recent Date":
                     doctors =
-                        doctors.OrderBy(d => Convert.ToDateTime(d.RecentDate, CultureInfo.GetCultureInfo("en-US"))).ToList();
+                        doctors.OrderBy(d => Convert.ToDateTime(d.RecentDate, CultureInfo.GetCultureInfo("en-US")))
+                            .ToList();
                     break;
                 case "specialty_desc":
                     doctors = doctors.OrderByDescending(d => d.Specialty).ToList();
@@ -180,10 +175,10 @@ namespace RSI.Controllers
         }
 
         // One filter at a time logic
-        private List<Doctors> ApplyFilters(string specialtyFilter, string rankFilter, string stateFilter, string yearFilter, string countryId,
-            List<Doctors> allDoctors, IReadOnlyList<string> specialties, IReadOnlyList<string> ranks,
-            IReadOnlyList<string> states, IReadOnlyList<string> countries, IReadOnlyList<string> years, out int fs, out int fr, out int fst,
-            out int fc, out int fy)
+        private List<Doctors> ApplyFilters(string specialtyFilter, string rankFilter, string stateFilter,
+            string yearFilter, string countryId, List<Doctors> allDoctors, IReadOnlyList<string> specialties,
+            IReadOnlyList<string> ranks, IReadOnlyList<string> states, IReadOnlyList<string> countries,
+            IReadOnlyList<string> years, out int fs, out int fr, out int fst, out int fc, out int fy)
         {
             int c;
             fc = -1;
@@ -202,21 +197,15 @@ namespace RSI.Controllers
 
             fs = -1;
             if (!specialtyFilter.IsNullOrWhiteSpace())
-            {
                 int.TryParse(specialtyFilter, out fs);
-            }
 
             fr = -1;
             if (!rankFilter.IsNullOrWhiteSpace())
-            {
                 int.TryParse(rankFilter, out fr);
-            }
 
             fst = -1;
             if (!stateFilter.IsNullOrWhiteSpace())
-            {
                 int.TryParse(stateFilter, out fst);
-            }
 
             fy = -1;
             if (!yearFilter.IsNullOrWhiteSpace())
@@ -227,61 +216,61 @@ namespace RSI.Controllers
                 doctors = FilteredByYearDoctorsList(doctors, year);
             }
 
-            if (fs >= 0 && fr < 0 && fst < 0)
+            if ((fs >= 0) && (fr < 0) && (fst < 0))
             {
                 var i = fs;
                 doctors =
                     doctors.Where(
-                        d => d.Specialty.Equals(specialties[i]) ||
-                             (!d.Taxonomy_Specialization.IsNullOrWhiteSpace() &&
-                              d.Taxonomy_Specialization.Contains(specialties[i])))
-                             .Select(d => d).ToList();
+                            d => d.Specialty.Equals(specialties[i]) ||
+                                 (!d.Taxonomy_Specialization.IsNullOrWhiteSpace() &&
+                                  d.Taxonomy_Specialization.Contains(specialties[i])))
+                        .Select(d => d).ToList();
             }
-            if (fr >= 0 && fs < 0 && fst < 0)
+            if ((fr >= 0) && (fs < 0) && (fst < 0))
             {
                 var i = fr;
                 doctors =
                     doctors.Where(
                         d => !ranks[i].IsNullOrWhiteSpace()
-                                ? d.Rank.Equals(int.Parse(ranks[i]))
-                                : d.Rank.ToString().Equals(ranks[i])).Select(d => d).ToList();
+                            ? d.Rank.Equals(int.Parse(ranks[i]))
+                            : d.Rank.ToString().Equals(ranks[i])).Select(d => d).ToList();
             }
-            if (fst >= 0 && fr < 0 && fs < 0)
+            if ((fst >= 0) && (fr < 0) && (fs < 0))
             {
                 var i = fst;
-                doctors = 
+                doctors =
                     doctors.Where(
                         d => d.State.Equals(states[i])).Select(d => d).ToList();
             }
-            if (fs >= 0 && fr >= 0 && fst < 0)
+            if ((fs >= 0) && (fr >= 0) && (fst < 0))
             {
                 var i = fs;
                 var j = fr;
                 doctors =
                     doctors.Where(
                             d => (d.Specialty.Equals(specialties[i]) ||
-                            (!d.Taxonomy_Specialization.IsNullOrWhiteSpace() &&
-                            d.Taxonomy_Specialization.Contains(specialties[i]))) &&
+                                  (!d.Taxonomy_Specialization.IsNullOrWhiteSpace() &&
+                                   d.Taxonomy_Specialization.Contains(specialties[i]))) &&
                                  (!ranks[j].IsNullOrWhiteSpace()
                                      ? d.Rank.Equals(int.Parse(ranks[j]))
                                      : d.Rank.ToString().Equals(ranks[j])))
                         .Select(d => d)
                         .ToList();
             }
-            if (fr < 0 && fs >= 0 && fst >= 0)
+            if ((fr < 0) && (fs >= 0) && (fst >= 0))
             {
                 var i = fs;
                 var j = fst;
                 doctors =
                     doctors.Where(
                             d => (d.Specialty.Equals(specialties[i]) ||
-                            (!d.Taxonomy_Specialization.IsNullOrWhiteSpace() &&
-                             d.Taxonomy_Specialization.Contains(specialties[i]))) &&
+                                  (!d.Taxonomy_Specialization.IsNullOrWhiteSpace() &&
+                                   d.Taxonomy_Specialization.Contains(specialties[i]))) &&
                                  d.State.Equals(states[j]))
                         .Select(d => d)
                         .ToList();
             }
-            if (fst >= 0 && fr >= 0 && fs < 0)
+            if ((fst >= 0) && (fr >= 0) && (fs < 0))
             {
                 var i = fst;
                 var j = fr;
@@ -296,7 +285,7 @@ namespace RSI.Controllers
                         .ToList();
             }
 
-            if (fs < 0 || fr < 0 || fst < 0 || fc < 0) return doctors; // fs >= 0 && fr >= 0 && fst >= 0
+            if ((fs < 0) || (fr < 0) || (fst < 0) || (fc < 0)) return doctors; // fs >= 0 && fr >= 0 && fst >= 0
 
             var x = fs;
             var z = fr;
@@ -304,11 +293,11 @@ namespace RSI.Controllers
             doctors =
                 doctors.Where(
                     d => (d.Specialty.Equals(specialties[x]) ||
-                            (!d.Taxonomy_Specialization.IsNullOrWhiteSpace() &&
-                             d.Taxonomy_Specialization.Contains(specialties[x]))
-                            ? d.Rank.Equals(int.Parse(ranks[z]))
-                            : d.Rank.ToString().Equals(ranks[z])) &&
-                        d.State.Equals(states[y])).Select(d => d).ToList();
+                          (!d.Taxonomy_Specialization.IsNullOrWhiteSpace() &&
+                           d.Taxonomy_Specialization.Contains(specialties[x]))
+                             ? d.Rank.Equals(int.Parse(ranks[z]))
+                             : d.Rank.ToString().Equals(ranks[z])) &&
+                         d.State.Equals(states[y])).Select(d => d).ToList();
 
             return doctors;
         }
@@ -326,30 +315,21 @@ namespace RSI.Controllers
         {
             List<Doctors> doctorsList;
             if (countryCode != "USA")
-            {
                 if (countryCode == "ALL")
-                {
                     doctorsList =
                         doctors.Where(d => !d.Country.Equals("USA"))
                             .Select(d => d)
                             .ToList();
-                }
                 else
-                {
                     doctorsList =
                         doctors.Where(d => d.Country.Equals(countryCode))
                             .Select(d => d)
                             .ToList();
-                }
-            }
             else
-            {
-                // limiting USA doctors with publications since year 2000
                 doctorsList =
-                    doctors.Where(d => d.Country.Equals(countryCode) && DateTime.Parse(d.RecentDate).Year >= 2000)
+                    doctors.Where(d => d.Country.Equals(countryCode) && (DateTime.Parse(d.RecentDate).Year >= 2000))
                         .Select(d => d)
                         .ToList();
-            }
             return doctorsList;
         }
 
@@ -358,9 +338,7 @@ namespace RSI.Controllers
             string rankFilter, string stateFilter, string yearFilter, string countryId)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             ViewBag.DRID = id;
             ViewBag.CurrentSort = sortorder;
@@ -373,9 +351,7 @@ namespace RSI.Controllers
 
             Doctors consolidatedDoctorsView = await _db.Doctors.FindAsync(id);
             if (consolidatedDoctorsView == null)
-            {
                 return HttpNotFound();
-            }
             return View(consolidatedDoctorsView);
         }
 
@@ -392,11 +368,11 @@ namespace RSI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(
             [Bind(
-                Include =
-                    "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax," +
-                    "Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website,Gender,Credentials,Taxonomy_Code,Taxonomy_Classification," +
-                    "Taxonomy_Specialization,License_Number,License_State,Medical_School,Residency_Training,Graduation_Year,Patients,Claims,Prescriptions,Country"
-                )] Doctors consolidatedDoctorsView)
+                 Include =
+                     "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax," +
+                     "Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website,Gender,Credentials,Taxonomy_Code,Taxonomy_Classification," +
+                     "Taxonomy_Specialization,License_Number,License_State,Medical_School,Residency_Training,Graduation_Year,Patients,Claims,Prescriptions,Country"
+             )] Doctors consolidatedDoctorsView)
         {
             if (ModelState.IsValid)
             {
@@ -413,14 +389,10 @@ namespace RSI.Controllers
             string rankFilter, string stateFilter, string yearFilter, string countryId)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Doctors consolidatedDoctorsView = await _db.Doctors.FindAsync(id);
             if (consolidatedDoctorsView == null)
-            {
                 return HttpNotFound();
-            }
 
             ViewBag.Specialties = DropDownHelper.ToSelectListItems(SpecialtiesList.Instance.Get());
 
@@ -443,12 +415,13 @@ namespace RSI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(
             [Bind(
-                Include =
-                    "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax," +
-                    "Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website,Gender,Credentials,Taxonomy_Code,Taxonomy_Classification," +
-                    "Taxonomy_Specialization,License_Number,License_State,Medical_School,Residency_Training,Graduation_Year,Patients,Claims,Prescriptions,Country"
-                )] Doctors consolidatedDoctorsView,
-            long? id, string sortorder, int? page, string specialtyFilter, string rankFilter, string stateFilter, string yearFilter, string countryId)
+                 Include =
+                     "DRID,Rank,Publications,RecentDate,NPI,REVIEWER_ID,Specialty,First_Name,Last_Name,Address,City,State,Zipcode,Phone,Fax," +
+                     "Email_Address,County,Company_Name,Latitude,Longitude,Timezone,Website,Gender,Credentials,Taxonomy_Code,Taxonomy_Classification," +
+                     "Taxonomy_Specialization,License_Number,License_State,Medical_School,Residency_Training,Graduation_Year,Patients,Claims,Prescriptions,Country"
+             )] Doctors consolidatedDoctorsView,
+            long? id, string sortorder, int? page, string specialtyFilter, string rankFilter, string stateFilter,
+            string yearFilter, string countryId)
         {
             ViewBag.DRID = id;
             ViewBag.CurrentSort = sortorder;
@@ -480,7 +453,7 @@ namespace RSI.Controllers
                             yearFilter = ViewBag.YearFilter,
                             countryId = ViewBag.Country
                         })
-                    );
+                );
             }
             return View(consolidatedDoctorsView);
         }
@@ -489,19 +462,16 @@ namespace RSI.Controllers
         public async Task<ActionResult> Delete(long? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Doctors consolidatedDoctorsView = await _db.Doctors.FindAsync(id);
             if (consolidatedDoctorsView == null)
-            {
                 return HttpNotFound();
-            }
             return View(consolidatedDoctorsView);
         }
 
         // POST: Doctors/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(long id)
         {
@@ -520,23 +490,19 @@ namespace RSI.Controllers
             if (countryCode != "USA")
             {
                 if (countryCode == "CAN")
-                {
                     return new CsvDownloader<DoctorsCanada>(_doctorsResultsCanada,
                         $"RSI-Export_{countryCode}_{timeStamp}.csv");
-                }
                 return new CsvDownloader<DoctorsOther>(_doctorsResultsOther,
                     $"RSI-Export_{countryCode}_{timeStamp}.csv");
             }
-            return new CsvDownloader<Doctors>(_doctorsResults, 
+            return new CsvDownloader<Doctors>(_doctorsResults,
                 $"RSI-Export_{countryCode}_{timeStamp}.csv");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 _db.Dispose();
-            }
             base.Dispose(disposing);
         }
     }

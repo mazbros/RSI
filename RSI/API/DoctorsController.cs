@@ -25,7 +25,7 @@ namespace RSI.API
         // POST api/<controller>/<action>/<filter>
         /// <summary>
         ///     [POST] Takes list and filters it using a filter with several filter categories that may have multiple entries each
-        ///             except Country - only single value allowed
+        ///     except Country - only single value allowed
         /// </summary>
         /// <param name="filter">Filter with several categories that may have multiple entries each</param>
         /// <remarks>
@@ -47,52 +47,56 @@ namespace RSI.API
             var doctors = DoctorsList.Instance.Get();
 
             if (filter == null)
-            {
                 filter = new Filter();
-            }
-            if (filter.Country == null || filter.Country.Count == 0)
-            { 
+            if ((filter.Country == null) || (filter.Country.Count == 0))
                 filter.Country = new List<string> {"USA"};
-            }
-            if (filter.Specialty == null || filter.Specialty.Count == 0)
-            {
+            if ((filter.Specialty == null) || (filter.Specialty.Count == 0))
                 filter.Specialty = new List<string>();
-            }
-            if (filter.State == null || filter.State.Count == 0)
-            {
+            if ((filter.State == null) || (filter.State.Count == 0))
                 filter.State = new List<string>();
-            }
-            if (filter.Rank == null || filter.Rank.Count == 0)
-            {
+            if ((filter.Rank == null) || (filter.Rank.Count == 0))
                 filter.Rank = new List<int?>();
-            }
 
             var predicateSpecialty = PredicateBuilder.New<Doctors>(false);
             var predicateState = PredicateBuilder.New<Doctors>(false);
             var predicateRank = PredicateBuilder.New<Doctors>(false);
             var predicateCountry = PredicateBuilder.New<Doctors>(false);
 
-            predicateSpecialty = filter.Specialty != null ? filter.Specialty.Count != 0
-                ? filter.Specialty.Aggregate(predicateSpecialty,
-                    (current, temp) => current.Or(d => d.Specialty == temp))
-                : PredicateBuilder.New<Doctors>(true) : PredicateBuilder.New<Doctors>(true);
+            predicateSpecialty = filter.Specialty != null
+                ? filter.Specialty.Count != 0
+                    ? filter.Specialty.Aggregate(predicateSpecialty,
+                        (current, temp) => current.Or(d => d.Specialty == temp))
+                    : PredicateBuilder.New<Doctors>(true)
+                : PredicateBuilder.New<Doctors>(true);
 
-            predicateState = filter.State != null ? filter.State.Count != 0
-                ? filter.State.Aggregate(predicateState,
-                    (current, temp) => current.Or(d => d.State == temp))
-                : PredicateBuilder.New<Doctors>(true) : PredicateBuilder.New<Doctors>(true);
+            predicateState = filter.State != null
+                ? filter.State.Count != 0
+                    ? filter.State.Aggregate(predicateState,
+                        (current, temp) => current.Or(d => d.State == temp))
+                    : PredicateBuilder.New<Doctors>(true)
+                : PredicateBuilder.New<Doctors>(true);
 
-            predicateRank = filter.Rank != null ? filter.Rank.Count != 0
-                ? filter.Rank.Aggregate(predicateRank,
-                    (current, temp) => current.Or(d => d.Rank == temp))
-                : PredicateBuilder.New<Doctors>(true) : PredicateBuilder.New<Doctors>(true);
+            predicateRank = filter.Rank != null
+                ? filter.Rank.Count != 0
+                    ? filter.Rank.Aggregate(predicateRank,
+                        (current, temp) => current.Or(d => d.Rank == temp))
+                    : PredicateBuilder.New<Doctors>(true)
+                : PredicateBuilder.New<Doctors>(true);
 
-            predicateCountry = filter.Country != null ? filter.Country.Count != 0
-                ? filter.Country.Aggregate(predicateCountry,
-                    (current, temp) => current.Or(d => d.Country == temp))
-                : PredicateBuilder.New<Doctors>(true) : PredicateBuilder.New<Doctors>(true);
+            predicateCountry = filter.Country != null
+                ? filter.Country.Count != 0
+                    ? filter.Country.Aggregate(predicateCountry,
+                        (current, temp) => current.Or(d => d.Country == temp))
+                    : PredicateBuilder.New<Doctors>(true)
+                : PredicateBuilder.New<Doctors>(true);
 
-            return doctors.AsQueryable().Where(predicateSpecialty).Where(predicateState).Where(predicateRank).Where(predicateCountry).ToList();
+            return
+                doctors.AsQueryable()
+                    .Where(predicateSpecialty)
+                    .Where(predicateState)
+                    .Where(predicateRank)
+                    .Where(predicateCountry)
+                    .ToList();
         }
 
         // POST api/<controller>
@@ -101,20 +105,20 @@ namespace RSI.API
         /// </summary>
         /// <param name="sorter">Sort options</param>
         /// <remarks>
-        ///     Sorter has two properties: 
+        ///     Sorter has two properties:
         /// </remarks>
         /// <remarks>
-        ///         Field - field to sort on
+        ///     Field - field to sort on
         /// </remarks>
         /// <remarks>
-        ///         Sort - direction of sort
+        ///     Sort - direction of sort
         /// </remarks>
         /// <returns>Sorted list</returns>
         [HttpPost]
         public List<Doctors> GetSorted(Sorter sorter)
         {
             var result = DoctorsList.Instance.Get();
-            
+
             if (typeof(Doctors).GetProperties().Any(p => p.Name.Equals(sorter.Field)))
             {
                 var pi = typeof(Doctors).GetProperty(sorter.Field);
@@ -171,14 +175,15 @@ namespace RSI.API
             return StatesList.Instance.Get();
         }
 
-        //// POST api/<controller>
-        //public void Post([FromBody] string value)
         //{
-        //}
+        //public void Put(int id, [FromBody] string value)
 
         //// PUT api/<controller>/5
-        //public void Put(int id, [FromBody] string value)
+        //}
         //{
+        //public void Post([FromBody] string value)
+
+        //// POST api/<controller>
         //}
 
         //// DELETE api/<controller>/5

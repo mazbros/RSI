@@ -63,7 +63,7 @@ namespace RSI.Controllers
                 var user = await UserManager.FindByEmailAsync(model.Email);
                 var user2 = await UserManager.FindByNameAsync(model.UserName);
 
-                if (user != null && user2 != null && user.Equals(user2))
+                if ((user != null) && (user2 != null) && user.Equals(user2))
                 {
                     if (!user.EmailConfirmed)
                     {
@@ -87,7 +87,7 @@ namespace RSI.Controllers
                     // if user is subject to lockouts and the credentials are invalid
                     // record the failure and check if user is lockedout and display message, otherwise,
                     // display the number of attempts remaining before lockout
-                    else if (await UserManager.GetLockoutEnabledAsync(user.Id) && validCredentials == null)
+                    else if (await UserManager.GetLockoutEnabledAsync(user.Id) && (validCredentials == null))
                     {
                         // Record the failure which also may cause the user to be locked out
                         await UserManager.AccessFailedAsync(user.Id);
@@ -152,15 +152,13 @@ namespace RSI.Controllers
             var minutesLeft = ((DateTime) user.LockoutEndDateUtc).Subtract(DateTime.UtcNow).Minutes;
             var secondsLeft = ((DateTime) user.LockoutEndDateUtc).Subtract(DateTime.UtcNow).Seconds;
 
-            if (minutesLeft < 0 && secondsLeft < 0) return message;
+            if ((minutesLeft < 0) && (secondsLeft < 0)) return message;
             if (minutesLeft == 1)
                 message +=
                     $" {minutesLeft}:{("0" + secondsLeft).Substring(("0" + secondsLeft).Length - Math.Min(2, ("0" + secondsLeft).Length))} remaining.";
             else
-            {
                 message +=
                     $" {minutesLeft}:{("0" + secondsLeft).Substring(("0" + secondsLeft).Length - Math.Min(2, ("0" + secondsLeft).Length))} remaining.";
-            }
             return message;
         }
 
@@ -171,9 +169,7 @@ namespace RSI.Controllers
         {
             // Require that the user has already logged in via username/password or external login
             if (!await SignInManager.HasBeenVerifiedAsync())
-            {
                 return View("Error");
-            }
             return View(new VerifyCodeViewModel {Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe});
         }
 
@@ -185,9 +181,7 @@ namespace RSI.Controllers
         public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
         {
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
 
             // The following code protects for brute force attacks against the two factor codes. 
             // If a user enters incorrect codes for a specified amount of time then the user account 
@@ -294,10 +288,8 @@ namespace RSI.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code, string email)
         {
-            if (userId == null || code == null || email == null)
-            {
+            if ((userId == null) || (code == null) || (email == null))
                 return View("Error");
-            }
 
             var user = UserManager.FindById(userId);
 
@@ -327,11 +319,8 @@ namespace RSI.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByEmailAsync(model.Email);
-                if (user == null || !await UserManager.IsEmailConfirmedAsync(user.Id))
-                {
-                    // Don't reveal that the user does not exist or is not confirmed
+                if ((user == null) || !await UserManager.IsEmailConfirmedAsync(user.Id))
                     return View("ForgotPasswordConfirmation");
-                }
 
                 // Send an email with this link
                 var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
@@ -389,20 +378,13 @@ namespace RSI.Controllers
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
             var user = await UserManager.FindByNameAsync(model.Email);
             if (user == null)
-            {
-                // Don't reveal that the user does not exist
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
-            {
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
             AddErrors(result);
             return View();
         }
@@ -434,9 +416,7 @@ namespace RSI.Controllers
         {
             var userId = await SignInManager.GetVerifiedUserIdAsync();
             if (userId == null)
-            {
                 return View("Error");
-            }
             var userFactors = await UserManager.GetValidTwoFactorProvidersAsync(userId);
             var factorOptions =
                 userFactors.Select(purpose => new SelectListItem {Text = purpose, Value = purpose}).ToList();
@@ -452,15 +432,11 @@ namespace RSI.Controllers
         public async Task<ActionResult> SendCode(SendCodeViewModel model)
         {
             if (!ModelState.IsValid)
-            {
                 return View();
-            }
 
             // Generate the token and send it
             if (!await SignInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
-            {
                 return View("Error");
-            }
             return RedirectToAction("VerifyCode",
                 new {Provider = model.SelectedProvider, model.ReturnUrl, model.RememberMe});
         }
@@ -472,9 +448,7 @@ namespace RSI.Controllers
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
-            {
                 return RedirectToAction("Login");
-            }
 
             // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync(loginInfo, false);
@@ -505,18 +479,14 @@ namespace RSI.Controllers
             string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
-            {
                 return RedirectToAction("Index", "Manage");
-            }
 
             if (ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
                 var info = await AuthenticationManager.GetExternalLoginInfoAsync();
                 if (info == null)
-                {
                     return View("ExternalLoginFailure");
-                }
                 var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
@@ -602,17 +572,13 @@ namespace RSI.Controllers
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
-            {
                 ModelState.AddModelError("", error);
-            }
         }
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
-            {
                 return Redirect(returnUrl);
-            }
             return RedirectToAction("Index", "Home");
         }
 
@@ -638,9 +604,7 @@ namespace RSI.Controllers
             {
                 var properties = new AuthenticationProperties {RedirectUri = RedirectUri};
                 if (UserId != null)
-                {
                     properties.Dictionary[XSRF_KEY] = UserId;
-                }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }

@@ -3,8 +3,8 @@
 namespace RSI.Helpers
 {
     /// <summary>
-    /// Input parameter for GetGiltered method
-    /// Country property has to be set in constructor - it is not optional and defaults to USA
+    ///     Input parameter for GetGiltered method
+    ///     Country property has to be set in constructor - it is not optional and defaults to USA
     /// </summary>
     public class Filter
     {

@@ -46,8 +46,5 @@ namespace RSI.Models
         {
             return new DoctorsCanada();
         }
-
-
     }
-
 }

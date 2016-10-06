@@ -9,12 +9,30 @@ namespace RSI.Cashed
     {
         private static readonly Lazy<SpecialtiesList> Inst = new Lazy<SpecialtiesList>();
 
-        private List<string> _specialities;
-
         private List<string> _multiSpecialtiesList;
 
         private List<string> _singleSpecialtiesList;
+
+        private List<string> _specialities;
         public static SpecialtiesList Instance => Inst.Value;
+
+        public List<string> ForApi
+        {
+            get
+            {
+                if (_specialities != null) return _specialities;
+
+                var doctors = DoctorsList.Instance.Get();
+
+                _specialities =
+                    doctors.OrderBy(s => s.Specialty)
+                        .Select(s => s.Specialty)
+                        .Distinct()
+                        .ToList();
+
+                return _specialities;
+            }
+        }
 
         public List<string> Get()
         {
@@ -22,11 +40,11 @@ namespace RSI.Cashed
 
             var doctors = DoctorsList.Instance.Get();
 
-           _multiSpecialtiesList =
-                    doctors.Select(s => s.Taxonomy_Specialization)
-                        .Where(s => !s.IsNullOrWhiteSpace() && s.Contains(","))
-                        .Distinct()
-                        .ToList();
+            _multiSpecialtiesList =
+                doctors.Select(s => s.Taxonomy_Specialization)
+                    .Where(s => !s.IsNullOrWhiteSpace() && s.Contains(","))
+                    .Distinct()
+                    .ToList();
 
             var tempList = new List<string>();
             foreach (var li in _multiSpecialtiesList)
@@ -34,14 +52,13 @@ namespace RSI.Cashed
                 var tL = li.Split(',');
 
                 tempList.AddRange(tL);
-
             }
 
             _singleSpecialtiesList =
-                    doctors.Select(s => s.Taxonomy_Specialization)
-                        .Where(s => !s.IsNullOrWhiteSpace() && !s.Contains(","))
-                        .Distinct()
-                        .ToList();
+                doctors.Select(s => s.Taxonomy_Specialization)
+                    .Where(s => !s.IsNullOrWhiteSpace() && !s.Contains(","))
+                    .Distinct()
+                    .ToList();
 
             tempList.AddRange(_singleSpecialtiesList);
 
@@ -54,24 +71,6 @@ namespace RSI.Cashed
                     .ToList();
 
             return _specialities;
-        }
-
-        public List<string> ForApi
-        {
-            get
-            {
-                if (_specialities != null) return _specialities;
-
-                var doctors = DoctorsList.Instance.Get();
-
-                _specialities = 
-                    doctors.OrderBy(s => s.Specialty)
-                        .Select(s => s.Specialty)
-                        .Distinct()
-                        .ToList();
-
-                return _specialities;
-            }
         }
     }
 }

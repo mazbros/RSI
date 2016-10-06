@@ -22,12 +22,12 @@ namespace RSI.Cashed
                 .OrderBy(d => d.Country)
                 .Join(countries, d => d.Country, c => c.Code,
                     (d, c) => new Country {Name = c.Name, Code = c.Code}).Distinct().ToList();
-            
-            _countries.Remove(new Country { Name = "United States", Code = "USA" });
+
+            _countries.Remove(new Country {Name = "United States", Code = "USA"});
             //_countries = _countries.OrderBy(c => c.Name).ToList();
             _countries.Sort((x, y) => string.Compare(x.Name, y.Name, StringComparison.InvariantCulture));
-            _countries.Insert(0, new Country { Name = "United States", Code = "USA" });
-            _countries.Insert(1,new Country {Name = "All Non-USA", Code = "ALL"});
+            _countries.Insert(0, new Country {Name = "United States", Code = "USA"});
+            _countries.Insert(1, new Country {Name = "All Non-USA", Code = "ALL"});
 
             return _countries;
         }
@@ -41,7 +41,7 @@ namespace RSI.Cashed
             _countryNames = doctors
                 .OrderBy(d => d.Country)
                 .Join(countries, d => d.Country, c => c.Code,
-                    (d, c) =>  c.Name).Distinct().ToList();
+                    (d, c) => c.Name).Distinct().ToList();
 
             _countryNames.Remove("United States");
             _countryNames.Sort();
@@ -54,9 +54,9 @@ namespace RSI.Cashed
         public string GetIndexByCode(string code)
         {
             var countries = GetNames();
-           
+
             var results = countries.IndexOf(AllCountries.Instance.GetNameByCode(code)).ToString();
-            
+
             return results;
         }
 

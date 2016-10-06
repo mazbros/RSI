@@ -109,7 +109,7 @@ namespace RSI.Cashed
                     Patients = d.Patients,
                     Claims = d.Claims,
                     Prescriptions = d.Prescriptions,
-                    Country = d.Country,
+                    Country = d.Country
                 };
                 _doctorsOther.Add(item);
             }

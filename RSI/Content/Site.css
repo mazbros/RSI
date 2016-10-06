@@ -15,13 +15,14 @@
 */
 
 .dl-horizontal dt {
+    border-bottom: dashed 1px gray;
     white-space: nowrap;
     width: 15%;
-    border-bottom: dashed 1px gray;
 }
+
 .dl-horizontal dd {
-    white-space: nowrap;
     border-bottom: dashed 1px gray;
+    white-space: nowrap;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -75,5 +76,7 @@ textarea { max-width: 480px; }
 
 .reset-highlight { background-color: #f9f9f9; }
 
-.navbar-inverse {background-color: #2e508e; color: #ffffff; } /* #41adf2; */
-
+.navbar-inverse {
+    background-color: #2e508e;
+    color: #ffffff;
+} /* #41adf2; */

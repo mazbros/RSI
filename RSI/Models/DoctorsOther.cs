@@ -38,7 +38,7 @@ namespace RSI.Models
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return (IEnumerator)GetEnumerator();
+            return (IEnumerator) GetEnumerator();
         }
 
         private DoctorsOther GetEnumerator()

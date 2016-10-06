@@ -15,7 +15,7 @@ namespace RSI.Tests.Controllers
         {
             // Arrange
             var controller = new DoctorsController();
-            
+
             // Act
             var result = controller.GetAll();
 
@@ -51,7 +51,7 @@ namespace RSI.Tests.Controllers
             Assert.IsTrue(result[0].DRID > result[1].DRID);
 
             // Act
-            result = controller.GetSorted(new Sorter { Field = "DRID", Order = ""});
+            result = controller.GetSorted(new Sorter {Field = "DRID", Order = ""});
 
             // Assert
             Assert.AreNotSame(result[0].DRID, result[1].DRID);
@@ -87,7 +87,7 @@ namespace RSI.Tests.Controllers
 
             // Act
             var result = controller.GetFiltered(filter);
-            
+
             // Cheat
             var cnt = result.Count;
 
@@ -101,7 +101,7 @@ namespace RSI.Tests.Controllers
         {
             // Arrange
             var controller = new DoctorsController();
-            
+
             // Act
             var ranks = controller.GetRanks();
 

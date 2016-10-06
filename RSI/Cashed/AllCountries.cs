@@ -18,7 +18,7 @@ namespace RSI.Cashed
 
             var db = new Entities();
             _countries = db.Country_Codes
-                .Select(c => new Country {Code = c.A3_UN, Name = c.COUNTRY }).ToList();
+                .Select(c => new Country {Code = c.A3_UN, Name = c.COUNTRY}).ToList();
             return _countries;
         }
 
@@ -33,6 +33,5 @@ namespace RSI.Cashed
             var result = _countries.First(c => c.Code.Equals(code)).Name;
             return result;
         }
-
     }
 }

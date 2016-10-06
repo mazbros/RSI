@@ -45,9 +45,7 @@ namespace RSI.Helpers
         private void writeHeaderLine(StreamWriter streamWriter)
         {
             foreach (var member in typeof(T).GetProperties())
-            {
                 writeValue(streamWriter, member.Name);
-            }
         }
 
         private void writeDataLines(StreamWriter streamWriter)
@@ -55,9 +53,7 @@ namespace RSI.Helpers
             foreach (var line in _list)
             {
                 foreach (var member in typeof(T).GetProperties())
-                {
                     writeValue(streamWriter, GetPropertyValue(line, member.Name));
-                }
                 streamWriter.WriteLine();
             }
         }
