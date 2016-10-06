@@ -97,6 +97,67 @@ namespace RSI.Tests.Controllers
         }
 
         [TestMethod]
+        public void GetFiltered_NONUS_returns_filtered_Doctors_NONUS()
+        {
+            // Arrange
+            var controller = new DoctorsController();
+            var filter = new Filter
+            {
+                Country = new List<string> {"USA"},
+                Specialty = new List<string>(),
+                State = new List<string>(),
+                Rank = new List<int?>()
+            };
+
+            // Act
+            var result = controller.GetFiltered(filter);
+
+            // Cheat
+            var cntUSA = result.Count;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count == cntUSA);
+
+            filter = new Filter
+            {
+                Country = new List<string> { "CAN" },
+                Specialty = new List<string>(),
+                State = new List<string>(),
+                Rank = new List<int?>()
+            };
+
+            // Act
+            result = controller.GetFiltered(filter);
+
+            // Cheat
+            var cntCAN = result.Count;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count == cntCAN);
+
+            filter = new Filter
+            {
+                Country = new List<string> { "USA", "CAN" },
+                Specialty = new List<string>(),
+                State = new List<string>(),
+                Rank = new List<int?>()
+            };
+
+            // Act
+            result = controller.GetFiltered(filter);
+
+            // Cheat
+            var cnt = result.Count;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count == cnt);
+            Assert.IsTrue((cnt == cntUSA + cntCAN));
+        }
+
+        [TestMethod]
         public void GetRanks_returns_ranks()
         {
             // Arrange
@@ -107,7 +168,7 @@ namespace RSI.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(ranks);
-            Assert.IsTrue(ranks.Count == 18);
+            Assert.IsTrue(ranks.Count == 12);
         }
 
         [TestMethod]
@@ -121,7 +182,7 @@ namespace RSI.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(states);
-            Assert.IsTrue(states.Count == 52);
+            Assert.IsTrue(states.Count == 65);
         }
 
         [TestMethod]
@@ -135,7 +196,7 @@ namespace RSI.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(specialties);
-            Assert.IsTrue(specialties.Count == 262);
+            Assert.IsTrue(specialties.Count == 310);
         }
     }
 }

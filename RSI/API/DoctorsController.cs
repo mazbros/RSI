@@ -13,7 +13,7 @@ namespace RSI.API
     {
         // GET api/<controller>
         /// <summary>
-        ///     [GET] Gets all records
+        ///     [GET] Gets all records (not useful, since there are other than USA countries, use <b>GetFiltered</b> instead for more control over what's returned)
         /// </summary>
         /// <returns>Complete list</returns>
         [HttpGet]
@@ -25,20 +25,21 @@ namespace RSI.API
         // POST api/<controller>/<action>/<filter>
         /// <summary>
         ///     [POST] Takes list and filters it using a filter with several filter categories that may have multiple entries each
-        ///     except Country - only single value allowed
         /// </summary>
         /// <param name="filter">Filter with several categories that may have multiple entries each</param>
         /// <remarks>
-        ///     Country: mandatory (not optional) parameter eg. USA, CAN
+        ///     <b>Country</b>: optional parameter eg. "USA", "CAN", etc., when not supplied, defaults to "USA"<br/>
+        ///     There is a special case to filter and retrieve all non-USA countries: "ALL".<br/> 
+        ///     It cannot be combined with any other country, but the others can, eg.: "USA", "CAN" will return USA and Canada combined
         /// </remarks>
         /// <remarks>
-        ///     Specialty: can contain single or multiple specialties, if empty ignored
+        ///     <b>Specialty</b>: can contain single or multiple specialties, if empty ignored
         /// </remarks>
         /// <remarks>
-        ///     State: can contain single or multiple states, if empty ignored
+        ///     <b>State</b>: can contain single or multiple states, if empty ignored
         /// </remarks>
         /// <remarks>
-        ///     Rank: can contain single or multiple ranks, if empty ignored
+        ///     <b>Rank</b>: can contain single or multiple ranks, if empty ignored
         /// </remarks>
         /// <returns>Returns filtered list</returns>
         [HttpPost]
@@ -85,8 +86,11 @@ namespace RSI.API
 
             predicateCountry = filter.Country != null
                 ? filter.Country.Count != 0
-                    ? filter.Country.Aggregate(predicateCountry,
-                        (current, temp) => current.Or(d => d.Country == temp))
+                    ? filter.Country[0].Equals("ALL")
+                        ? filter.Country.Aggregate(predicateCountry,
+                            (current, temp) => current.Or(d => d.Country != "USA"))
+                        : filter.Country.Aggregate(predicateCountry,
+                            (current, temp) => current.Or(d => d.Country == temp))
                     : PredicateBuilder.New<Doctors>(true)
                 : PredicateBuilder.New<Doctors>(true);
 
@@ -108,10 +112,10 @@ namespace RSI.API
         ///     Sorter has two properties:
         /// </remarks>
         /// <remarks>
-        ///     Field - field to sort on
+        ///     <b>Field</b> - field to sort on
         /// </remarks>
         /// <remarks>
-        ///     Sort - direction of sort
+        ///     <b>Sort</b> - direction of sort
         /// </remarks>
         /// <returns>Sorted list</returns>
         [HttpPost]
