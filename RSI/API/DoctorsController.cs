@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using LinqKit;
+using Microsoft.Ajax.Utilities;
 using RSI.Cashed;
 using RSI.Helpers;
 using RSI.Models;
@@ -66,7 +67,9 @@ namespace RSI.API
             predicateSpecialty = filter.Specialty != null
                 ? filter.Specialty.Count != 0
                     ? filter.Specialty.Aggregate(predicateSpecialty,
-                        (current, temp) => current.Or(d => d.Specialty == temp))
+                        (current, temp) => current.Or(d => d.Specialty == temp 
+                            || (!d.Taxonomy_Specialization.IsNullOrWhiteSpace() 
+                                && d.Taxonomy_Specialization.Contains(temp))))
                     : PredicateBuilder.New<Doctors>(true)
                 : PredicateBuilder.New<Doctors>(true);
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RSI.API;
@@ -97,7 +98,33 @@ namespace RSI.Tests.Controllers
         }
 
         [TestMethod]
-        public void GetFiltered_NONUS_returns_filtered_Doctors_NONUS()
+        public void GetFiltered_Specialty_returns_filterd_Doctors()
+        {
+            // Arrange
+            var controller = new DoctorsController();
+            var filter = new Filter
+            {
+                Country = new List<string>(),
+                Specialty = new List<string> {"Allergy"},
+                State = new List<string>(),
+                Rank = new List<int?>()
+            };
+
+            // Act
+            var result = controller.GetFiltered(filter);
+
+            // Cheat
+            var cntExact = result.Count(x => x.Specialty.Equals(filter.Specialty[0]));
+            var cntDifferent = result.Count(x => !x.Specialty.Equals(filter.Specialty[0]));
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.Count == cntExact);
+            Assert.IsFalse(cntExact == cntDifferent);
+        }
+
+        [TestMethod]
+        public void GetFiltered_NONUS_USA_Combined_returns_filtered_Doctors()
         {
             // Arrange
             var controller = new DoctorsController();
