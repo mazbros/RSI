@@ -62,7 +62,7 @@ namespace RSI.API
         ///     supplied value
         /// </remarks>
         /// <remarks>
-        ///     <b>OlderRecentYear</b>: minimum recent year of publication, if empty ignored. Returns anything 
+        ///     <b>OldestRecentYear</b>: minimum recent year of publication, if empty ignored. Returns anything 
         ///     greater or equal to supplied value
         /// </remarks>
         /// <returns>Returns filtered list</returns>
