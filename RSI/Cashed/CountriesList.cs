@@ -10,9 +10,10 @@ namespace RSI.Cashed
 
         private List<Country> _countries;
         private List<string> _countryNames;
+        private List<string> _countryAbbreviations;
         public static CountriesList Instance => Inst.Value;
 
-        private List<Country> Get()
+        public List<Country> Get()
         {
             if (_countries != null) return _countries;
 
@@ -49,6 +50,24 @@ namespace RSI.Cashed
             _countryNames.Insert(1, "All Non-USA");
 
             return _countryNames;
+        }
+
+        public List<string> GetAbbreviations()
+        {
+            if (_countryAbbreviations != null) return _countryAbbreviations;
+
+            var doctors = DoctorsList.Instance.Get();
+            var countries = AllCountries.Instance.Get();
+            _countryAbbreviations = doctors
+                .OrderBy(d => d.Country)
+                .Join(countries, d => d.Country, c => c.Code,
+                    (d, c) => c.Code).Distinct().ToList();
+
+            _countryAbbreviations.Remove("USA");
+            _countryAbbreviations.Sort();
+            _countryAbbreviations.Insert(0, "USA");
+
+            return _countryAbbreviations;
         }
 
         public string GetIndexByCode(string code)

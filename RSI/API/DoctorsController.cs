@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -25,22 +26,44 @@ namespace RSI.API
 
         // POST api/<controller>/<action>/<filter>
         /// <summary>
-        ///     [POST] Takes list and filters it using a filter with several filter categories that may have multiple entries each
+        ///     [POST] Takes list and filters it using a filter (see below)
         /// </summary>
-        /// <param name="filter">Filter with several categories that may have multiple entries each</param>
+        /// <param name="filter">Filter with several categories that may have multiple or single entries each</param>
         /// <remarks>
         ///     <b>Country</b>: optional parameter eg. "USA", "CAN", etc., when not supplied, defaults to "USA"<br/>
         ///     There is a special case to filter and retrieve all non-USA countries: "ALL".<br/> 
-        ///     It cannot be combined with any other country, but the others can, eg.: "USA", "CAN" will return USA and Canada combined
+        ///     It cannot be combined with any other country, but the others can, eg.: "USA", "CAN" will return USA 
+        ///     and Canada combined
         /// </remarks>
         /// <remarks>
-        ///     <b>Specialty</b>: can contain single or multiple specialties, if empty ignored
+        ///     <b>Specialty</b>: can contain single or multiple specialties, if empty ignored. Returns records with 
+        ///     specialties listed under Specialty and Taxonomy Specialization, that contain supplied value(s)
         /// </remarks>
         /// <remarks>
         ///     <b>State</b>: can contain single or multiple states, if empty ignored
         /// </remarks>
         /// <remarks>
-        ///     <b>Rank</b>: can contain single or multiple ranks, if empty ignored
+        ///     <b>MinRank</b>: minimum rank, if empty ignored. Returns anything greater or equal to supplied value
+        /// </remarks>
+        /// <remarks>
+        ///     <b>MinPublications</b>: minimum number of publications, if empty ignored. Returns anything greater 
+        ///     or equal to supplied value
+        /// </remarks>
+        /// <remarks>
+        ///     <b>MinPrescriptions</b>: minimum number of prescriptions, if empty ignored. Returns anything greater 
+        ///     or equal to supplied value
+        /// </remarks>
+        /// <remarks>
+        ///     <b>MinPatients</b>: minimum number of patients, if empty ignored. Returns anything greater or equal 
+        ///     to supplied value
+        /// </remarks>
+        /// <remarks>
+        ///     <b>MinClaims</b>: minimum number of claims, if empty ignored. Returns anything greater or equal to 
+        ///     supplied value
+        /// </remarks>
+        /// <remarks>
+        ///     <b>OlderRecentYear</b>: minimum recent year of publication, if empty ignored. Returns anything 
+        ///     greater or equal to supplied value
         /// </remarks>
         /// <returns>Returns filtered list</returns>
         [HttpPost]
@@ -56,13 +79,33 @@ namespace RSI.API
                 filter.Specialty = new List<string>();
             if ((filter.State == null) || (filter.State.Count == 0))
                 filter.State = new List<string>();
-            if ((filter.Rank == null) || (filter.Rank.Count == 0))
-                filter.Rank = new List<int?>();
+            if ((filter.MinRank == null) || (filter.MinRank.Count == 0))
+                filter.MinRank = new List<int?>();
+            if ((filter.MinPublications == null) || (filter.MinPublications.Count == 0))
+                filter.MinPublications = new List<int?>();
+            if ((filter.MinPrescriptions == null) || (filter.MinPrescriptions.Count == 0))
+                filter.MinPrescriptions = new List<int?>();
+            if ((filter.MinPatients == null) || (filter.MinPatients.Count == 0))
+                filter.MinPatients = new List<int?>();
+            if ((filter.MinClaims == null) || (filter.MinClaims.Count == 0))
+                filter.MinClaims = new List<int?>();
+            if ((filter.OldestRecentYear == null) || (filter.OldestRecentYear.Count == 0))
+                filter.OldestRecentYear = new List<string>();
 
+            var predicateCountry = PredicateBuilder.New<Doctors>(false);
             var predicateSpecialty = PredicateBuilder.New<Doctors>(false);
             var predicateState = PredicateBuilder.New<Doctors>(false);
             var predicateRank = PredicateBuilder.New<Doctors>(false);
-            var predicateCountry = PredicateBuilder.New<Doctors>(false);
+
+            predicateCountry = filter.Country != null
+                ? filter.Country.Count != 0
+                    ? filter.Country[0].Equals("ALL")
+                        ? filter.Country.Aggregate(predicateCountry,
+                            (current, temp) => current.Or(d => d.Country != "USA"))
+                        : filter.Country.Aggregate(predicateCountry,
+                            (current, temp) => current.Or(d => d.Country == temp))
+                    : PredicateBuilder.New<Doctors>(true)
+                : PredicateBuilder.New<Doctors>(true);
 
             predicateSpecialty = filter.Specialty != null
                 ? filter.Specialty.Count != 0
@@ -80,29 +123,59 @@ namespace RSI.API
                     : PredicateBuilder.New<Doctors>(true)
                 : PredicateBuilder.New<Doctors>(true);
 
-            predicateRank = filter.Rank != null
-                ? filter.Rank.Count != 0
-                    ? filter.Rank.Aggregate(predicateRank,
-                        (current, temp) => current.Or(d => d.Rank == temp))
+            predicateRank = filter.MinRank != null
+                ? filter.MinRank.Count != 0
+                    ? filter.MinRank.Aggregate(predicateRank,
+                        (current, temp) => current.Or(d => d.Rank >= temp))
                     : PredicateBuilder.New<Doctors>(true)
                 : PredicateBuilder.New<Doctors>(true);
 
-            predicateCountry = filter.Country != null
-                ? filter.Country.Count != 0
-                    ? filter.Country[0].Equals("ALL")
-                        ? filter.Country.Aggregate(predicateCountry,
-                            (current, temp) => current.Or(d => d.Country != "USA"))
-                        : filter.Country.Aggregate(predicateCountry,
-                            (current, temp) => current.Or(d => d.Country == temp))
+            ExpressionStarter<Doctors> predicatePublications = filter.MinPublications != null
+                ? filter.MinPublications.Count != 0
+                    ? filter.MinPublications.Aggregate(predicateRank,
+                        (current, temp) => current.Or(d => d.Publications >= temp))
+                    : PredicateBuilder.New<Doctors>(true)
+                : PredicateBuilder.New<Doctors>(true);
+
+            ExpressionStarter<Doctors> predicatePrescriptions = filter.MinPrescriptions != null
+                ? filter.MinPrescriptions.Count != 0
+                    ? filter.MinPrescriptions.Aggregate(predicateRank,
+                        (current, temp) => current.Or(d => d.Prescriptions >= temp))
+                    : PredicateBuilder.New<Doctors>(true)
+                : PredicateBuilder.New<Doctors>(true);
+
+            ExpressionStarter<Doctors> predicatePatients = filter.MinPatients != null
+                ? filter.MinPatients.Count != 0
+                    ? filter.MinPatients.Aggregate(predicateRank,
+                        (current, temp) => current.Or(d => d.Patients >= temp))
+                    : PredicateBuilder.New<Doctors>(true)
+                : PredicateBuilder.New<Doctors>(true);
+
+            ExpressionStarter<Doctors> predicateClaims = filter.MinClaims != null
+                ? filter.MinClaims.Count != 0
+                    ? filter.MinClaims.Aggregate(predicateRank,
+                        (current, temp) => current.Or(d => d.Claims >= temp))
+                    : PredicateBuilder.New<Doctors>(true)
+                : PredicateBuilder.New<Doctors>(true);
+
+            ExpressionStarter<Doctors> predicateOldestRecentYear = filter.OldestRecentYear != null
+                ? filter.OldestRecentYear.Count != 0
+                    ? filter.OldestRecentYear.Aggregate(predicateRank,
+                        (current, temp) => current.Or(d => DateTime.Parse(d.RecentDate).Year >= int.Parse(temp)))
                     : PredicateBuilder.New<Doctors>(true)
                 : PredicateBuilder.New<Doctors>(true);
 
             return
                 doctors.AsQueryable()
+                    .Where(predicateCountry)
                     .Where(predicateSpecialty)
                     .Where(predicateState)
                     .Where(predicateRank)
-                    .Where(predicateCountry)
+                    .Where(predicatePublications)
+                    .Where(predicatePrescriptions)
+                    .Where(predicatePatients)
+                    .Where(predicateClaims)
+                    .Where(predicateOldestRecentYear)
                     .ToList();
         }
 
@@ -153,7 +226,7 @@ namespace RSI.API
         /// <summary>
         ///     [GET] Distinct list of all available ranks
         /// </summary>
-        /// <returns>List</returns>
+        /// <returns>List<string></string></returns>
         [HttpGet]
         public List<string> GetRanks()
         {
@@ -164,7 +237,7 @@ namespace RSI.API
         /// <summary>
         ///     [GET] Distinct list of all available specialties
         /// </summary>
-        /// <returns>List</returns>
+        /// <returns>List<string></string></returns>
         [HttpGet]
         public List<string> GetSpecialties()
         {
@@ -175,27 +248,22 @@ namespace RSI.API
         /// <summary>
         ///     [GET] Distinct list of available states
         /// </summary>
-        /// <returns>List</returns>
+        /// <returns>List<string></string></returns>
         [HttpGet]
         public List<string> GetStates()
         {
             return StatesList.Instance.Get();
         }
 
-        //{
-        //public void Put(int id, [FromBody] string value)
-
-        //// PUT api/<controller>/5
-        //}
-        //{
-        //public void Post([FromBody] string value)
-
-        //// POST api/<controller>
-        //}
-
-        //// DELETE api/<controller>/5
-        //public void Delete(int id)
-        //{
-        //}
+        // GAET api/<controller>
+        /// <summary>
+        ///     [GET] Distinct list of countries codes abbreviations
+        /// </summary>
+        /// <returns>List<string></string></returns>
+        [HttpGet]
+        public List<string> GetCountries()
+        {
+            return CountriesList.Instance.GetAbbreviations();
+        }
     }
 }

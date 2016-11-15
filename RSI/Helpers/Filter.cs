@@ -11,6 +11,11 @@ namespace RSI.Helpers
         public List<string> Country { get; set; }
         public List<string> Specialty { get; set; }
         public List<string> State { get; set; }
-        public List<int?> Rank { get; set; }
+        public List<int?> MinRank { get; set; }
+        public List<int?> MinPublications { get; set; }
+        public List<int?> MinPrescriptions { get; set; }
+        public List<int?> MinPatients { get; set; }
+        public List<int?> MinClaims { get; set; }
+        public List<string> OldestRecentYear { get; set; }
     }
 }

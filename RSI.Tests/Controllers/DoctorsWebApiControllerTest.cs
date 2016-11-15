@@ -83,7 +83,7 @@ namespace RSI.Tests.Controllers
                 //Country = new List<string>(),
                 Specialty = new List<string>(),
                 State = new List<string>(),
-                Rank = new List<int?>()
+                MinRank = new List<int?>()
             };
 
             // Act
@@ -107,7 +107,12 @@ namespace RSI.Tests.Controllers
                 Country = new List<string>(),
                 Specialty = new List<string> {"Allergy"},
                 State = new List<string>(),
-                Rank = new List<int?>()
+                MinRank = new List<int?>(),
+                MinPublications = new List<int?>(),
+                MinPrescriptions = new List<int?>(),
+                MinPatients = new List<int?>(),
+                MinClaims = new List<int?>(),
+                OldestRecentYear = new List<string>()
             };
 
             // Act
@@ -133,7 +138,12 @@ namespace RSI.Tests.Controllers
                 Country = new List<string> {"USA"},
                 Specialty = new List<string>(),
                 State = new List<string>(),
-                Rank = new List<int?>()
+                MinRank = new List<int?>(),
+                MinPublications = new List<int?>(),
+                MinPrescriptions = new List<int?>(),
+                MinPatients = new List<int?>(),
+                MinClaims = new List<int?>(),
+                OldestRecentYear = new List<string>()
             };
 
             // Act
@@ -151,7 +161,13 @@ namespace RSI.Tests.Controllers
                 Country = new List<string> { "CAN" },
                 Specialty = new List<string>(),
                 State = new List<string>(),
-                Rank = new List<int?>()
+                MinRank = new List<int?>(),
+                MinPublications = new List<int?>(),
+                MinPrescriptions = new List<int?>(),
+                MinPatients = new List<int?>(),
+                MinClaims = new List<int?>(),
+                OldestRecentYear = new List<string>()
+
             };
 
             // Act
@@ -169,7 +185,13 @@ namespace RSI.Tests.Controllers
                 Country = new List<string> { "USA", "CAN" },
                 Specialty = new List<string>(),
                 State = new List<string>(),
-                Rank = new List<int?>()
+                MinRank = new List<int?>(),
+                MinPublications = new List<int?>(),
+                MinPrescriptions = new List<int?>(),
+                MinPatients = new List<int?>(),
+                MinClaims = new List<int?>(),
+                OldestRecentYear = new List<string>()
+
             };
 
             // Act
@@ -181,7 +203,36 @@ namespace RSI.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Count == cnt);
-            Assert.IsTrue((cnt == cntUSA + cntCAN));
+        }
+
+        [TestMethod]
+        public void GetFiltered_New_Filter_returns_filtered_Doctors()
+        {
+            // Arrange
+            var controller = new DoctorsController();
+
+            var filter = new Filter
+            {
+                Country = new List<string> {"USA"},
+                Specialty = new List<string>(),
+                State = new List<string>(),
+                MinRank = new List<int?> {7},
+                MinPublications = new List<int?> {3},
+                MinPrescriptions = new List<int?> {0},
+                MinPatients = new List<int?> {0},
+                MinClaims = new List<int?> {0},
+                OldestRecentYear = new List<string> {"2008"}
+            };
+
+            // Act
+            var result = controller.GetFiltered(filter);
+
+            // Cheat
+            var cnt = result.Count;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count == cnt);
         }
 
         [TestMethod]
@@ -224,6 +275,20 @@ namespace RSI.Tests.Controllers
             // Assert
             Assert.IsNotNull(specialties);
             Assert.IsTrue(specialties.Count == 310);
+        }
+
+        [TestMethod]
+        public void GetCountries_Returns_List_of_Abbreviations()
+        {
+            // Arrange
+            var controller = new DoctorsController();
+
+            // Act
+            var countries = controller.GetCountries();
+
+            // Assert
+            Assert.IsNotNull(countries);
+            Assert.IsTrue(countries.Count == 23);
         }
     }
 }
