@@ -96,6 +96,11 @@ namespace RSI.API
             var predicateSpecialty = PredicateBuilder.New<Doctors>(false);
             var predicateState = PredicateBuilder.New<Doctors>(false);
             var predicateRank = PredicateBuilder.New<Doctors>(false);
+            var predicatePublications = PredicateBuilder.New<Doctors>(false);
+            var predicatePrescriptions = PredicateBuilder.New<Doctors>(false);
+            var predicatePatients = PredicateBuilder.New<Doctors>(false);
+            var predicateClaims = PredicateBuilder.New<Doctors>(false);
+            var predicateOldestRecentYear = PredicateBuilder.New<Doctors>(false);
 
             predicateCountry = filter.Country != null
                 ? filter.Country.Count != 0
@@ -130,37 +135,37 @@ namespace RSI.API
                     : PredicateBuilder.New<Doctors>(true)
                 : PredicateBuilder.New<Doctors>(true);
 
-            ExpressionStarter<Doctors> predicatePublications = filter.MinPublications != null
+            predicatePublications = filter.MinPublications != null
                 ? filter.MinPublications.Count != 0
-                    ? filter.MinPublications.Aggregate(predicateRank,
+                    ? filter.MinPublications.Aggregate(predicatePublications,
                         (current, temp) => current.Or(d => d.Publications >= temp))
                     : PredicateBuilder.New<Doctors>(true)
                 : PredicateBuilder.New<Doctors>(true);
 
-            ExpressionStarter<Doctors> predicatePrescriptions = filter.MinPrescriptions != null
+            predicatePrescriptions = filter.MinPrescriptions != null
                 ? filter.MinPrescriptions.Count != 0
-                    ? filter.MinPrescriptions.Aggregate(predicateRank,
+                    ? filter.MinPrescriptions.Aggregate(predicatePrescriptions,
                         (current, temp) => current.Or(d => d.Prescriptions >= temp))
                     : PredicateBuilder.New<Doctors>(true)
                 : PredicateBuilder.New<Doctors>(true);
 
-            ExpressionStarter<Doctors> predicatePatients = filter.MinPatients != null
+            predicatePatients = filter.MinPatients != null
                 ? filter.MinPatients.Count != 0
-                    ? filter.MinPatients.Aggregate(predicateRank,
+                    ? filter.MinPatients.Aggregate(predicatePatients,
                         (current, temp) => current.Or(d => d.Patients >= temp))
                     : PredicateBuilder.New<Doctors>(true)
                 : PredicateBuilder.New<Doctors>(true);
 
-            ExpressionStarter<Doctors> predicateClaims = filter.MinClaims != null
+            predicateClaims = filter.MinClaims != null
                 ? filter.MinClaims.Count != 0
-                    ? filter.MinClaims.Aggregate(predicateRank,
+                    ? filter.MinClaims.Aggregate(predicateClaims,
                         (current, temp) => current.Or(d => d.Claims >= temp))
                     : PredicateBuilder.New<Doctors>(true)
                 : PredicateBuilder.New<Doctors>(true);
 
-            ExpressionStarter<Doctors> predicateOldestRecentYear = filter.OldestRecentYear != null
+            predicateOldestRecentYear = filter.OldestRecentYear != null
                 ? filter.OldestRecentYear.Count != 0
-                    ? filter.OldestRecentYear.Aggregate(predicateRank,
+                    ? filter.OldestRecentYear.Aggregate(predicateOldestRecentYear,
                         (current, temp) => current.Or(d => DateTime.Parse(d.RecentDate).Year >= int.Parse(temp)))
                     : PredicateBuilder.New<Doctors>(true)
                 : PredicateBuilder.New<Doctors>(true);
