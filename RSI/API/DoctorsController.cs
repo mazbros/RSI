@@ -15,7 +15,8 @@ namespace RSI.API
     {
         // GET api/<controller>
         /// <summary>
-        ///     [GET] Gets all records (not useful, since there are other than USA countries, use <b>GetFiltered</b> instead for more control over what's returned)
+        ///     [GET] Gets all records (not useful, since there are other than USA countries, use <b>GetFiltered</b> instead for
+        ///     more control over what's returned)
         /// </summary>
         /// <returns>Complete list</returns>
         [HttpGet]
@@ -30,13 +31,13 @@ namespace RSI.API
         /// </summary>
         /// <param name="filter">Filter with several categories that may have multiple or single entries each</param>
         /// <remarks>
-        ///     <b>Country</b>: optional parameter eg. "USA", "CAN", etc., when not supplied, defaults to "USA"<br/>
-        ///     There is a special case to filter and retrieve all non-USA countries: "ALL".<br/> 
-        ///     It cannot be combined with any other country, but the others can, eg.: "USA", "CAN" will return USA 
+        ///     <b>Country</b>: optional parameter eg. "USA", "CAN", etc., when not supplied, defaults to "USA"<br />
+        ///     There is a special case to filter and retrieve all non-USA countries: "ALL".<br />
+        ///     It cannot be combined with any other country, but the others can, eg.: "USA", "CAN" will return USA
         ///     and Canada combined
         /// </remarks>
         /// <remarks>
-        ///     <b>Specialty</b>: can contain single or multiple specialties, if empty ignored. Returns records with 
+        ///     <b>Specialty</b>: can contain single or multiple specialties, if empty ignored. Returns records with
         ///     specialties listed under Specialty and Taxonomy Specialization, that contain supplied value(s)
         /// </remarks>
         /// <remarks>
@@ -46,23 +47,23 @@ namespace RSI.API
         ///     <b>MinRank</b>: minimum rank, if empty ignored. Returns anything greater or equal to supplied value
         /// </remarks>
         /// <remarks>
-        ///     <b>MinPublications</b>: minimum number of publications, if empty ignored. Returns anything greater 
+        ///     <b>MinPublications</b>: minimum number of publications, if empty ignored. Returns anything greater
         ///     or equal to supplied value
         /// </remarks>
         /// <remarks>
-        ///     <b>MinPrescriptions</b>: minimum number of prescriptions, if empty ignored. Returns anything greater 
+        ///     <b>MinPrescriptions</b>: minimum number of prescriptions, if empty ignored. Returns anything greater
         ///     or equal to supplied value
         /// </remarks>
         /// <remarks>
-        ///     <b>MinPatients</b>: minimum number of patients, if empty ignored. Returns anything greater or equal 
+        ///     <b>MinPatients</b>: minimum number of patients, if empty ignored. Returns anything greater or equal
         ///     to supplied value
         /// </remarks>
         /// <remarks>
-        ///     <b>MinClaims</b>: minimum number of claims, if empty ignored. Returns anything greater or equal to 
+        ///     <b>MinClaims</b>: minimum number of claims, if empty ignored. Returns anything greater or equal to
         ///     supplied value
         /// </remarks>
         /// <remarks>
-        ///     <b>OldestRecentYear</b>: minimum recent year of publication, if empty ignored. Returns anything 
+        ///     <b>OldestRecentYear</b>: minimum recent year of publication, if empty ignored. Returns anything
         ///     greater or equal to supplied value
         /// </remarks>
         /// <returns>Returns filtered list</returns>
@@ -92,6 +93,11 @@ namespace RSI.API
             if ((filter.OldestRecentYear == null) || (filter.OldestRecentYear.Count == 0))
                 filter.OldestRecentYear = new List<string>();
 
+            if ((filter.FirstNameStartsWith == null) || (filter.FirstNameStartsWith.Count == 0))
+                filter.FirstNameStartsWith = new List<string>();
+            if ((filter.LastNameStartsWith == null) || (filter.LastNameStartsWith.Count == 0))
+                filter.LastNameStartsWith = new List<string>();
+
             var predicateCountry = PredicateBuilder.New<Doctors>(false);
             var predicateSpecialty = PredicateBuilder.New<Doctors>(false);
             var predicateState = PredicateBuilder.New<Doctors>(false);
@@ -101,6 +107,9 @@ namespace RSI.API
             var predicatePatients = PredicateBuilder.New<Doctors>(false);
             var predicateClaims = PredicateBuilder.New<Doctors>(false);
             var predicateOldestRecentYear = PredicateBuilder.New<Doctors>(false);
+
+            var predicateFirstNameStartsWith = PredicateBuilder.New<Doctors>(false);
+            var predicateLastNameStartsWith = PredicateBuilder.New<Doctors>(false);
 
             predicateCountry = filter.Country != null
                 ? filter.Country.Count != 0
@@ -115,9 +124,9 @@ namespace RSI.API
             predicateSpecialty = filter.Specialty != null
                 ? filter.Specialty.Count != 0
                     ? filter.Specialty.Aggregate(predicateSpecialty,
-                        (current, temp) => current.Or(d => d.Specialty == temp 
-                            || (!d.Taxonomy_Specialization.IsNullOrWhiteSpace() 
-                                && d.Taxonomy_Specialization.Contains(temp))))
+                        (current, temp) => current.Or(d => (d.Specialty == temp)
+                                                           || (!d.Taxonomy_Specialization.IsNullOrWhiteSpace()
+                                                               && d.Taxonomy_Specialization.Contains(temp))))
                     : PredicateBuilder.New<Doctors>(true)
                 : PredicateBuilder.New<Doctors>(true);
 
@@ -170,6 +179,20 @@ namespace RSI.API
                     : PredicateBuilder.New<Doctors>(true)
                 : PredicateBuilder.New<Doctors>(true);
 
+            predicateFirstNameStartsWith = filter.FirstNameStartsWith != null
+                ? filter.FirstNameStartsWith.Count != 0
+                    ? filter.FirstNameStartsWith.Aggregate(predicateFirstNameStartsWith,
+                        (current, temp) => current.Or(d => d.First_Name.StartsWith(temp)))
+                    : PredicateBuilder.New<Doctors>(true)
+                : PredicateBuilder.New<Doctors>(true);
+
+            predicateLastNameStartsWith = filter.LastNameStartsWith != null
+                ? filter.LastNameStartsWith.Count != 0
+                    ? filter.LastNameStartsWith.Aggregate(predicateLastNameStartsWith,
+                        (current, temp) => current.Or(d => d.Last_Name.StartsWith(temp)))
+                    : PredicateBuilder.New<Doctors>(true)
+                : PredicateBuilder.New<Doctors>(true);
+
             return
                 doctors.AsQueryable()
                     .Where(predicateCountry)
@@ -181,6 +204,8 @@ namespace RSI.API
                     .Where(predicatePatients)
                     .Where(predicateClaims)
                     .Where(predicateOldestRecentYear)
+                    .Where(predicateFirstNameStartsWith)
+                    .Where(predicateLastNameStartsWith)
                     .ToList();
         }
 

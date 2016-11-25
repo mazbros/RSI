@@ -17,5 +17,7 @@ namespace RSI.Helpers
         public List<int?> MinPatients { get; set; }
         public List<int?> MinClaims { get; set; }
         public List<string> OldestRecentYear { get; set; }
+        public List<string> FirstNameStartsWith { get; set; }
+        public List<string> LastNameStartsWith { get; set; }
     }
 }
