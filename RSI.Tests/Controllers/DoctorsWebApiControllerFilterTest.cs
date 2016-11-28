@@ -216,5 +216,37 @@ namespace RSI.Tests
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Count == cnt);
         }
+
+        [TestMethod]
+        public void GetFiltered_USA_withFirstNameStartsWith_returns_USA_filtered_by_First_Name_Doctors()
+        {
+            // Arrange
+            var controller = new DoctorsController();
+
+            var filter = new Filter
+            {
+                Country = new List<string> { "USA" },
+                Specialty = new List<string>(),
+                State = new List<string>(),
+                MinRank = new List<int?>(),
+                MinPublications = new List<int?>(),
+                MinPrescriptions = new List<int?>(),
+                MinPatients = new List<int?>(),
+                MinClaims = new List<int?>(),
+                OldestRecentYear = new List<string>(),
+                FirstNameStartsWith = new List<string> {"Alex","Barbara","John"},
+                LastNameStartsWith = new List<string>()
+            };
+
+            // Act
+            var result = controller.GetFiltered(filter);
+
+            // Cheat
+            var cnt = result.Count;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count == cnt);
+        }
     }
 }

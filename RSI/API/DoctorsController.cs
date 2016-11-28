@@ -66,6 +66,14 @@ namespace RSI.API
         ///     <b>OldestRecentYear</b>: minimum recent year of publication, if empty ignored. Returns anything
         ///     greater or equal to supplied value
         /// </remarks>
+        /// <remarks>
+        ///     <b>FirstNameStartsWith</b>: single or multiple letters that first name should start with, can be 
+        ///     supplied as an array of parameters, e.g. {"Alex", "John", "K", "Sam"}
+        /// </remarks>
+        /// <remarks>
+        ///     <b>LastNameStartsWith</b>: single or multiple letters that last name should start with, can be 
+        ///     supplied as an array of parameters, e.g. {"B", "John", "Col", "Dur"}
+        /// </remarks>
         /// <returns>Returns filtered list</returns>
         [HttpPost]
         public List<Doctors> GetFiltered(Filter filter)
